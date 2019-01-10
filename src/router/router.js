@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
-import BasicLayout from '../layout/BasicLayout/BasicLayout'
+import PublicHome from './PublicHome/PublicHome'
 
 const router = (
   <BrowserRouter>
     <div>
       <Route path="/"
-             component={BasicLayout}>
+             component={PublicHome}>
       </Route>
     </div>
   </BrowserRouter>

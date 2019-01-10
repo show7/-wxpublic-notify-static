@@ -1,0 +1,95 @@
+.public-home-container {
+  position: relative;
+  background: #F8F9FB;
+
+  .public-home-scroll-block {
+    height: 100vh;
+    overflow-y: scroll;
+
+    .search-block {
+      background: #FFFFFF;
+      height: 7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .search-inner {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        padding: 0 1.4rem;
+        width: 34.2rem;
+        height: 4rem;
+        background: rgba(241, 241, 241, 1);
+        border-radius: 20px;
+        margin: 0 auto;
+
+        .search-icon {
+          display: inline-block;
+          width: 1.7rem;
+          height: 1.7rem;
+        }
+
+        .search-input {
+          margin-left: 1.2rem;
+          display: inline-block;
+          flex: 1;
+          height: 3rem;
+          outline: none;
+          background: transparent;
+          border: none;
+          font-size: 1.5rem;
+          &::placeholder {
+            color: #C1C0C9;
+          }
+        }
+      }
+    }
+
+    .switch-tab {
+      width: 100%;
+      height: 4.6rem;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .tab-item {
+        position: relative;
+        flex: 1;
+        height: 100%;
+        .tab-text {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          font-size: 1.4rem;
+          font-weight: 400;
+          color: #333333;
+        }
+        .tab-highlight {
+          position: absolute;
+          left: 50%;
+          bottom: 0;
+          transform: translateX(-50%);
+          width: 2.2rem;
+          height: 0.3rem;
+          background: #7DBE00;
+          visibility: hidden;
+        }
+        &.active {
+          .tab-text {
+            font-size: 1.9rem;
+            font-weight: 600;
+          }
+          .tab-highlight {
+            visibility: visible;
+          }
+        }
+      }
+
+    }
+  }
+
+}

@@ -1,0 +1,44 @@
+.public-summary-component {
+  width: 100%;
+  height: 6rem;
+  background: #FFFFFF;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #EFEFEF;
+
+  .public-image {
+    display: inline-block;
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 50%;
+  }
+
+  .public-name {
+    margin-left: 0.8rem;
+    flex: 1;
+    display: inline-block;
+    font-size: 15px;
+    color: #50505A;
+  }
+
+  .public-status {
+    width: 7.6rem;
+    height: 3rem;
+    border-radius: 22px;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 3rem;
+    text-align: center;
+    &.un-subscribe {
+      background: #7DBE00;
+      color: #FFFFFF;
+    }
+    &.subscribed {
+      border: 1px solid rgba(219, 219, 219, 1);
+      background: #FFFFFF;
+      color: #999999;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 let express = require('express')
 let app = express()
 
-app.use(require('./datas/userInfoList'))
+app.use(require('./datas/home'))
 
 let ip = '0.0.0.0'
 let port = 3000

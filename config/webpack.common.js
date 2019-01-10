@@ -51,7 +51,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.html',
-      inject: false
+      inject: true
     }),
     new CleanWebpackPlugin(path.resolve('dist'), { root: '/Users/xfduan/WorkSpace/StaticSpace/spiderman' })
   ],

@@ -1,14 +1,9 @@
 import * as React from 'react'
-import { Button } from 'antd'
 import { observer, inject } from 'mobx-react'
 
 @inject('mobxDemoModel')
 @observer
 export default class MobxDemo extends React.Component {
-
-  constructor () {
-    super()
-  }
 
   componentDidMount () {
     console.log(this.props)
@@ -21,8 +16,9 @@ export default class MobxDemo extends React.Component {
   render () {
     return (
       <div>
-        <Button onClick={() => this.changeName()}
-                type="primary">Primary</Button>
+        <button onClick={() => this.changeName()}>
+          Primary
+        </button>
         <div>{this.props.mobxDemoModel.name}</div>
       </div>
     )

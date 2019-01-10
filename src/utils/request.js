@@ -1,5 +1,5 @@
 import * as axios from 'axios'
-import { message as antdMessage } from 'antd'
+// import { message as antdMessage } from 'antd'
 
 // 根据当前所在平台，添加 header
 let platform = 'crm'
@@ -33,7 +33,7 @@ export function pget (url, params = {}) {
       let code = response.data.code
       let message = response.data.msg
       if (code > 220 || code < 200) {
-        antdMessage.warn(message)
+        // antdMessage.warn(message)
       }
       return response.data
     }).catch(error => {
@@ -56,7 +56,7 @@ export function ppost (url, params = {}) {
       let code = response.data.code
       let message = response.data.msg
       if (code > 220 || code < 200) {
-        antdMessage.warn(message)
+        // antdMessage.warn(message)
       }
       return response.data
     }).catch(error => {
@@ -79,7 +79,7 @@ export function ppostMute (url, params = {}) {
       let code = response.data.code
       let message = response.data.msg
       if (code > 220 || code < 200) {
-        antdMessage.warn(message)
+        // antdMessage.warn(message)
       }
       return response.data
     }).catch(error => {

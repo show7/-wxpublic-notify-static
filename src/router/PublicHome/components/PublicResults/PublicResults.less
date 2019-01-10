@@ -1,0 +1,54 @@
+.public-results-component {
+
+  .search-results-list {
+
+    .empty-tips {
+      margin-top: 10rem;
+      font-size: 1.2rem;
+      color: #C1C0C9;
+      line-height: 2.2rem;
+      text-align: center;
+    }
+
+    .self-summaries-block {
+      margin-top: 3rem;
+      .self-summaries-inner-container {
+        max-height: 18rem;
+        overflow: hidden;
+        &.show-all {
+          max-height: none;
+          overflow: visible;
+        }
+      }
+      .show-more-tips {
+        height: 3rem;
+        background: #FFFFFF;
+        font-size: 12px;
+        color: #999999;
+        line-height: 3rem;
+        text-align: center;
+        .icon-down {
+          display: inline-block;
+          font-size: 10px;
+          transform: scale(0.7);
+        }
+      }
+    }
+
+    .net-summaries-block {
+      .net-summaries-tips {
+        padding: 0.8rem 0;
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: #C1C0C9;
+        line-height: 2rem;
+        text-align: center;
+      }
+    }
+
+    .recommend-btn {
+      margin-top: 1rem;
+    }
+  }
+
+}

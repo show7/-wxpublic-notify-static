@@ -1,5 +1,5 @@
 {
-  "name": "spiderman",
+  "name": "wxpublic-notfiy-static",
   "version": "1.0.0",
   "scripts": {
     "local": "webpack-dev-server --config ./config/webpack.local.js",
@@ -10,16 +10,11 @@
   "author": "三十文_felix",
   "license": "ISC",
   "dependencies": {
-    "animate.css": "^3.7.0",
-    "antd": "^3.10.8",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
-    "jquery": "^3.3.1",
-    "lodash": "^4.17.11",
     "mobx": "^5.5.2",
     "mobx-react": "^5.3.5",
     "normalize.css": "^8.0.0",
-    "prop-types": "^15.6.1",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-router-dom": "^4.2.2"
