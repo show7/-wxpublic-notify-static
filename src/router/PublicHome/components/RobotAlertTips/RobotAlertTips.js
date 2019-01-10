@@ -17,7 +17,7 @@ export default class RobotAlertTips extends React.Component {
         <div className="robot-alert-tips-block">
           <div className="robot-alert-title">
             <img className="robot-avatar"
-                 src="https://thirdwx.qlogo.cn/mmopen/siaKjia9aBPcJHOCEV6z4Ayic3SEaztBgIHFjfNZCFnvibW7bURBmYJIwfoRgN2guicWOGEPX1S05NqJyTwA1EzoIJgWEdJg3nXlZ/132"/>
+                 src="https://static.iqycamp.com/robot-avatar-tvrfmvxy.png"/>
             <span className="robot-title">小新提示</span>
           </div>
           <div className="robot-alert-content">{content}</div>
