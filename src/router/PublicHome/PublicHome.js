@@ -24,7 +24,7 @@ export default class PublicHome extends React.Component {
     return (
       <div className="public-home-container">
         <ScrollContainer className="public-home-scroll-block"
-                         enablePullDown={true}
+                         enablePullDown={false}
                          onPullDown={() => {
                            publicHomeModel.refreshAllWeChats()
                          }}
