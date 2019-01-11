@@ -3,15 +3,17 @@ import { observer, inject } from 'mobx-react'
 import PublicResults from './components/PublicResults/PublicResults'
 import RobotAlertTips from './components/RobotAlertTips/RobotAlertTips'
 import ScrollContainer from '../../components/ScrollContainer/ScrollContainer'
+import PublicGuide from './components/PublicGuide/PublicGuide'
+import Api from "../../api/Api";
 
 import './PublicHome.less'
-import PublicGuide from './components/PublicGuide/PublicGuide'
 
 @inject('publicHomeModel')
 @observer
 export default class PublicHome extends React.Component {
 
   async componentDidMount () {
+    Api.base_mark({ module: '又更新了', function: '进入页面', action: '进入首页' });
     const { publicHomeModel } = this.props
     // 校验是否展示引导页面
     publicHomeModel.checkPublicGuideStatus()
