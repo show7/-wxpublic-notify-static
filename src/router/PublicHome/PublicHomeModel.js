@@ -186,7 +186,7 @@ class PublicHomeModel {
           }
         },
         {
-          text: '好的',
+          text: '确认取消',
           primary: false,
           onClick: async () => {
             this._unSubscribeWeChat(weChat)
