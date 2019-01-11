@@ -152,7 +152,7 @@ class PublicHomeModel {
 
   @action.bound
   async subscribeWeChat (weChat) {
-    let subscribeRes = await Api.subscribeSingleWeChat({ weChatPublicId: weChat.weChatPublicId })
+    let subscribeRes = await Api.subscribeSingleWeChat({ weChatPublicId: weChat.weChatPublicId, isSearchResult: weChat.isSearchResult })
     weChat.isSubscribe = true
     if (subscribeRes.msg == 5) {
       this._showRobotAlertTips({
