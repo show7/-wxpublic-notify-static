@@ -12,8 +12,10 @@ export default class PublicRecommendInput extends React.Component {
     const {
       publicHomeModel
     } = this.props
-    await publicHomeModel.recommendWeChat({ weChatName: publicHomeModel.recommendInputValue })
-    await publicHomeModel.changeRecommendStatus(false)
+    if (publicHomeModel.recommendInputValue) {
+      await publicHomeModel.recommendWeChat({ weChatName: publicHomeModel.recommendInputValue })
+      await publicHomeModel.changeRecommendStatus(false)
+    }
   }
 
   render () {
