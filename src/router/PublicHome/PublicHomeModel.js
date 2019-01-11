@@ -152,6 +152,7 @@ class PublicHomeModel {
 
   @action.bound
   async subscribeWeChat (weChat) {
+    Api.base_mark({ module: '又更新了', function: '点击按钮', action: '订阅按钮', memo: weChat.weChatPublicId + '' })
     let subscribeRes = await Api.subscribeSingleWeChat({ weChatPublicId: weChat.weChatPublicId, isSearchResult: weChat.isSearchResult })
     weChat.isSubscribe = true
     if (subscribeRes.msg == 5) {
@@ -175,6 +176,7 @@ class PublicHomeModel {
 
   @action.bound
   async warnUnSubscribeWeChat (weChat) {
+    Api.base_mark({ module: '又更新了', function: '点击按钮', action: '取消订阅按钮', memo: weChat.weChatPublicId + '' })
     this._showRobotAlertTips({
       content: '取消订阅之后，就不能收到最新更新的提醒了哦！',
       buttons: [
@@ -198,6 +200,7 @@ class PublicHomeModel {
   }
 
   async _unSubscribeWeChat (weChat) {
+    Api.base_mark({ module: '又更新了', function: '取关', action: '取关', memo: weChat.weChatPublicId + '' })
     let subscribeRes = await Api.unSubscribeSingleWeChat({ weChatPublicId: weChat.weChatPublicId })
     weChat.isSubscribe = false
     setTimeout(() => {
@@ -225,6 +228,7 @@ class PublicHomeModel {
 
   @action.bound
   changeRecommendStatus (isShowRecommendBlock) {
+    isShowRecommendBlock && Api.base_mark({ module: '又更新了', function: '推荐公众号', action: '点击自主推荐按钮' })
     this.isShowRecommendInput = isShowRecommendBlock
     this.recommendInputValue = ''
   }
@@ -236,6 +240,7 @@ class PublicHomeModel {
 
   @action.bound
   async recommendWeChat (recommendWeChatParams) {
+    Api.base_mark({ module: '又更新了', function: '推荐公众号', action: recommendWeChatParams.weChatName, memo: recommendWeChatParams.searchId +'' })
     let recommendWeChatRes = await Api.recommendWeChat(recommendWeChatParams)
     this._showRobotAlertTips({
       content: '推荐成功！我会在24小时内审核，收录后会告诉你哒！',
