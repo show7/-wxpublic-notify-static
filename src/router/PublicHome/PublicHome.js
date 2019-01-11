@@ -13,6 +13,14 @@ import './PublicHome.less'
 export default class PublicHome extends React.Component {
 
   async componentDidMount () {
+    let bfscrolltop = document.body.scrollTop
+    document.body.addEventListener('focus', function () {
+      window.scrollTo(0, bfscrolltop)
+    }, true)
+    document.body.addEventListener('blur', function () {
+      window.scrollTo(0, bfscrolltop)
+    }, true)
+
     Api.base_mark({ module: '又更新了', function: '进入页面', action: '进入首页' })
     const { publicHomeModel } = this.props
     // 校验是否展示引导页面
@@ -81,6 +89,7 @@ export default class PublicHome extends React.Component {
                             buttons={publicHomeModel.robotAlertTipsParams.buttons}/>
           }
         </ScrollContainer>
+
         {
           publicHomeModel.isShowPublicGuide &&
           <PublicGuide lastStepCallback={() => publicHomeModel.hidePublicGuide()}/>
