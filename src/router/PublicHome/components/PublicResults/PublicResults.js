@@ -6,7 +6,6 @@ import PublicRecommend from '../PublicRecommend/PublicRecommend'
 import PublicRecommendInput from '../PublicRecommendInput/PublicRecommendInput'
 
 import './PublicResults.less'
-import publicHomeModel from '../../PublicHomeModel'
 
 @inject('publicHomeModel')
 @observer
@@ -14,7 +13,8 @@ export default class PublicResults extends React.Component {
 
   renderAllResults () {
     const {
-      allWeChats = []
+      allWeChats = [],
+      publicHomeModel
     } = this.props
 
     return (
