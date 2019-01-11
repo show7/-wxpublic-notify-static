@@ -96,8 +96,10 @@ export default class PublicResults extends React.Component {
 
   renderSubscribedResults () {
     const {
-      subscribedWeChats = []
+      subscribedWeChats = [],
+      publicHomeModel
     } = this.props
+
     return (
       <div className="all-results-list">
         {
@@ -105,6 +107,11 @@ export default class PublicResults extends React.Component {
             <PublicSummary key={index}
                            data={weChatItem}/>
           ))
+        }
+        {
+          publicHomeModel.isSubscribeWeChatsLoadEnd ?
+            <div className="bottom-tips">我也是有底线的</div> :
+            <div className="bottom-tips">上拉加载更多</div>
         }
       </div>
     )

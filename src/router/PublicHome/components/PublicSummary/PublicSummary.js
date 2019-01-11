@@ -36,7 +36,8 @@ export default class PublicSummary extends React.Component {
            onClick={() => this.handleClickSingleSummary(data)}>
         <img className="public-image"
              src={avatar}/>
-        <div className="public-name">{weChatName}</div>
+        <div className="public-name"
+             dangerouslySetInnerHTML={{ __html: weChatName }}></div>
         {
           !hideSubscribeBtn ?
             isSubscribe ?

@@ -39,7 +39,6 @@ class PublicHomeModel {
 
   @action.bound
   checkPublicGuideStatus () {
-    console.log('guide status:', window.localStorage.getItem('isReadGuide'))
     this.isShowPublicGuide = !!!window.localStorage.getItem('isReadGuide')
   }
 
