@@ -35,6 +35,20 @@ class PublicHomeModel {
     buttons: []
   }
 
+  @observable isShowPublicGuide = false
+
+  @action.bound
+  checkPublicGuideStatus () {
+    console.log('guide status:', window.localStorage.getItem('isReadGuide'))
+    this.isShowPublicGuide = !!!window.localStorage.getItem('isReadGuide')
+  }
+
+  @action.bound
+  hidePublicGuide () {
+    this.isShowPublicGuide = false
+    window.localStorage.setItem('isReadGuide', true)
+  }
+
   @action.bound
   async loadInitData () {
     this._loadInitAllWeChats()
@@ -126,6 +140,12 @@ class PublicHomeModel {
   @action.bound
   showAllSearchedOwnedWeChats () {
     this.showAllOwnedWeChats = true
+  }
+
+  @action.bound
+  clickCancelSearchIcon () {
+    this.searchInputValue = ''
+    this.isSearchingStatus = false
   }
 
   @action.bound

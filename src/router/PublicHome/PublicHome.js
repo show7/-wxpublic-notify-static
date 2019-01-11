@@ -5,6 +5,7 @@ import RobotAlertTips from './components/RobotAlertTips/RobotAlertTips'
 import ScrollContainer from '../../components/ScrollContainer/ScrollContainer'
 
 import './PublicHome.less'
+import PublicGuide from './components/PublicGuide/PublicGuide'
 
 @inject('publicHomeModel')
 @observer
@@ -12,6 +13,8 @@ export default class PublicHome extends React.Component {
 
   async componentDidMount () {
     const { publicHomeModel } = this.props
+    // 校验是否展示引导页面
+    publicHomeModel.checkPublicGuideStatus()
     await publicHomeModel.loadInitData()
   }
 
@@ -40,6 +43,9 @@ export default class PublicHome extends React.Component {
                      maxLength={10}
                      value={publicHomeModel.searchInputValue}
                      onChange={(e) => publicHomeModel.listenSearchInputValueChange(e)}/>
+              <img className="calcel-icon"
+                   src="https://static.iqycamp.com/delete-icon-zkqufaap.png"
+                   onClick={() => publicHomeModel.clickCancelSearchIcon()}/>
             </div>
           </div>
           {/* 菜单切换模块 */}
@@ -62,14 +68,20 @@ export default class PublicHome extends React.Component {
                          subscribedWeChats={publicHomeModel.subscribedWeChats}
                          searchedOwnedWeChats={publicHomeModel.searchedOwnedWeChats}
                          searchedNetWeChats={publicHomeModel.searchedNetWeChats}/>
-        </ScrollContainer>
 
-        {/* 提醒弹框 */}
-        {
-          publicHomeModel.isShowRobotAlertTips &&
-          <RobotAlertTips content={publicHomeModel.robotAlertTipsParams.content}
-                          buttons={publicHomeModel.robotAlertTipsParams.buttons}/>
-        }
+
+          {
+            publicHomeModel.isShowPublicGuide &&
+            <PublicGuide lastStepCallback={() => publicHomeModel.hidePublicGuide()}/>
+          }
+
+          {/* 提醒弹框 */}
+          {
+            publicHomeModel.isShowRobotAlertTips &&
+            <RobotAlertTips content={publicHomeModel.robotAlertTipsParams.content}
+                            buttons={publicHomeModel.robotAlertTipsParams.buttons}/>
+          }
+        </ScrollContainer>
       </div>
     )
   }
