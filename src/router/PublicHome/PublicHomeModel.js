@@ -127,6 +127,10 @@ class PublicHomeModel {
   listenSearchInputValueChange (e) {
     this.searchInputValue = e.target.value
     frequencyLimitRunAfter(async () => {
+      if (this.searchInputValue.length == 0) {
+        this.isSearchingStatus = false
+        return
+      }
       let searchedWeChatsDataRes = await Api.loadWebWeChatsByName(this.searchInputValue)
       this.searchedOwnedWeChats = searchedWeChatsDataRes.msg.ownerList
       this.searchedNetWeChats = searchedWeChatsDataRes.msg.searchList
