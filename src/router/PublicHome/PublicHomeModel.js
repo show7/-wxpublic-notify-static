@@ -117,6 +117,9 @@ class PublicHomeModel {
       this._loadInitSubscribedWeChats()
     }
     this.switchTabStatus = switchTabStatus
+    if (switchTabStatus === this.SWITCH_TAB_STATUS.SUBSCRIBED) {
+      Api.base_mark({ module: '又更新了', function: '点击按钮', action: '查看已订阅' })
+    }
   }
 
   /**
