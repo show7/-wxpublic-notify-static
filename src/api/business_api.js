@@ -11,7 +11,7 @@ const business_api = {
   // 搜索指定名称的公众号
   loadWebWeChatsByName: (weChatName) => pget(`/api/webwechat/search?weChatName=${weChatName}`),
   // 关注某个公众号
-  subscribeSingleWeChat: (params) => ppost(`/api/webwechat/subscribe`, { weChatPublicId: params.weChatPublicId }),
+  subscribeSingleWeChat: (params) => ppost(`/api/webwechat/subscribe`, { weChatPublicId: params.weChatPublicId, isSearchResult: params.isSearchResult }),
   // 取关某个公众号
   unSubscribeSingleWeChat: (params) => ppost(`/api/webwechat/unsubscribe`, { weChatPublicId: params.weChatPublicId }),
   // 推荐公众号

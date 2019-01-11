@@ -3,15 +3,25 @@ import { observer, inject } from 'mobx-react'
 import PublicResults from './components/PublicResults/PublicResults'
 import RobotAlertTips from './components/RobotAlertTips/RobotAlertTips'
 import ScrollContainer from '../../components/ScrollContainer/ScrollContainer'
+import PublicGuide from './components/PublicGuide/PublicGuide'
+import Api from '../../api/Api'
 
 import './PublicHome.less'
-import PublicGuide from './components/PublicGuide/PublicGuide'
 
 @inject('publicHomeModel')
 @observer
 export default class PublicHome extends React.Component {
 
   async componentDidMount () {
+    let bfscrolltop = document.body.scrollTop
+    document.body.addEventListener('focus', function () {
+      window.scrollTo(0, bfscrolltop)
+    }, true)
+    document.body.addEventListener('blur', function () {
+      window.scrollTo(0, bfscrolltop)
+    }, true)
+
+    Api.base_mark({ module: '又更新了', function: '进入页面', action: '进入首页' })
     const { publicHomeModel } = this.props
     // 校验是否展示引导页面
     publicHomeModel.checkPublicGuideStatus()
@@ -43,9 +53,12 @@ export default class PublicHome extends React.Component {
                      maxLength={10}
                      value={publicHomeModel.searchInputValue}
                      onChange={(e) => publicHomeModel.listenSearchInputValueChange(e)}/>
-              <img className="calcel-icon"
-                   src="https://static.iqycamp.com/delete-icon-zkqufaap.png"
-                   onClick={() => publicHomeModel.clickCancelSearchIcon()}/>
+              {
+                publicHomeModel.searchInputValue && publicHomeModel.searchInputValue.length > 0 &&
+                <img className="calcel-icon"
+                     src="https://static.iqycamp.com/delete-icon-zkqufaap.png"
+                     onClick={() => publicHomeModel.clickCancelSearchIcon()}/>
+              }
             </div>
           </div>
           {/* 菜单切换模块 */}
@@ -76,6 +89,7 @@ export default class PublicHome extends React.Component {
                             buttons={publicHomeModel.robotAlertTipsParams.buttons}/>
           }
         </ScrollContainer>
+
         {
           publicHomeModel.isShowPublicGuide &&
           <PublicGuide lastStepCallback={() => publicHomeModel.hidePublicGuide()}/>
