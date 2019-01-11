@@ -152,7 +152,7 @@ class PublicHomeModel {
 
   @action.bound
   async subscribeWeChat (weChat) {
-    Api.base_mark({ module: '又更新了', function: '点击按钮', action: '订阅按钮', memo: weChat.weChatPublicId + '' })
+    Api.base_mark({ module: '又更新了', function: !!weChat.isSearchResult, action: '点击订阅按钮', memo: weChat.weChatPublicId + '' })
     let subscribeRes = await Api.subscribeSingleWeChat({ weChatPublicId: weChat.weChatPublicId, isSearchResult: weChat.isSearchResult })
     weChat.isSubscribe = true
     if (subscribeRes.msg == 5) {
