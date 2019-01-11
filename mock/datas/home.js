@@ -156,31 +156,36 @@ router.get('/api/webwechat/search', (req, res) => {
           weChatPublicId: 1,
           avatar: 'https://thirdwx.qlogo.cn/mmopen/siaKjia9aBPcJHOCEV6z4Ayic3SEaztBgIHFjfNZCFnvibW7bURBmYJIwfoRgN2guicWOGEPX1S05NqJyTwA1EzoIJgWEdJg3nXlZ/132',
           weChatName: '公众号名字',
-          isSubscribe: false
+          isSubscribe: false,
+          isSearchResult: true
         },
         {
           weChatPublicId: 1,
           avatar: 'https://thirdwx.qlogo.cn/mmopen/siaKjia9aBPcJHOCEV6z4Ayic3SEaztBgIHFjfNZCFnvibW7bURBmYJIwfoRgN2guicWOGEPX1S05NqJyTwA1EzoIJgWEdJg3nXlZ/132',
           weChatName: '公众号名字',
-          isSubscribe: true
+          isSubscribe: true,
+          isSearchResult: true
         },
         {
           weChatPublicId: 1,
           avatar: 'https://thirdwx.qlogo.cn/mmopen/siaKjia9aBPcJHOCEV6z4Ayic3SEaztBgIHFjfNZCFnvibW7bURBmYJIwfoRgN2guicWOGEPX1S05NqJyTwA1EzoIJgWEdJg3nXlZ/132',
           weChatName: '公众号名字',
-          isSubscribe: true
+          isSubscribe: true,
+          isSearchResult: true
         },
         {
           weChatPublicId: 1,
           avatar: 'https://thirdwx.qlogo.cn/mmopen/siaKjia9aBPcJHOCEV6z4Ayic3SEaztBgIHFjfNZCFnvibW7bURBmYJIwfoRgN2guicWOGEPX1S05NqJyTwA1EzoIJgWEdJg3nXlZ/132',
           weChatName: '公众号名字',
-          isSubscribe: true
+          isSubscribe: true,
+          isSearchResult: true
         },
         {
           weChatPublicId: 1,
           avatar: 'https://thirdwx.qlogo.cn/mmopen/siaKjia9aBPcJHOCEV6z4Ayic3SEaztBgIHFjfNZCFnvibW7bURBmYJIwfoRgN2guicWOGEPX1S05NqJyTwA1EzoIJgWEdJg3nXlZ/132',
           weChatName: '公众号名字',
-          isSubscribe: true
+          isSubscribe: true,
+          isSearchResult: true
         },
       ],
       // 网络搜索结果
@@ -189,6 +194,7 @@ router.get('/api/webwechat/search', (req, res) => {
           searchId: 1,
           avatar: 'https://thirdwx.qlogo.cn/mmopen/siaKjia9aBPcJHOCEV6z4Ayic3SEaztBgIHFjfNZCFnvibW7bURBmYJIwfoRgN2guicWOGEPX1S05NqJyTwA1EzoIJgWEdJg3nXlZ/132',
           weChatName: '公众号名字',
+          isSearchResult: true
         }
       ]
     }
