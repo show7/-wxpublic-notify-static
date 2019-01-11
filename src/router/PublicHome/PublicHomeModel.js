@@ -152,10 +152,7 @@ class PublicHomeModel {
   async subscribeWeChat (weChat) {
     let subscribeRes = await Api.subscribeSingleWeChat({ weChatPublicId: weChat.weChatPublicId })
     weChat.isSubscribe = true
-    setTimeout(() => {
-      this._refreshWeChats(weChat)
-    }, 0)
-    if (this.subscribedWeChats.length == 4) {
+    if (subscribeRes.msg == 5) {
       this._showRobotAlertTips({
         content: '你已经订阅了5个心仪的公众号啦~ 继续订阅的话，每天可能会收到多条来自小新的提醒哦！',
         buttons: [
@@ -169,6 +166,9 @@ class PublicHomeModel {
         ]
       })
     }
+    setTimeout(() => {
+      this._refreshWeChats(weChat)
+    }, 0)
   }
 
   @action.bound

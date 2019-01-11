@@ -9,7 +9,8 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, '../dist'),
-    filename: '[name].bundle_[hash].js',
+    // filename: '[name].bundle_[hash].js',
+    filename: '[name].bundle.js',
     chunkFilename: '[id].chunk_[chunkhash].js',
     publicPath: '/',
   },
@@ -53,6 +54,6 @@ module.exports = {
       template: 'index.html',
       inject: true
     }),
-    new CleanWebpackPlugin(path.resolve('dist'), { root: '/Users/xfduan/WorkSpace/StaticSpace/spiderman' })
+    new CleanWebpackPlugin(path.resolve('dist'), { root: '/Users/xfduan/WorkSpace/StaticSpace/wxpublic-notify-static' })
   ],
 }

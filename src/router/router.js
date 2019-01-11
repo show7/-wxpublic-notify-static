@@ -5,7 +5,7 @@ import PublicHome from './PublicHome/PublicHome'
 const router = (
   <BrowserRouter>
     <div>
-      <Route path="/"
+      <Route path="/wx_public"
              component={PublicHome}>
       </Route>
     </div>

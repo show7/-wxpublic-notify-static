@@ -2,7 +2,7 @@ import * as axios from 'axios'
 // import { message as antdMessage } from 'antd'
 
 // 根据当前所在平台，添加 header
-let platform = 'crm'
+let platform = 'we_mobile'
 axios.defaults.headers.platform = platform
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 

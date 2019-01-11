@@ -69,12 +69,6 @@ export default class PublicHome extends React.Component {
                          searchedOwnedWeChats={publicHomeModel.searchedOwnedWeChats}
                          searchedNetWeChats={publicHomeModel.searchedNetWeChats}/>
 
-
-          {
-            publicHomeModel.isShowPublicGuide &&
-            <PublicGuide lastStepCallback={() => publicHomeModel.hidePublicGuide()}/>
-          }
-
           {/* 提醒弹框 */}
           {
             publicHomeModel.isShowRobotAlertTips &&
@@ -82,6 +76,10 @@ export default class PublicHome extends React.Component {
                             buttons={publicHomeModel.robotAlertTipsParams.buttons}/>
           }
         </ScrollContainer>
+        {
+          publicHomeModel.isShowPublicGuide &&
+          <PublicGuide lastStepCallback={() => publicHomeModel.hidePublicGuide()}/>
+        }
       </div>
     )
   }

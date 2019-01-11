@@ -29,7 +29,9 @@ export default class PublicGuide extends React.Component {
       e.preventDefault()
     }
     window.addEventListener('scroll', preventDefaultFunc, false)
-    return window.removeEventListener('scroll', preventDefaultFunc)
+    return () => {
+      window.removeEventListener('scroll', preventDefaultFunc)
+    }
   }
 
   destoryForbiddenScroll () {
