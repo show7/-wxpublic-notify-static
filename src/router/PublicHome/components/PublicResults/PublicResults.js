@@ -6,6 +6,7 @@ import PublicRecommend from '../PublicRecommend/PublicRecommend'
 import PublicRecommendInput from '../PublicRecommendInput/PublicRecommendInput'
 
 import './PublicResults.less'
+import publicHomeModel from '../../PublicHomeModel'
 
 @inject('publicHomeModel')
 @observer
@@ -23,6 +24,11 @@ export default class PublicResults extends React.Component {
             <PublicSummary key={index}
                            data={weChatItem}/>
           ))
+        }
+        {
+          publicHomeModel.isAllWeChatsLoadEnd ?
+            <div className="bottom-tips">我也是有底线的</div> :
+            <div className="bottom-tips">上拉加载更多</div>
         }
       </div>
     )
