@@ -7,7 +7,7 @@
         "targets": {
           "node": 6,
           "browsers": [
-            "last 2 versions"
+            "last 5 versions"
           ]
         }
       }
@@ -18,14 +18,6 @@
     "syntax-dynamic-import",
     "transform-decorators-legacy",
     "transform-class-properties",
-    "transform-object-rest-spread",
-    [
-      "import",
-      {
-        "libraryName": "antd",
-        "libraryDirectory": "es",
-        "style": "css"
-      }
-    ]
+    "transform-object-rest-spread"
   ]
 }
