@@ -21,8 +21,8 @@ export default class PublicHome extends React.Component {
       window.scrollTo(0, bfscrolltop)
     }, true)
 
-    Api.base_mark({ module: '又更新了', function: '进入页面', action: '进入首页' })
     const { publicHomeModel } = this.props
+    Api.base_mark({ module: '又更新了', function: '进入页面', action: '进入首页', memo: publicHomeModel.isShowPublicGuide + '' })
     // 校验是否展示引导页面
     publicHomeModel.checkPublicGuideStatus()
     await publicHomeModel.loadInitData()
