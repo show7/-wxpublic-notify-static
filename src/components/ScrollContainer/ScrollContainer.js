@@ -10,6 +10,9 @@ export default class ScrollContainer extends React.Component {
   // 本次滚动区块的 DOM 实例
   instance = null
 
+  pullDownListenerDestory = null
+  reachBottomListenerDestory = null
+
   componentDidMount () {
     const {
       enablePullDown = false,
@@ -20,20 +23,20 @@ export default class ScrollContainer extends React.Component {
 
     // 如果允许下拉加载
     if (enablePullDown) {
-      this.initPullDownListener()
+      this.pullDownListenerDestory = this.initPullDownListener()
     }
 
     // 如果允许触发触底方法
     if (enableReachBottom) {
-      this.initReachBottomListener()
+      this.reachBottomListenerDestory = this.initReachBottomListener()
     }
   }
 
   // 释放各种资源
   componentWillUnmount () {
     this.instance = null
-    this.destoryPullDownListener()
-    this.destoryReachBottomListener()
+    this.pullDownListenerDestory && this.pullDownListenerDestory()
+    this.reachBottomListenerDestory && this.reachBottomListenerDestory()
   }
 
   initPullDownListener () {
@@ -79,10 +82,6 @@ export default class ScrollContainer extends React.Component {
     }
   }
 
-  destoryPullDownListener () {
-    this.initPullDownListener()()
-  }
-
   initReachBottomListener () {
     const {
       onReachBottom = () => {
@@ -102,10 +101,6 @@ export default class ScrollContainer extends React.Component {
     return () => {
       this.instance.removeListener('scroll', reachBottomScrollListener)
     }
-  }
-
-  destoryReachBottomListener () {
-    this.initReachBottomListener()()
   }
 
   render () {

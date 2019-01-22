@@ -4,18 +4,20 @@ import PublicResults from './components/PublicResults/PublicResults'
 import RobotAlertTips from './components/RobotAlertTips/RobotAlertTips'
 import ScrollContainer from '../../components/ScrollContainer/ScrollContainer'
 import PublicGuide from './components/PublicGuide/PublicGuide'
-import Api from '../../api/Api'
-
-import './PublicHome.less'
 import GuideImage from './components/GuideImage/GuideImage'
 import BrandBlock from './components/BrandBlock/BrandBlock'
-import publicHomeModel from './PublicHomeModel'
+
+import './PublicHome.less'
 
 @inject('publicHomeModel')
 @observer
 export default class PublicHome extends React.Component {
 
+  scrollListenerDestory = null
+
   async componentDidMount () {
+    const { publicHomeModel } = this.props
+
     let bfscrolltop = document.body.scrollTop
     document.body.addEventListener('focus', function () {
       window.scrollTo(0, bfscrolltop)
@@ -24,17 +26,14 @@ export default class PublicHome extends React.Component {
       window.scrollTo(0, bfscrolltop)
     }, true)
 
-    Api.base_mark({ module: '又更新了', function: '进入页面', action: '进入首页' })
-    const { publicHomeModel } = this.props
     // 校验是否展示引导页面
     publicHomeModel.checkPublicGuideStatus()
     await publicHomeModel.loadInitData()
-
-    publicHomeModel.initScrollListener()
+    this.scrollListenerDestory = publicHomeModel.initScrollListener()
   }
 
   componentWillUnmount () {
-    publicHomeModel.destoryScrollListener()
+    this.scrollListenerDestory && this.scrollListenerDestory()
   }
 
   render () {

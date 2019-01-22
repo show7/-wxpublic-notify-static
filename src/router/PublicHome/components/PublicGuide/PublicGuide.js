@@ -16,12 +16,14 @@ export default class PublicGuide extends React.Component {
     STEP_FOUR: 4
   }
 
+  eventListenerDestory = null
+
   componentDidMount () {
-    this.initForbiddenScroll()
+    this.eventListenerDestory = this.initForbiddenScroll()
   }
 
   componentWillUnmount () {
-    this.destoryForbiddenScroll()
+    this.eventListenerDestory && this.eventListenerDestory()
   }
 
   initForbiddenScroll () {
@@ -32,10 +34,6 @@ export default class PublicGuide extends React.Component {
     return () => {
       window.removeEventListener('scroll', preventDefaultFunc)
     }
-  }
-
-  destoryForbiddenScroll () {
-    this.initForbiddenScroll()()
   }
 
   renderStepOne () {

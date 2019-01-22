@@ -16,5 +16,5 @@ export function importExternalCss (url) {
 export function importExternalJs (url) {
   let jsLink = document.createElement('script')
   jsLink.src = url
-  document.body.appendChild(jsLink)
+  document.head.appendChild(jsLink)
 }

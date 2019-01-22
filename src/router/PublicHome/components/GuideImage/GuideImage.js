@@ -1,8 +1,15 @@
 import * as React from 'react'
+import PreviewImage from '../../../../components/PreviewImage/PreviewImage'
 
 import './GuideImage.less'
 
 export default class GuideImage extends React.Component {
+
+  PreviewImages = [
+    'https://static.iqycamp.com/step1-rnmbk8z2.png',
+    'https://static.iqycamp.com/step2-7m2jbob4.png',
+    'https://static.iqycamp.com/step3-g53oaaqj.png'
+  ]
 
   render () {
     return (
@@ -13,12 +20,12 @@ export default class GuideImage extends React.Component {
         </div>
         <div className="guide-tips">你订阅的公众号发文后，我会微信提醒你哒！</div>
         <div className="image-list">
-          <img src="https://static.iqycamp.com/05-4r6r1d37.jpg"
-               alt=""/>
-          <img src="https://static.iqycamp.com/06-69dh5vrq.jpg"
-               alt=""/>
-          <img src="https://static.iqycamp.com/07-nugo1f49.jpg"
-               alt=""/>
+          <PreviewImage src={this.PreviewImages[0]}
+                        picList={this.PreviewImages}/>
+          <PreviewImage src={this.PreviewImages[1]}
+                        picList={this.PreviewImages}/>
+          <PreviewImage src={this.PreviewImages[2]}
+                        picList={this.PreviewImages}/>
         </div>
       </div>
     )

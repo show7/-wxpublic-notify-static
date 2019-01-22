@@ -50,6 +50,7 @@ class PublicHomeModel {
 
   @action.bound
   async loadInitData () {
+    Api.base_mark({ module: '又更新了', function: '进入页面', action: '进入首页' })
     this._loadInitAllWeChats()
     this._loadInitSubscribedWeChats()
   }
@@ -256,9 +257,6 @@ class PublicHomeModel {
     })
   }
 
-  // scrollListener 销毁方法
-  scrollListenerDestory = null
-
   @action.bound
   initScrollListener () {
     let node = document.querySelector('.public-home-scroll-block')
@@ -267,14 +265,9 @@ class PublicHomeModel {
       node.removeEventListener('scroll', scrollCallback)
     }
     node.addEventListener('scroll', scrollCallback, false)
-    this.scrollListenerDestory = () => {
+    return () => {
       node.removeEventListener('scroll', scrollCallback)
     }
-  }
-
-  @action.bound
-  destoryScrollListener () {
-    this.scrollListenerDestory && this.scrollListenerDestory()
   }
 
   _hideRobotAlertTips () {
