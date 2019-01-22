@@ -244,7 +244,7 @@ class PublicHomeModel {
 
   @action.bound
   async recommendWeChat (recommendWeChatParams) {
-    Api.base_mark({ module: '又更新了', function: '推荐公众号', action: recommendWeChatParams.weChatName, memo: recommendWeChatParams.searchId +'' })
+    Api.base_mark({ module: '又更新了', function: '推荐公众号', action: recommendWeChatParams.weChatName, memo: recommendWeChatParams.searchId + '' })
     let recommendWeChatRes = await Api.recommendWeChat(recommendWeChatParams)
     this._showRobotAlertTips({
       content: '推荐成功！我会在24小时内审核，收录后会告诉你哒！',
@@ -258,6 +258,25 @@ class PublicHomeModel {
         }
       ]
     })
+  }
+
+  @action.bound
+  initScrollListener () {
+    let node = document.querySelector('.public-home-container')
+    let scrollCallback = (event) => {
+      // TODO mark
+
+      this.initScrollListener()()
+    }
+    node.addEventListener('scroll', scrollCallback, false)
+    return () => {
+      node.removeEventListener('scroll', scrollCallback)
+    }
+  }
+
+  @action.bound
+  destoryScrollListener () {
+    this.initScrollListener()()
   }
 
   _hideRobotAlertTips () {

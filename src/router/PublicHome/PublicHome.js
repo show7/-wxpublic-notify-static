@@ -9,6 +9,7 @@ import Api from '../../api/Api'
 import './PublicHome.less'
 import GuideImage from './components/GuideImage/GuideImage'
 import BrandBlock from './components/BrandBlock/BrandBlock'
+import publicHomeModel from './PublicHomeModel'
 
 @inject('publicHomeModel')
 @observer
@@ -28,6 +29,12 @@ export default class PublicHome extends React.Component {
     // 校验是否展示引导页面
     publicHomeModel.checkPublicGuideStatus()
     await publicHomeModel.loadInitData()
+
+    publicHomeModel.initScrollListener()
+  }
+
+  componentWillUnmount () {
+    publicHomeModel.destoryScrollListener()
   }
 
   render () {
