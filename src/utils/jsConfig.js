@@ -9,6 +9,9 @@ const defaultJsList = ['hideOptionMenu', 'showOptionMenu', 'previewImage', 'onMe
  * 初始化 wx sdk 配置信息
  */
 export async function initWeiXinSdkConfig () {
+  if (!!!wx) {
+    return
+  }
   let validateParam = {}
   try {
     let signatureRes = await pget(`/wx/js/signature?url=${encodeURIComponent(window.location.href.split('#')[0])}`)
