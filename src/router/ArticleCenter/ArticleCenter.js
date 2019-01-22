@@ -62,28 +62,36 @@ export default class ArticleCenter extends React.Component {
                          enableReachBottom={true}
                          onReachBottom={() => articleCenterModel.loadMoreAlreadyReadArticles()}>
           <div className="category-title">———— 未读文章 ————</div>
-          <div className="un-read-articles-box">
-            {
-              articleCenterModel.unReadArticles.map((article, index) => (
-                <ArticleSingle key={article.recordId}
-                               article={article}
-                               onClick={() => articleCenterModel.clickArticle(article)}/>
-              ))
-            }
-          </div>
+          {
+            articleCenterModel.unReadArticles.length > 0 ?
+              <div className="un-read-articles-box">
+                {
+                  articleCenterModel.unReadArticles.map((article, index) => (
+                    <ArticleSingle key={article.recordId}
+                                   article={article}
+                                   onClick={() => articleCenterModel.clickArticle(article)}/>
+                  ))
+                }
+              </div> :
+              <div className="empty-block scroll-reach-bottom-tips">赞！你订阅的公众号文章都已经读完了哦~</div>
+          }
           <div className="category-title">———— 已读文章 ————</div>
-          <div className="already-read-articles-box">
-            {
-              articleCenterModel.alreadyReadArticles.map((article, index) => (
-                <ArticleSingle key={article.recordId}
-                               article={article}
-                               onClick={() => articleCenterModel.clickArticle(article)}/>
-              ))
-            }
-            <div className="scroll-reach-bottom-tips">
-              {articleCenterModel.isAlreadyReadArticlesLoadEnded ? '我也是有底线的' : '上拉加载更多'}
-            </div>
-          </div>
+          {
+            articleCenterModel.alreadyReadArticles.length > 0 ?
+              <div className="already-read-articles-box">
+                {
+                  articleCenterModel.alreadyReadArticles.map((article, index) => (
+                    <ArticleSingle key={article.recordId}
+                                   article={article}
+                                   onClick={() => articleCenterModel.clickArticle(article)}/>
+                  ))
+                }
+                <div className="scroll-reach-bottom-tips">
+                  {articleCenterModel.isAlreadyReadArticlesLoadEnded ? '我也是有底线的' : '上拉加载更多'}
+                </div>
+              </div> :
+              <div className="empty-block scroll-reach-bottom-tips">你还没有已读文章哦！快去【读者订阅】订阅你喜欢的公众号吧！ </div>
+          }
         </ScrollContainer>
       </div>
     )

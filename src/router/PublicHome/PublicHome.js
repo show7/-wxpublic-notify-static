@@ -14,8 +14,11 @@ import './PublicHome.less'
 export default class PublicHome extends React.Component {
 
   scrollListenerDestory = null
+  firstScreenBlock = null
 
   async componentDidMount () {
+    this.firstScreenBlock = window.innerHeight
+
     const { publicHomeModel } = this.props
 
     let bfscrolltop = document.body.scrollTop
@@ -37,7 +40,6 @@ export default class PublicHome extends React.Component {
   }
 
   render () {
-    let scrollHeight = window.innerHeight
 
     const { publicHomeModel } = this.props
 
@@ -56,7 +58,7 @@ export default class PublicHome extends React.Component {
 
           {/* 添加特殊逻辑，此处 block 占一屏空间 */}
           <div className={`${publicHomeModel.isSearchingStatus ? '' : 'first-screen-block'} `}
-               style={{ height: publicHomeModel.isSearchingStatus ? 'auto' : innerHeight }}>
+               style={{ height: publicHomeModel.isSearchingStatus ? 'auto' : this.firstScreenBlock }}>
             {/* 品牌头图 */}
             <BrandBlock/>
 
