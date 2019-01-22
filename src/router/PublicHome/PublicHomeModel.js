@@ -266,7 +266,7 @@ class PublicHomeModel {
     let scrollCallback = (event) => {
       // TODO mark
 
-      this.initScrollListener()()
+      this.destoryScrollListener()
     }
     node.addEventListener('scroll', scrollCallback, false)
     return () => {
