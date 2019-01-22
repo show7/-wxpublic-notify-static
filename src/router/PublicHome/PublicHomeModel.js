@@ -265,7 +265,7 @@ class PublicHomeModel {
 
   @action.bound
   initScrollListener () {
-    let node = document.querySelector('.public-home-container')
+    let node = document.querySelector('.public-home-scroll-block')
     let scrollCallback = (event) => {
       // TODO mark
 
