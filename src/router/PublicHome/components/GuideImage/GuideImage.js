@@ -8,8 +8,7 @@ export default class GuideImage extends React.Component {
     return (
       <div className="guide-image-component" {...this.props}>
         <div className="guide-image-title">
-          <img src="https://static.iqycamp.com/03-wo3wcctn.png"
-               alt="guide"/>
+          <img src="https://static.iqycamp.com/03-wo3wcctn.png"/>
           <span>小新提示</span>
         </div>
         <div className="guide-tips">你订阅的公众号发文后，我会微信提醒你哒！</div>

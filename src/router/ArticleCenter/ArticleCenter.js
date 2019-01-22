@@ -31,8 +31,7 @@ class ArticleSingle extends React.Component {
         <div className="article-top">{title}</div>
         <div className="article-middle">
           <img className="public-avatar"
-               src={avatar}
-               alt="avatar"/>
+               src={avatar}/>
           <div className="public-name">{nickname}</div>
         </div>
         <div className="article-bottom">
