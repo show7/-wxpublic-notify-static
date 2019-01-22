@@ -16,12 +16,14 @@ export default class PublicGuide extends React.Component {
     STEP_FOUR: 4
   }
 
+  eventListenerDestory = null
+
   componentDidMount () {
-    this.initForbiddenScroll()
+    this.eventListenerDestory = this.initForbiddenScroll()
   }
 
   componentWillUnmount () {
-    this.destoryForbiddenScroll()
+    this.eventListenerDestory && this.eventListenerDestory()
   }
 
   initForbiddenScroll () {
@@ -34,19 +36,15 @@ export default class PublicGuide extends React.Component {
     }
   }
 
-  destoryForbiddenScroll () {
-    this.initForbiddenScroll()()
-  }
-
   renderStepOne () {
     return (
       <div className="step-guide step-one"
            onClick={() => this.setState({ currentStep: this.CURRENT_STEP.STEP_TWO })}>
         <img className="bottom"
-             src="https://static.iqycamp.com/step_01_bg-80i41khm.png"/>
+             src="https://static.iqycamp.com/step_01_bg-f8uyfj2l.png"/>
         <div className="middle"/>
         <img className="top"
-             src="https://static.iqycamp.com/step_01_top-4on01v0g.png"/>
+             src="https://static.iqycamp.com/step_01_top-5zq8vv6z.png"/>
       </div>
     )
   }

@@ -27,8 +27,8 @@ export default class PublicResults extends React.Component {
         }
         {
           publicHomeModel.isAllWeChatsLoadEnd ?
-            <div className="bottom-tips">我也是有底线的</div> :
-            <div className="bottom-tips">上拉加载更多</div>
+            <div className="scroll-reach-bottom-tips">我也是有底线的</div> :
+            <div className="scroll-reach-bottom-tips">上拉加载更多</div>
         }
       </div>
     )
@@ -110,8 +110,8 @@ export default class PublicResults extends React.Component {
         }
         {
           publicHomeModel.isSubscribeWeChatsLoadEnd ?
-            <div className="bottom-tips">我也是有底线的</div> :
-            <div className="bottom-tips">上拉加载更多</div>
+            <div className="scroll-reach-bottom-tips">我也是有底线的</div> :
+            <div className="scroll-reach-bottom-tips">上拉加载更多</div>
         }
       </div>
     )

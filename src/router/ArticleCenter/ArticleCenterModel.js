@@ -1,0 +1,54 @@
+import { observable, action } from 'mobx'
+import Api from '../../api/Api'
+
+class ArticleCenterModel {
+
+  ARTICLE_STATUS_TYPE = {
+    UN_READ: 2, // 未读
+    ALREADY_READ: 1,  // 已读
+  }
+
+  @observable unReadArticles = [] // 未读文章列表
+  @observable alreadyReadArticles = [] // 已读文章列表
+
+  @observable isAlreadyReadArticlesLoadEnded = false
+  @observable currentAlreadyReadArticlesPage = 1
+
+  @action.bound
+  async loadInitData () {
+    Api.base_mark({ module: '又更新了', function: '文章列表', action: '加载文章列表' })
+    let unReadRes = await Api.loadArticleList(this.ARTICLE_STATUS_TYPE.UN_READ)
+    this.unReadArticles = unReadRes.msg.content
+    let alreadyReadArticlesRes = await Api.loadArticleList(this.ARTICLE_STATUS_TYPE.ALREADY_READ)
+    this.alreadyReadArticles = alreadyReadArticlesRes.msg.content
+    this.isAlreadyReadArticlesLoadEnded = alreadyReadArticlesRes.msg.isEnd
+  }
+
+  @action.bound
+  async loadMoreAlreadyReadArticles () {
+    if (!this.isAlreadyReadArticlesLoadEnded) {
+      let alreadyReadArticlesRes = await Api.loadArticleList(this.ARTICLE_STATUS_TYPE.ALREADY_READ, ++this.currentAlreadyReadArticlesPage)
+      this.alreadyReadArticles = this.alreadyReadArticles.concat(alreadyReadArticlesRes.msg.content)
+      this.isAlreadyReadArticlesLoadEnded = alreadyReadArticlesRes.msg.isEnd
+    }
+  }
+
+  @action.bound
+  async clickArticle (article) {
+    this.unReadArticles = this.unReadArticles.filter((item, index) => {
+      return article.recordId != item.recordId
+    })
+    // 页面打开记录
+    let openArticleRes = await Api.openArticle({ recordId: article.recordId })
+
+    let alreadyReadArticlesRes = await Api.loadArticleList(this.ARTICLE_STATUS_TYPE.ALREADY_READ)
+    this.alreadyReadArticles = alreadyReadArticlesRes.msg.content
+    this.isAlreadyReadArticlesLoadEnded = alreadyReadArticlesRes.msg.isEnd
+
+    window.location.href = article.url
+  }
+
+}
+
+let articleCenterModel = new ArticleCenterModel()
+export default articleCenterModel

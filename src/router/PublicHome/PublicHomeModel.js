@@ -51,6 +51,7 @@ class PublicHomeModel {
 
   @action.bound
   async loadInitData () {
+    Api.base_mark({ module: '又更新了', function: '进入页面', action: '进入首页' })
     this._loadInitAllWeChats()
     this._loadInitSubscribedWeChats()
   }
@@ -175,9 +176,7 @@ class PublicHomeModel {
         ]
       })
     }
-    setTimeout(() => {
-      this._refreshWeChats(weChat)
-    }, 0)
+    this._refreshWeChats(weChat)
   }
 
   @action.bound
@@ -209,9 +208,7 @@ class PublicHomeModel {
     Api.base_mark({ module: '又更新了', function: '取关', action: '取关', memo: weChat.weChatPublicId + '' })
     let subscribeRes = await Api.unSubscribeSingleWeChat({ weChatPublicId: weChat.weChatPublicId })
     weChat.isSubscribe = false
-    setTimeout(() => {
-      this._refreshWeChats(weChat)
-    }, 0)
+    this._refreshWeChats(weChat)
   }
 
   /**
@@ -222,12 +219,12 @@ class PublicHomeModel {
   _refreshWeChats (weChat) {
     this.allWeChats.forEach((item, index) => {
       if (item.weChatPublicId === weChat.weChatPublicId) {
-        this.allWeChats[index] = JSON.parse(JSON.stringify(item))
+        this.allWeChats[index] = JSON.parse(JSON.stringify(weChat))
       }
     })
     this.subscribedWeChats.forEach((item, index) => {
       if (item.weChatPublicId === weChat.weChatPublicId) {
-        this.subscribedWeChats[index] = JSON.parse(JSON.stringify(item))
+        this.subscribedWeChats[index] = JSON.parse(JSON.stringify(weChat))
       }
     })
   }
@@ -246,7 +243,7 @@ class PublicHomeModel {
 
   @action.bound
   async recommendWeChat (recommendWeChatParams) {
-    Api.base_mark({ module: '又更新了', function: '推荐公众号', action: recommendWeChatParams.weChatName, memo: recommendWeChatParams.searchId +'' })
+    Api.base_mark({ module: '又更新了', function: '推荐公众号', action: recommendWeChatParams.weChatName, memo: recommendWeChatParams.searchId + '' })
     let recommendWeChatRes = await Api.recommendWeChat(recommendWeChatParams)
     this._showRobotAlertTips({
       content: '推荐成功！我会在24小时内审核，收录后会告诉你哒！',
@@ -260,6 +257,19 @@ class PublicHomeModel {
         }
       ]
     })
+  }
+
+  @action.bound
+  initScrollListener () {
+    let node = document.querySelector('.public-home-scroll-block')
+    let scrollCallback = (event) => {
+      Api.base_mark({ module: '又更新了', function: '首屏滚动', action: '又更新了首页' })
+      node.removeEventListener('scroll', scrollCallback)
+    }
+    node.addEventListener('scroll', scrollCallback, false)
+    return () => {
+      node.removeEventListener('scroll', scrollCallback)
+    }
   }
 
   _hideRobotAlertTips () {

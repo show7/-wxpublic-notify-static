@@ -19,7 +19,7 @@ module.exports = merge(common, {
     openPage: '',
     proxy: {
       '/api/*': {
-        target: 'http://localhost:3000',
+        target: 'http://beta.confucius.mobi',
         secure: false,
         bypass: function (req, res, proxyOptions) {
           if (req.headers.accept && req.headers.accept.indexOf('html') !== -1) {
