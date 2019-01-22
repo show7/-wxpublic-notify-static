@@ -44,6 +44,7 @@ class PublicHomeModel {
 
   @action.bound
   hidePublicGuide () {
+    Api.base_mark({ module: '又更新了', function: '新手引导', action: '浏览完毕' })
     this.isShowPublicGuide = false
     window.localStorage.setItem('isReadGuide', true)
   }
@@ -151,6 +152,7 @@ class PublicHomeModel {
 
   @action.bound
   clickCancelSearchIcon () {
+    Api.base_mark({ module: '又更新了', function: '搜索', action: '点击取消搜索' })
     this.searchInputValue = ''
     this.isSearchingStatus = false
   }
