@@ -37,6 +37,8 @@ export default class PublicHome extends React.Component {
   }
 
   render () {
+    let scrollHeight = window.innerHeight
+
     const { publicHomeModel } = this.props
 
     return (
@@ -53,7 +55,8 @@ export default class PublicHome extends React.Component {
 
 
           {/* 添加特殊逻辑，此处 block 占一屏空间 */}
-          <div className={`${publicHomeModel.isSearchingStatus ? '' : 'first-screen-block'} `}>
+          <div className={`${publicHomeModel.isSearchingStatus ? '' : 'first-screen-block'} `}
+               style={{ height: publicHomeModel.isSearchingStatus ? 'auto' : innerHeight }}>
             {/* 品牌头图 */}
             <BrandBlock/>
 
