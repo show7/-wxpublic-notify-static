@@ -11,7 +11,7 @@ const business_api = {
   // 搜索指定名称的公众号
   loadWebWeChatsByName: (weChatName) => pget(`/api/webwechat/search?weChatName=${weChatName}`),
   // 获取文章阅读状态列表 type 1-已读，2-未读
-  loadArticleList: (type, page = 1) => pget(`/api/webwechat/article/list?type=${type}&page=${page}`),
+  loadArticleList: (type, page = 1) => pget(`/api/webwechat/article/list?type=${type}&page=${page}&timestamp=${new Date().getTime()}`),
   // 关注某个公众号
   subscribeSingleWeChat: (params) => ppost(`/api/webwechat/subscribe`, { weChatPublicId: params.weChatPublicId, isSearchResult: params.isSearchResult }),
   // 取关某个公众号

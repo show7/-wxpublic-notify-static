@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { observer, inject } from 'mobx-react'
 import ScrollContainer from '../../components/ScrollContainer/ScrollContainer'
-import articleCenterModel from './ArticleCenterModel'
 
 import './ArticleCenter.less'
 
@@ -55,6 +54,8 @@ export default class ArticleCenter extends React.Component {
 
   render () {
     const { articleCenterModel } = this.props
+
+    console.log('rerender')
 
     return (
       <div className="article-center-container">

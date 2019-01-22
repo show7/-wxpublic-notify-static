@@ -35,7 +35,16 @@ class ArticleCenterModel {
 
   @action.bound
   async clickArticle (article) {
-    await Api.openArticle({ recordId: article.recordId })
+    this.unReadArticles = this.unReadArticles.filter((item, index) => {
+      return article.recordId != item.recordId
+    })
+    // 页面打开记录
+    let openArticleRes = await Api.openArticle({ recordId: article.recordId })
+
+    let alreadyReadArticlesRes = await Api.loadArticleList(this.ARTICLE_STATUS_TYPE.ALREADY_READ)
+    this.alreadyReadArticles = alreadyReadArticlesRes.msg.content
+    this.isAlreadyReadArticlesLoadEnded = alreadyReadArticlesRes.msg.isEnd
+
     window.location.href = article.url
   }
 
