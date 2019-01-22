@@ -16,6 +16,7 @@ class ArticleCenterModel {
 
   @action.bound
   async loadInitData () {
+    Api.base_mark({ module: '又更新了', function: '文章列表', action: '加载文章列表' })
     let unReadRes = await Api.loadArticleList(this.ARTICLE_STATUS_TYPE.UN_READ)
     this.unReadArticles = unReadRes.msg.content
     let alreadyReadArticlesRes = await Api.loadArticleList(this.ARTICLE_STATUS_TYPE.ALREADY_READ)

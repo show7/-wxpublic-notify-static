@@ -267,8 +267,7 @@ class PublicHomeModel {
   initScrollListener () {
     let node = document.querySelector('.public-home-scroll-block')
     let scrollCallback = (event) => {
-      // TODO mark
-
+      Api.base_mark({ module: '又更新了', function: '首屏滚动', action: '又更新了首页' })
       node.removeEventListener('scroll', scrollCallback)
     }
     node.addEventListener('scroll', scrollCallback, false)
