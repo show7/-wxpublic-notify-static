@@ -173,9 +173,7 @@ class PublicHomeModel {
         ]
       })
     }
-    setTimeout(() => {
-      this._refreshWeChats(weChat)
-    }, 0)
+    this._refreshWeChats(weChat)
   }
 
   @action.bound
@@ -207,9 +205,7 @@ class PublicHomeModel {
     Api.base_mark({ module: '又更新了', function: '取关', action: '取关', memo: weChat.weChatPublicId + '' })
     let subscribeRes = await Api.unSubscribeSingleWeChat({ weChatPublicId: weChat.weChatPublicId })
     weChat.isSubscribe = false
-    setTimeout(() => {
-      this._refreshWeChats(weChat)
-    }, 0)
+    this._refreshWeChats(weChat)
   }
 
   /**
@@ -220,12 +216,12 @@ class PublicHomeModel {
   _refreshWeChats (weChat) {
     this.allWeChats.forEach((item, index) => {
       if (item.weChatPublicId === weChat.weChatPublicId) {
-        this.allWeChats[index] = JSON.parse(JSON.stringify(item))
+        this.allWeChats[index] = JSON.parse(JSON.stringify(weChat))
       }
     })
     this.subscribedWeChats.forEach((item, index) => {
       if (item.weChatPublicId === weChat.weChatPublicId) {
-        this.subscribedWeChats[index] = JSON.parse(JSON.stringify(item))
+        this.subscribedWeChats[index] = JSON.parse(JSON.stringify(weChat))
       }
     })
   }
