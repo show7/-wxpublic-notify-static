@@ -260,6 +260,9 @@ class PublicHomeModel {
     })
   }
 
+  // scrollListener 销毁方法
+  scrollListenerDestory = null
+
   @action.bound
   initScrollListener () {
     let node = document.querySelector('.public-home-container')
@@ -269,14 +272,14 @@ class PublicHomeModel {
       node.removeEventListener('scroll', scrollCallback)
     }
     node.addEventListener('scroll', scrollCallback, false)
-    return () => {
+    this.scrollListenerDestory = () => {
       node.removeEventListener('scroll', scrollCallback)
     }
   }
 
   @action.bound
   destoryScrollListener () {
-    this.initScrollListener()()
+    this.scrollListenerDestory && this.scrollListenerDestory()
   }
 
   _hideRobotAlertTips () {
