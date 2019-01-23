@@ -5,7 +5,7 @@ import { previewImage } from '../../utils/jsConfig'
 export default class PreviewImage extends React.Component {
 
   state = {
-    randomClass: `scroll-container-${Math.floor(Math.random() * 100)}`
+    randomClass: `preview-image-${Math.floor(Math.random() * 100)}`
   }
 
   eventListenerDestory = null
