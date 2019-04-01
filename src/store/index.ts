@@ -8,17 +8,13 @@ import getters from './getters'
 Vue.use(Vuex)
 
 interface State {
-  
+  login: boolean,
+  activities: any[]
 }
 
 let state: State = {
   login: false,
-  modules: [],
-  headline: [],
-  activities: [],
-  superSales: [],
-  shops: [],
-  searchVal: ''
+  activities: []
 }
 
 export default new Vuex.Store({

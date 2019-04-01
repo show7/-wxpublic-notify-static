@@ -8,7 +8,7 @@ import Vant from 'vant';
 import 'vant/lib/index.css';
 
 Vue.use(Vant);
-Vue.use(VueLazyload, { preLoad: 1 })
+// Vue.use(VueLazyload, { preLoad: 1 })
 
 Vue.config.productionTip = false
 

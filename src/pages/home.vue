@@ -1,27 +1,30 @@
 <template lang="pug">
   div
     Button
-    span 123
+    //- span 123
+    div(v-for='item in activities')
+      .title {{item.title}}
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { State } from "vuex-class";
-import Button from '@/components/Button.vue';
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { State, Action } from 'vuex-class'
+import Button from '@/components/Button.vue'
 @Component({
   components: {
     Button
   }
 })
 export default class Home extends Vue {
+  @Action getHome: (params: any) => void
   Alert(params: number) {
     alert(params == 1)
   }
   private mounted() {
-    
+    this.getHome('123')
   }
-  // @State activities: StoreState.activity[]
+  @State activities: StoreState.activity[]
 }
 </script>
 
