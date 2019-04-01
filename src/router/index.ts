@@ -1,7 +1,7 @@
 import Vue, { AsyncComponent } from 'vue'
 import Router, { RouteConfig, Route, NavigationGuard } from 'vue-router'
 
-const home: AsyncComponent = (): any => import('@/pages/home.vue')
+const home: AsyncComponent = (): any => import('@/pages/home/home.vue')
 const personal: AsyncComponent = (): any => import('@/pages/personal.vue')
 // import main from '@/views/main.vue'
 
