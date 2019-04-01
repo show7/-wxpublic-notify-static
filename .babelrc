@@ -1,23 +1,9 @@
 {
   "presets": [
-    [
-      "env",
-      {
-        "modules": false,
-        "targets": {
-          "node": 6,
-          "browsers": [
-            "last 5 versions"
-          ]
-        }
-      }
-    ],
-    "react"
+    ["env", {
+      "modules": false
+    }],
+    "stage-2"
   ],
-  "plugins": [
-    "syntax-dynamic-import",
-    "transform-decorators-legacy",
-    "transform-class-properties",
-    "transform-object-rest-spread"
-  ]
+  "plugins": ["transform-runtime"]
 }
