@@ -1,19 +1,16 @@
 <template lang="pug">
   div
-    Button
-    //- span 123
-    div(v-for='item in activities')
-      .title {{item.title}}
+    SearchInput
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { State, Action } from 'vuex-class'
-import Button from '@/components/Button.vue'
+import SearchInput from '@/components/searchInput.vue'
 @Component({
   components: {
-    Button
+    SearchInput
   }
 })
 export default class Home extends Vue {

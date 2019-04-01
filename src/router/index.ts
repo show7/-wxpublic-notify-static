@@ -9,24 +9,20 @@ Vue.use(Router)
 
 const routes: RouteConfig[] = [
   {
-    path: '/',
-    redirect: '/home',
-    component: home
-  },
-  {
     name:'home',
-    path:'/home',
+    path:'/update/home',
     component:home
   },
   {
-    path: '/personal',
+    path: '/update/personal',
     name: 'personal',
     component: personal
   },
-  // {
-  //   path: '*',
-  //   component: pageNotFound
-  // }
+  {
+    path: '*',
+    redirect: '/update/home',
+    component: home
+  }
 ]
 
 const router: Router = new Router({

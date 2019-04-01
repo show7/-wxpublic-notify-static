@@ -7,8 +7,8 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
+import Vue from 'vue'
+import Component from 'vue-class-component'
 
 @Component
 export default class App extends Vue {}
@@ -16,7 +16,6 @@ export default class App extends Vue {}
 
 <style>
 body {
-  font-size: 14px;
   margin: 0;
 }
 
