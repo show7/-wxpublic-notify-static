@@ -22,7 +22,7 @@ export default class Home extends Vue {
     alert(params == 1)
   }
   private mounted() {
-    this.getHome('123')
+    this.getHome('')
   }
   @State activities: StoreState.activity[]
 }
