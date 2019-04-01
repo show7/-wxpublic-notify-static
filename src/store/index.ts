@@ -8,13 +8,7 @@ import getters from './getters'
 Vue.use(Vuex)
 
 interface State {
-  login: Boolean,
-  modules: StoreState.module[],
-  headline: StoreState.headline[],
-  activities: StoreState.activity[],
-  superSales: StoreState.superSale[],
-  shops: StoreState.shop[],
-  searchVal: string
+  
 }
 
 let state: State = {

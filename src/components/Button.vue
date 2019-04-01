@@ -10,7 +10,7 @@ import { State } from "vuex-class";
 
 @Component
 export default class Button extends Vue {
-  @State activities: StoreState.activity[]
+  
 }
 </script>
 
