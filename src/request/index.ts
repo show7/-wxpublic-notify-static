@@ -1,17 +1,15 @@
 import axios from 'axios';
-
-
+import TYPES from '../store/types'
+let platform = 'we_mobile'
+axios.defaults.headers.platform = platform
+axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.interceptors.response.use(
   (response: any) => {
-    // 对响应数据做点什么
-    console.log(response)
-    return response
-    window.location.href =
-      decodeURI(
-        `${window.location.protocol}//${
-          window.location.host
-        }/login?callbackUrl=`
-      ) + encodeURIComponent(window.location.href)
+    if (response.status === 700) {
+      window.location.href = decodeURI(`${window.location.protocol}//${window.location.host}/wx/oauth/auth/10?callbackUrl=`) + encodeURIComponent(window.location.href)
+    } else {
+      return response
+    }
   },
   function(error) {
     // 对响应错误做点什么
@@ -20,3 +18,5 @@ axios.interceptors.response.use(
 )
 
 export { default as home }from './home'
+export { default as wxSdk }from './wxSdk'
+export { default as article }from './article'

@@ -1,7 +1,7 @@
 /**
  * 全局默认配置的 sdk 列表
  */
-import { ajaxGet } from '../request'
+import { wxSdk } from '../request'
 
 const defaultJsList = [
   'hideOptionMenu',
@@ -21,7 +21,7 @@ export async function initWeiXinSdkConfig() {
   }
   let validateParam = {}
   try {
-    let signatureRes = await ajaxGet(
+    let signatureRes = await wxSdk(
       `/wx/js/signature?url=${encodeURIComponent(
         window.location.href.split('#')[0]
       )}`
