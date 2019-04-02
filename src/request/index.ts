@@ -1,14 +1,24 @@
 import axios from 'axios';
 
 
-export const ajaxGet:any  = (url: string, params?: any) => axios.get(url).then((res) => res.data).catch((e: string) => console.error(e))
+axios.interceptors.response.use(
+  (response: any) => {
+    // 对响应数据做点什么
+    console.log(response)
+    return response
+    window.location.href =
+      decodeURI(
+        `${window.location.protocol}//${
+          window.location.host
+        }/login?callbackUrl=`
+      ) + encodeURIComponent(window.location.href)
+  },
+  function(error) {
+    // 对响应错误做点什么
+    return Promise.reject(error)
+  }
+)
 
-export const ajaxPost:any = (url:string ,params?: any) => axios.post(url, params).then((res) => res.data).catch((e: string) => console.error(e))
+import {getData} from './home'
 
-axios.interceptors.response.use(function (response) {
-  // 对响应数据做点什么
-  return response;
-}, function (error) {
-  // 对响应错误做点什么
-  return Promise.reject(error);
-});
+export default getData
