@@ -1,94 +1,41 @@
 <template lang="pug">
-  div
-    SearchInput
+  .home-component-wrap
+    Search(@input = "searchChange")
+    transition(name="fade")
+      router-view
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import Search from '@/components/search/Search.vue'
+
 import { State, Action } from 'vuex-class'
-import SearchInput from '@/components/searchInput.vue'
+
 @Component({
+  name: 'Home',
   components: {
-    SearchInput
+    Search
   }
 })
 export default class Home extends Vue {
-  @Action getHome: (params: any) => void
-  Alert(params: number) {
-    alert(params == 1)
-  }
-  private mounted() {
-    this.getHome('')
+  // @Action getHome: (params: any) => void
+  // Alert(params: number) {
+  //   alert(params == 1)
+  // }
+  async mounted() {
+
   }
   @State activities: StoreState.activity[]
+  searchChange(val: any) {
+    console.log(val)
+  }
 }
 </script>
 
 <style lang="less" scoped>
-.board-wrap {
-  .board {
-    display: flex;
-    align-items: center;
-
-    .item {
-      display: flex;
-      flex: 1;
-      align-items: center;
-      padding: 10px;
-
-      .cnt {
-        flex: 1;
-
-        .title {
-          font-size: 16px;
-        }
-
-        .desc {
-          font-size: 12px;
-          color: #999;
-          margin-top: 5px;
-        }
-      }
-
-      img {
-        height: 60px;
-        width: 60px;
-      }
-    }
-  }
-
-  .wrap:nth-child(2) {
-    .item:first-child {
-      border-right: 1px solid #f1f1f1;
-    }
-  }
-
-  .wrap:nth-child(3) {
-    .item {
-      background-color: #ffa383;
-      color: white;
-      margin-right: 5px;
-
-      .desc {
-        width: 75px;
-        padding: 2px;
-        border-radius: 12px;
-        background-color: #f97e54;
-        transform: scale(0.9);
-        color: #e6e6e6;
-        text-align: center;
-      }
-    }
-
-    .item:last-child {
-      background-color: #44d0cd;
-      margin: 0;
-
-      .desc {
-        background-color: #22bab7;
-      }
-    }
-  }
+@import '../style/common.less';
+.home-component-wrap {
+  padding: 14px 0 0 0;
 }
 </style>

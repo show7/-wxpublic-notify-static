@@ -1,5 +1,5 @@
 <template lang="pug">
-  .public-address-wrap 
+  .public-address-component 
     img(class="public-address-head-img" src="")
     div(class="public-address-info")
       div(class="public-address-title") 吴晓波频道
