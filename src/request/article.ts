@@ -5,5 +5,5 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 
 export default{
-  article: () => axios.get('/api/webwechat/all/list?page=1')
+  article: () => axios.get('/api/webwechat/subscribe/overview')
 }
