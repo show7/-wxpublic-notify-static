@@ -8,7 +8,7 @@ axios.interceptors.response.use(
     if (response.status === 700) {
       window.location.href = decodeURI(`${window.location.protocol}//${window.location.host}/wx/oauth/auth/10?callbackUrl=`) + encodeURIComponent(window.location.href)
     } else {
-      return response
+      return response.data
     }
   },
   function(error) {
@@ -20,3 +20,5 @@ axios.interceptors.response.use(
 export { default as home }from './home'
 export { default as wxSdk }from './wxSdk'
 export { default as article }from './article'
+export { default as articleList }from './articleList'
+export { default as searchPublic }from './searchPublic'

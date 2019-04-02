@@ -18,7 +18,6 @@ export default class Home extends Vue {
   private mounted() {
     this.getHome('')
   }
-  @State activities: StoreState.activity[]
 }
 </script>
 

@@ -1,32 +1,20 @@
 <template lang='pug'>
   div
     van-cell-group
-      van-cell(title='又更新公众号' class='cellTit')
+      van-cell(title='又更新公众号' class='cellTit' is-link)
         span(class='findMore') 查看全部({{updatePulic}})
     van-row(class='descriptionContent')
-      van-col(span='6')
+      van-col(span='6' v-for='(item, index) in publicList' :key='index' @click='pathToPublic(item.url)')
         div(class='mySubscribe-item')
-          img(class='mySubscribe' src='')
-        div(class='descriptionTxt') 圈外孙圈圈
-      van-col(span='6')
-        div(class='mySubscribe-item')
-          img(class='mySubscribe' src='')
-        div(class='descriptionTxt') 圈外孙圈圈
-      van-col(span='6')
-        div(class='mySubscribe-item')
-          img(class='mySubscribe' src='')
-        div(class='descriptionTxt') 圈外孙圈圈
-      van-col(span='6')
-        div(class='mySubscribe-item')
-          img(class='mySubscribe' src='')
+          img(class='mySubscribe' :src='item.avatar')
         div(class='descriptionTxt') 圈外孙圈圈
     div(class='separate')
     van-cell-group
         van-cell(title='又更新文章' class='cellTit')
-          span(class='findMore') 查看全部({{updatePulic}})
-    Article
+          span(v-if='mySubscribe.unReadArticles.length > 3' class='findMore') 查看全部({{mySubscribe.unReadArticles.length}})
+    Article(:data='mySubscribe.unReadArticles')
     div(class='separate')
-    van-cell(title="单元格" is-link class='cellTit')
+    van-cell(title="已阅文章" is-link class='cellTit')
 </template>
 
 <script lang='ts'>
@@ -40,11 +28,22 @@ import Article from '@/components/article/Article.vue'
   }
 })
 export default class Myorder extends Vue {
-  @State activities: StoreState.activity[]
+  @State mySubscribe: StoreState.overview
   @Action getArticle: () => void
   private updatePulic = 0
   private mounted() {
     this.getArticle()
+  }
+  get publicList() {
+    if (this.mySubscribe.publicList.length > 4) {
+      let _public = this.mySubscribe.publicList.slice(0, 4)
+      return _public
+    } else {
+      return this.mySubscribe.publicList
+    }
+  }
+  pathToPublic(url: string) {
+    // window.location.href = url
   }
 }
 </script>
@@ -56,6 +55,7 @@ export default class Myorder extends Vue {
 .mySubscribe {
   width: 34px;
   height: 34px;
+  border-radius: 50%;
 }
 .mySubscribe-item {
   display: flex;

@@ -1,19 +1,19 @@
 <template lang="pug">
     .search-component-wrap
-      input(class="search-input" type="text" v-model="text" @focus="focus" @blur="blur" @input="search")
+      input(class="search-input" type="text" v-model="text" @search="search" @input='search')
       span(class="iconfont icon-search") 
       span(class="iconfont icon-close-copy" @click="clearText" v-show="searchStates")
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import Component from "vue-class-component";
+import Component from 'vue-class-component'
 
 @Component({
-  name: "Search",
+  name: 'Search',
   props: {
     input: {
       type: Function,
-      default: (): void => { }
+      default: (): void => {}
     }
   }
 })

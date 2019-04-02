@@ -1,18 +1,36 @@
 <template lang="pug">
   div
-      div(class='articleTit') 阿萨德与我阿萨德与我阿萨德与时代与阿萨德与我阿萨德与我阿萨德与时代与阿萨德与我阿萨德与我阿萨德与时代与
+    van-cell(v-for='(item, index) in computedMsg' :key='index' @click='pathToArticle(item.url)')
+      div(class='articleTit') {{item.title}}
       div(class='articleContent')
         div(class='contentLeft')
-          img(src='' class='articleUserImg')
-          div(class='channelName') 圈外同学
+          img(:src='item.avatar' class='articleUserImg')
+          div(class='channelName') {{item.nickname}}
         div(class='contentRight') 2019.01.07 12:30
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { State } from 'vuex-class'
+import Component from 'vue-class-component'
+@Component({
+  props: {
+    data: Array
+  }
+})
 export default class Article extends Vue {
+  name: 'Article'
+  private data: object[] = this.data
   private updatePulic = 0
+  mounted() {
+    console.log(this.data)
+  }
+  get computedMsg() {
+    return this.data
+  }
+  pathToArticle(url: string) {
+    window.location.href = url
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -31,9 +49,12 @@ export default class Article extends Vue {
 }
 .contentLeft {
   display: flex;
+  align-items: center;
 }
 .articleUserImg {
-  width: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }
 .channelName {
   font-size: 14px;
@@ -47,7 +68,7 @@ export default class Article extends Vue {
   color: rgba(80, 80, 90, 1);
   margin: 10px 0;
   padding: 0 15px;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.5;
   text-overflow: ellipsis;
   display: -webkit-box;

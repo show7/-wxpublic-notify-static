@@ -1,7 +1,7 @@
 import Vue, { AsyncComponent } from 'vue'
 import Router, { RouteConfig, Route, NavigationGuard } from 'vue-router'
 
-const home: AsyncComponent = (): any => import('@/pages/home/home.vue')
+// const home: AsyncComponent = (): any => import('@/pages/home/home.vue')
 const myorder: AsyncComponent = (): any => import('@/pages/myorder/Myorder.vue')
 const ArticleList: AsyncComponent = (): any => import('@/pages/articleList/ArticleList.vue')
 // import main from '@/views/main.vue'
@@ -12,7 +12,7 @@ const routes: RouteConfig[] = [
   {
     name:'Home',
     path:'/update',
-    component:()=>import('@/pages/home.vue'),
+    component:()=>import('@/pages/Home.vue'),
     children:[{
       name: 'Default',
       path: 'default',

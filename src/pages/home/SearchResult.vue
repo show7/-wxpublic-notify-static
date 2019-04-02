@@ -1,19 +1,21 @@
 <template lang="pug">
   div(class="search-result-component")
-    Public-address
+    Public-address(:inputSearchArr='inputSearch.ownerList')
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import Component from 'vue-class-component';
+import Component from 'vue-class-component'
 import PublicAddress from '@/components/publicAddress/PublicAddress.vue'
+import { State, Action } from 'vuex-class'
 @Component({
-  name: "SearchResult",
+  name: 'SearchResult',
   components: {
     PublicAddress
   }
 })
 export default class SearchResult extends Vue {
-
+  @Action changeInputText: () => void
+  @State inputSearch: Object
 }
 </script>
 

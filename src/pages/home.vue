@@ -19,16 +19,19 @@ import { State, Action } from 'vuex-class'
   }
 })
 export default class Home extends Vue {
+  @Action changeInputText: (val: string) => void
   // @Action getHome: (params: any) => void
   // Alert(params: number) {
   //   alert(params == 1)
   // }
-  async mounted() {
-
-  }
-  @State activities: StoreState.activity[]
+  async mounted() {}
   searchChange(val: any) {
-    console.log(val)
+    this.changeInputText(val)
+    if (val === '' && location.href.indexOf('/update/Default') === -1) {
+      this.$router.replace({ path: '/update/Default' })
+    } else if (location.href.indexOf('/update/SearchResult') === -1) {
+      this.$router.replace({ path: '/update/SearchResult' })
+    }
   }
 }
 </script>
