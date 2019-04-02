@@ -10,9 +10,19 @@ Vue.use(Router)
 
 const routes: RouteConfig[] = [
   {
-    name:'home',
-    path:'/update/home',
-    component:home
+    name:'Home',
+    path:'/update',
+    component:()=>import('@/pages/home.vue'),
+    children:[{
+      name: 'Default',
+      path: 'default',
+      component: () => import('@/pages/home/Default.vue')
+    },
+    {
+      name: 'SearchResult',
+      path: 'searchResult',
+      component: () => import('@/pages/home/SearchResult.vue')
+    }]
   },
   {
     path: '/update/myorder',
@@ -24,11 +34,11 @@ const routes: RouteConfig[] = [
     name: 'articleList',
     component: ArticleList
   },
-  // {
-  //   path: '*',
-  //   redirect: '/update/home',
-  //   component: home
-  // }
+  {
+    path: '*',
+    redirect: '/home/Default',
+    component: ()=>import('@/pages/home/Default.vue')
+  }
 ]
 
 const router: Router = new Router({
