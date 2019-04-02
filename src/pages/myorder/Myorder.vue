@@ -32,7 +32,7 @@
 <script lang='ts'>
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { State } from 'vuex-class'
+import { State, Action } from 'vuex-class'
 import Article from '@/components/article/Article.vue'
 @Component({
   components: {
@@ -40,7 +40,12 @@ import Article from '@/components/article/Article.vue'
   }
 })
 export default class Myorder extends Vue {
+  @State activities: StoreState.activity[]
+  @Action getData: () => void
   private updatePulic = 0
+  private mounted() {
+    this.getData()
+  }
 }
 </script>
 

@@ -17,7 +17,6 @@ import Component from 'vue-class-component'
 import Search from '@/components/search/Search.vue'
 import PublicAddress from '@/components/publicAddress/PublicAddress.vue'
 import { State, Action } from 'vuex-class'
-import getData from '../../request'
 
 @Component({
   name: 'Home',
@@ -33,8 +32,6 @@ export default class Home extends Vue {
   }
   async mounted() {
     // this.Alert(1)
-    let _data = await getData();
-    alert(_data)
   }
   @State activities: StoreState.activity[]
   searchChange(val: any) {

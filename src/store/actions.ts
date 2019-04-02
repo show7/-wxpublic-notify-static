@@ -6,9 +6,9 @@ interface Params{
   
 }
 const actions: ActionTree<any, any> = {
-  async home.getData({ commit }, params?: any) {
-    const res: Ajax.AjaxResponse = await RequestUrl.getData()
-    if (res && res.code == 200) commit(TYPES.SET_ACTIVITIES, res.result.list)
+  async getData({ commit }, params?: any) {
+    const res: any = await home.getData()
+    commit(TYPES.SET_ACTIVITIES, res.result.list)
   }
 }
 
