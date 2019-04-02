@@ -19,6 +19,4 @@ axios.interceptors.response.use(
   }
 )
 
-import {getData} from './home'
-
-export default getData
+export { default as home }from './home'
