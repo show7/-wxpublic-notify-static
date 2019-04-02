@@ -1,23 +1,29 @@
 <template lang="pug">
   .home-component-wrap
-    search
+    Search(@input = "searchChange")
     Button
-    div(
-      class='' 
-      v-for='(item,i) in activities' :key='i')
-      .title {{item.title}}
-
+    div(class="classify-warp")
+      div(class="classify-title")
+        div 公众号分类
+        div(class="classify-strategy") 使用攻略 &gt;
+      div(class="classify-nav")
+        Public-address
+        
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import search from '@/components/search/search.vue'
+import Search from '@/components/search/Search.vue'
+import PublicAddress from '@/components/publicAddress/PublicAddress.vue'
 import { State, Action } from 'vuex-class'
+import getData from '../../request'
 
 @Component({
+  name: 'Home',
   components: {
-    search
+    Search,
+    PublicAddress
   }
 })
 export default class Home extends Vue {
@@ -25,17 +31,18 @@ export default class Home extends Vue {
   Alert(params: number) {
     alert(params == 1)
   }
-  private mounted() {
+  async mounted() {
     // this.Alert(1)
+    let _data = await getData();
+    alert(_data)
   }
   @State activities: StoreState.activity[]
+  searchChange(val: any) {
+    console.log(val)
+  }
 }
 </script>
 
 <style lang="less" scoped>
-.home-component-wrap {
-  width: ;
-  height: 20px;
-  background: red;
-}
+@import './Home.less';
 </style>

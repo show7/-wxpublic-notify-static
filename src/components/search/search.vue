@@ -1,13 +1,37 @@
 <template lang="pug">
     .search-component-wrap
-      div {adfjklsjf}
+      input(class="search-input" type="text" v-model="text" @focus="focus" @blur="blur" @input="search")
+      span(class="iconfont icon-search") 
+      span(class="iconfont icon-close-copy" @click="clearText" v-show="searchStates")
 </template>
 <script lang="ts">
 import Vue from 'vue'
 import Component from "vue-class-component";
 
+@Component({
+  name: "Search",
+  props: {
+    input: {
+      type: Function,
+      default: (): void => { }
+    }
+  }
+})
 export default class Search extends Vue {
-
+  text: any = ''
+  searchStates: boolean = false
+  focus() {
+    this.searchStates = true
+  }
+  blur() {
+    this.searchStates = false
+  }
+  clearText() {
+    this.text = ''
+  }
+  search() {
+    this.$emit('input', this.text)
+  }
 }
 </script>
 <style lang="less" scoped>
