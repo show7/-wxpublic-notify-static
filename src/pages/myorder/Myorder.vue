@@ -41,10 +41,10 @@ import Article from '@/components/article/Article.vue'
 })
 export default class Myorder extends Vue {
   @State activities: StoreState.activity[]
-  @Action getData: () => void
+  @Action getArticle: () => void
   private updatePulic = 0
   private mounted() {
-    this.getData()
+    this.getArticle()
   }
 }
 </script>

@@ -1,7 +1,8 @@
 declare namespace Ajax {
   // axios 返回数据
   export interface AxiosResponse {
-    data: AjaxResponse
+    msg: any
+    code: number
   }
 
   // 请求接口数据
