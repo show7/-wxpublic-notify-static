@@ -22,12 +22,18 @@ const mutations: MutationTree<any> = {
   },
   [TYPES.SET_TYPELIST](state,typelist):void{
     state.typelist = typelist
+    state.loading = typelist.map((item:any) => true)
+    state.finished = typelist.map((item:any) => false)
+    console.log(state.loading, state.finished, 111)
+    state.listParams = typelist.map((item:any) => {return {category: item.id, page:1}})
+    console.log(state.listParams)
   },
-  [TYPES.SET_ALL_LIST](state,parmas):void{
-    console.log(parmas)
-    const {category,page=0}= parmas
-      state.allList[category] = {...parmas,page}
-      console.log(state.allList)
+  [TYPES.SET_ALL_LIST](state,allList):void{
+    state.loading = state.loading.map((item:any,index:number) => index === state.activeIndex && allList.isEnd ? false : true)
+    state.finished = state.finished.map((item:any,index:number) => index === state.activeIndex && allList.isEnd ? true : false)
+    allList.content.map((item:any) => {
+      state.allList.content.push(item)
+    })
   },
   [TYPES.LOAD_MORE_ALL_LIST](state,parmas){
     console.log(parmas)

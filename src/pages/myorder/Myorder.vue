@@ -2,7 +2,7 @@
   div
     van-cell-group
       van-cell(title='又更新公众号' class='cellTit' is-link)
-        span(class='findMore') 查看全部({{updatePulic}})
+        span(class='findMore') 查看全部({{mySubscribe.publicList.length}})
     van-row(class='descriptionContent')
       van-col(span='6' v-for='(item, index) in publicList' :key='index' @click='pathToPublic(item.url)')
         div(class='mySubscribe-item')
@@ -11,10 +11,10 @@
     div(class='separate')
     van-cell-group
         van-cell(title='又更新文章' class='cellTit')
-          span(v-if='mySubscribe.unReadArticles.length > 3' class='findMore') 查看全部({{mySubscribe.unReadArticles.length}})
+          span(v-if='mySubscribe.unReadArticles.length > 3' class='findMore' @click='pathToArticle(2)') 查看全部({{mySubscribe.unReadArticles.length}})
     Article(:data='mySubscribe.unReadArticles')
     div(class='separate')
-    van-cell(title="已阅文章" is-link class='cellTit')
+    van-cell(title="已阅文章" is-link class='cellTit' @click='pathToArticle(1)')
 </template>
 
 <script lang='ts'>
@@ -43,7 +43,10 @@ export default class Myorder extends Vue {
     }
   }
   pathToPublic(url: string) {
-    // window.location.href = url
+    this.$router.push('/update/publicList')
+  }
+  pathToArticle(type: number) {
+    this.$router.push(`/update/articleList?type=${type}`)
   }
 }
 </script>

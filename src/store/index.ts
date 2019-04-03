@@ -20,7 +20,18 @@ let state = {
     unReadArticles: []
   },
   typelist:[],
-  allList:{},
+  allList:{
+    content: [],
+    isEnd: true,
+    totalCount: 0
+  },
+  listParams:[{
+    category:1,
+    page:1
+  }],
+  activeIndex: 0,
+  loading: [],
+  finished: [],
   articleList:{
     content: [],
     isEnd: true,

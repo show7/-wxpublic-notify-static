@@ -3,11 +3,11 @@
       div(class="classify-title")
         div 公众号分类
         div(class="classify-strategy") 使用攻略 &gt;
-      van-tabs(v-model="active" @click="selectNav")
+      van-tabs( @click="selectNav")
           van-tab(v-for="(navItem,i) in typelist" :key="i" :title="navItem.name")
-            van-list(class="public-address-wrap" v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad")
-               van-cell 
-                    Public-address(v-for="(publist,i) in currentList" :inputSearchArr="publist.content" :showMore="false" :key='i')
+      van-list(class="public-address-wrap" v-model="loading[activeIndex]" :finished="finished[activeIndex]" finished-text="没有更多了" @load="onLoad")
+        van-cell(v-for="(publist,i) in allList.content" :key='i' style='padding:30px 0;border:1px solid red')
+                    // Public-address(v-for="(publist,i) in allList" :inputSearchArr="publist.content" :showMore="false" :key='i')
       // div(class="classify-nav-wrap")
       //   div(class="nav-active" v-for="(navItem,i) in typelist" :key="i" @click="checkNavItem(navItem.id)") {{navItem.name}}
       // van-list(class="public-address-wrap" v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad")
@@ -34,43 +34,43 @@ export default class Default extends Vue {
   @Action loadMore: (params?: object) => void
   @State typelist: StoreState.typelist[]
   @State allList: StoreState.typelist[]
-  loading: boolean = false
-  finished: boolean = false
-  active: number = 0
-  listParams = {
-    category: 1,
-    page: 0
-  }
+  @State loading: StoreState.typelist[]
+  @State finished: StoreState.typelist[]
+  @State activeIndex: number
+  @State listParams: StoreState.typelist[]
   currentPublicInfo = {}
   private mounted() {
     this.getTypelist()
-  }
-  selectNav() {
-    const params = {
-      category: this.category
-    }
-    console.log(params)
-    console.log(this.typelist[this.active])
-    this.setAllList(params)
-  }
-  get category() {
-    return this.typelist[this.active].id
-  }
-  get currentList() {
-    return this.allList[this.category]
-  }
-  onLoad() {
-    // if (this.allList[this.category].isEnd) {
-    //   alert('加载完成')
-    //   this.loading = false;
-    //   this.finished = true;
+    // const params = {
+    //   category: 1,
+    //   page: 1
     // }
-    const params = {
-      category: this.category
+    // console.log(params)
+    // // console.log(this.typelist[this.active])
+    // this.setAllList(params)
+  }
+  selectNav(index: number) {
+    const params = this.listParams[index]
+    // console.log(this.typelist[this.active])
+    this.setAllList(params)
+  }
+  // get category() {
+  //   return this.typelist[this.active].id
+  // }
+  // get currentList() {
+  //   return this.allList[this.category]
+  // }
+  onLoad() {
+    console.log(true)
+    let params = {}
+    params = {
+      ...this.listParams[this.activeIndex],
+      page: this.listParams[this.activeIndex].page++
     }
     this.setAllList(params)
-
-    console.log(params)
+  }
+  get allListItem() {
+    return this.allList
   }
 }
 </script>
