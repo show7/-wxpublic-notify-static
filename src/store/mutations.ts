@@ -20,7 +20,6 @@ const mutations: MutationTree<any> = {
       ...publicList
     }
   },
-<<<<<<< HEAD
   [TYPES.SET_TYPELIST](state,typelist):void{
     state.typelist = typelist
   },
@@ -34,8 +33,7 @@ const mutations: MutationTree<any> = {
     console.log(parmas)
     // const {allList,category}=parmas
     // state.allList[category] = { content:state.allList[category].concat(allList.content),...allList }
-  }
-=======
+  },
   [TYPES.SET_CANCLICK](state, params): void {
     state.canClick = params
   },
@@ -48,6 +46,5 @@ const mutations: MutationTree<any> = {
   [TYPES.SET_SUBSCRIBE](state, params): void {
     state.gettoggleNight = params
   },
->>>>>>> bd4eb447c75e6f5d51722f26658c4154da98f372
 }
 export default mutations

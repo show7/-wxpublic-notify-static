@@ -49,16 +49,12 @@ export default class ArticleList extends Vue {
       this.finished = true
     }
   }
-<<<<<<< HEAD
-  toggleSwitch() { }
-=======
   toggleSwitch() {
     this.ToggleNight({ quietMode: this.checked })
   }
   mounted() {
     this.GetToggleNight({})
   }
->>>>>>> bd4eb447c75e6f5d51722f26658c4154da98f372
 }
 </script>
 <style lang="less" scoped>
