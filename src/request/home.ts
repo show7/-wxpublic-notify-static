@@ -3,5 +3,6 @@ import axios from 'axios'
 
 
 export default{
-  getData: (params?: any) => axios.get('/home')
+  getTypelist: (params?: any) => axios.get('/api/webwechat/category/list',params),
+  getAllList: (params?: any) => axios.get('/api/webwechat/all/list',params)
 }

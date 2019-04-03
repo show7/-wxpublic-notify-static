@@ -3,22 +3,25 @@
       div(class="classify-title")
         div 公众号分类
         div(class="classify-strategy") 使用攻略 &gt;
-      div(class="classify-nav-wrap")
-        div(class="nav-active") 小新推荐
-        div 小新推荐
-        div 小新推荐
-        div 小新推荐
-        div 小新推荐
-        div 小新推荐
-        div 小新推荐
-        div 小新推荐
-      .public-address-wrap
-        Public-address
+      van-tabs(v-model="active" @click="selectNav")
+          van-tab(v-for="(navItem,i) in typelist" :key="i" :title="navItem.name")
+            van-list(class="public-address-wrap" v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad")
+               van-cell 
+                    Public-address(v-for="(publist,i) in currentList" :inputSearchArr="publist.content" :showMore="false")
+      // div(class="classify-nav-wrap")
+      //   div(class="nav-active" v-for="(navItem,i) in typelist" :key="i" @click="checkNavItem(navItem.id)") {{navItem.name}}
+      // van-list(class="public-address-wrap" v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad")
+      //   van-cell
+      //     Public-address(v-for="(publist,i) in allList" :inputSearchArr="publist.content" :showMore="false")
 </template>
-<script lang="ts">
+<script lang="ts">  
 import Vue from 'vue'
 import Component from 'vue-class-component';
 import PublicAddress from '@/components/publicAddress/PublicAddress.vue'
+import { State, Action, Getter } from 'vuex-class';
+import { constants } from 'fs';
+import { fail } from 'assert';
+import { setInterval } from 'timers';
 @Component({
   name: 'Default',
   components: {
@@ -26,7 +29,52 @@ import PublicAddress from '@/components/publicAddress/PublicAddress.vue'
   }}
 )
 export default class Default extends Vue {
+  @Action getTypelist: () => void
+  @Action setAllList: (params?: object) => void
+  @Action loadMore: (params?: object) => void
+  @State typelist: StoreState.typelist[]
+  @State allList: StoreState.typelist[]
+  loading: boolean = false
+  finished: boolean = false
+  active: number = 0
+  listParams = {
+    category: 1,
+    page: 0
+  }
+  currentPublicInfo = {}
+  private mounted() {
+    this.getTypelist()
+  }
+  selectNav() {
+    const params = {
+      category: this.category,
+    }
+    console.log(params)
+    console.log(this.typelist[this.active])
+    this.setAllList(params)
+  }
+  get category() {
+    return this.typelist[this.active].id
+  }
+  get currentList() {
+    return this.allList[this.category]
+  }
+  onLoad() {
 
+    // if (this.allList[this.category].isEnd) {
+    //   alert('加载完成')
+    //   this.loading = false;
+    //   this.finished = true;
+    // }
+    const params = {
+      category: this.category,
+    }
+    this.setAllList(params)
+
+    console.log(params)
+
+
+  }
 }
 </script>
 
@@ -34,6 +82,9 @@ export default class Default extends Vue {
 @import '../../style/common.less';
 .classify-warp {
   padding-top: 18px;
+  .van-tabs__line {
+    background: @color-subscribe-btn;
+  }
   .classify-title {
     display: flex;
     padding: 0 20px;

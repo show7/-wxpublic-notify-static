@@ -7,11 +7,6 @@ import getters from './getters'
 
 Vue.use(Vuex)
 
-// interface State {
-//   login: boolean,
-//   publicList: any[]
-// }
-
 let state = {
   inputSearch: {
     ownerList: [],
@@ -24,6 +19,8 @@ let state = {
     totalUnReadCount: 0,
     unReadArticles: []
   },
+  typelist:[],
+  allList:{},
   articleList:{
     content: [],
     isEnd: true,

@@ -1,6 +1,7 @@
 import { ActionTree } from 'vuex'
 import {home,wxSdk,article,articleList,searchPublic,publicList} from '../request'
 import TYPES from './types'
+import { Loading } from 'vant';
 const actions: ActionTree<any, any> = {
   // async getData({ commit }, params?: any) {
   //   const res: Ajax.AxiosResponse | any = await home.getData()
@@ -22,6 +23,19 @@ const actions: ActionTree<any, any> = {
     const res: Ajax.AxiosResponse | any = await publicList.publicList(params)
     commit(TYPES.SET_ARTICLELIST, res.msg)
   },
+  async getTypelist({commit},params:any){
+    const res : Ajax.AxiosResponse | any = await home.getTypelist(params)
+    commit(TYPES.SET_TYPELIST, res.msg)
+  },
+  async setAllList({commit},params:any){
+    const res : Ajax.AxiosResponse | any = await home.getAllList(params)
+    commit(TYPES.SET_ALL_LIST, Object.assign(res.msg, params))
+  },
+  async loadMore({commit},params:any){
+    const res : Ajax.AxiosResponse | any = await home.getAllList(params)
+    commit(TYPES.LOAD_MORE_ALL_LIST, Object.assign(res.msg, params))
+  }
+
 }
 
 export default actions

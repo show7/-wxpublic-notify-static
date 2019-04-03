@@ -20,5 +20,19 @@ const mutations: MutationTree<any> = {
       ...publicList
     }
   },
+  [TYPES.SET_TYPELIST](state,typelist):void{
+    state.typelist = typelist
+  },
+  [TYPES.SET_ALL_LIST](state,parmas):void{
+    console.log(parmas)
+    const {category,page=0}= parmas
+      state.allList[category] = {...parmas,page}
+      console.log(state.allList)
+  },
+  [TYPES.LOAD_MORE_ALL_LIST](state,parmas){
+    console.log(parmas)
+    // const {allList,category}=parmas
+    // state.allList[category] = { content:state.allList[category].concat(allList.content),...allList }
+  }
 }
 export default mutations

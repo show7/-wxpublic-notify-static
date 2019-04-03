@@ -5,4 +5,10 @@ declare namespace StoreState {
     totalUnReadCount: number
     unReadArticles: object[]
   }
+  export interface typelist {
+    id: number
+    page: number
+    isEnd: boolean
+    category: number
+  }
 }

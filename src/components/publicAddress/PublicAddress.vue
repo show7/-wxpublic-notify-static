@@ -6,7 +6,6 @@
         div(class="public-address-title") {{item.weChatName}}
         // div(class="public-address-introduction") 我是最棒的我是最棒的我是最棒的我～
       div(:class="['public-address-subscribe',subscribe.class]") {{subscribe.text}}
-
 </template>
 <script lang="ts">
 import Vue from 'vue'

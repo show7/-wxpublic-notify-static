@@ -46,7 +46,7 @@ export default class ArticleList extends Vue {
       this.finished = true
     }
   }
-  toggleSwitch() {}
+  toggleSwitch() { }
 }
 </script>
 <style lang="less" scoped>
