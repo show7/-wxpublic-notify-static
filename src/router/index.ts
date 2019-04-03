@@ -50,7 +50,7 @@ const routes: RouteConfig[] = [
 
 const router: Router = new Router({
   mode: 'history',
-  base: '/',
+  base: '/wx_public',
   routes
 })
 
