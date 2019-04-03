@@ -16,12 +16,12 @@ const routes: RouteConfig[] = [
     path:'/update',
     component:()=>import('@/pages/Home.vue'),
     children:[{
-      name: 'Default',
+      name: 'default',
       path: 'default',
       component: () => import('@/pages/home/Default.vue')
     },
     {
-      name: 'SearchResult',
+      name: 'searchResult',
       path: 'searchResult',
       component: () => import('@/pages/home/SearchResult.vue')
     }]
@@ -43,7 +43,7 @@ const routes: RouteConfig[] = [
   },
   {
     path: '*',
-    redirect: '/home/Default',
+    redirect: '/home/default',
     component: ()=>import('@/pages/home/Default.vue')
   }
 ]
