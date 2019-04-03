@@ -1,5 +1,16 @@
 import { ActionTree } from 'vuex'
-import {home,wxSdk,article,articleList,searchPublic,publicList} from '../request'
+import {
+  home,
+  wxSdk,
+  article,
+  articleList,
+  searchPublic,
+  publicList,
+  unsubscribe,
+  toggleNight,
+  getToggleNight,
+  subscribe
+} from '../request'
 import TYPES from './types'
 import { Loading } from 'vant';
 const actions: ActionTree<any, any> = {
@@ -21,7 +32,18 @@ const actions: ActionTree<any, any> = {
   },
   async PublicList({ commit }, params: any) {
     const res: Ajax.AxiosResponse | any = await publicList.publicList(params)
-    commit(TYPES.SET_ARTICLELIST, res.msg)
+    commit(TYPES.SET_PUBLICLIST, res.msg)
+  },
+  async ToggleNight({ commit }, params: any) {
+    const res: Ajax.AxiosResponse | any = await toggleNight.toggleNight(params)
+    commit(TYPES.SET_TOGGLENIGHT)
+  },
+  async GetToggleNight({ commit }) {
+    const res: Ajax.AxiosResponse | any = await getToggleNight.getToggleNight()
+    commit(TYPES.SET_GETTOGGLENIGHT, res.msg)
+  },
+  CanClick({ commit }) {
+    commit(TYPES.SET_CANCLICK, false)
   },
   async getTypelist({commit},params:any){
     const res : Ajax.AxiosResponse | any = await home.getTypelist(params)

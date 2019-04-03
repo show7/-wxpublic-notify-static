@@ -30,7 +30,10 @@ let state = {
     content: [],
     isEnd: true,
     totalCount: 0
-  }
+  },
+  canClick: true,
+  toggleNight: true,
+  gettoggleNight: true
 }
 
 export default new Vuex.Store({
