@@ -3,10 +3,10 @@
     Search(@input = "searchChange")
     transition(name="fade")
       router-view
-    Popup
-      div(class="boot-page-step1")
-        img(src="https://static.iqycamp.com/Group 7@2x-1eft11f2.png")
-        div(class="boot-step-btn") 如何查阅？
+    // Popup
+      // div(class="boot-page-step1")
+      //   img(src="https://static.iqycamp.com/Group 7@2x-1eft11f2.png")
+      //   div(class="boot-step-btn") 如何查阅？
 </template>
 
 <script lang="ts">
@@ -30,7 +30,7 @@ export default class Home extends Vue {
   // Alert(params: number) {
   //   alert(params == 1)
   // }
-  async mounted() { }
+  async mounted() {}
   searchChange(val: any) {
     if (val !== '') this.changeInputText(val)
     if (val === '' && location.href.indexOf('/update/Default') === -1) {
