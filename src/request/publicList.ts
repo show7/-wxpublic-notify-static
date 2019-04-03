@@ -1,7 +1,7 @@
-import axios from 'axios'
+import  Vue from 'vue'
 
 
 
 export default{
-  publicList: (params: object) => axios.get('/api/webwechat/subscribe/list', params)
+  publicList: (params: object) => Vue.axios.get('/api/webwechat/subscribe/list', params)
 }

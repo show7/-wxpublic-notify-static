@@ -3,7 +3,7 @@
     Search(@input = "searchChange")
     transition(name="fade")
       router-view
-    Popup
+    // Popup
       div(class="boot-page-step1")
         img(src="https://static.iqycamp.com/Group 7@2x-1eft11f2.png")
         div(class="boot-step-btn") 如何查阅？
@@ -48,6 +48,8 @@ export default class Home extends Vue {
   padding: 14px 0 0 0;
   .boot-page-step1 {
     position: absolute;
+    left: 0;
+    right: 0;
     top: 130px;
     width: 364px;
     margin: auto;
