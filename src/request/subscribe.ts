@@ -1,7 +1,5 @@
-import axios from 'axios'
-
-
+import Vue from 'vue'
 
 export default{
-  subscribe: (params: any) => axios.post('/api/webwechat/subscribe', params)
+  subscribe: (params: any) => Vue.axios.post('/api/webwechat/subscribe', params)
 }

@@ -48,6 +48,8 @@ export default class Home extends Vue {
   padding: 14px 0 0 0;
   .boot-page-step1 {
     position: absolute;
+    left: 0;
+    right: 0;
     top: 130px;
     width: 364px;
     margin: auto;

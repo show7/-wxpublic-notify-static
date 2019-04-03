@@ -1,8 +1,6 @@
-import axios from 'axios'
-
-
+import Vue from 'vue'
 
 export default{
-  getTypelist: (params?: any) => axios.get('/api/webwechat/category/list',params),
-  getAllList: (params?: any) => axios.get('/api/webwechat/all/list',params)
+  getTypelist: (params?: any) => Vue.axios.get('/api/webwechat/category/list',params),
+  getAllList: (params?: any) => Vue.axios.get('/api/webwechat/all/list',params)
 }
