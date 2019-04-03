@@ -22,3 +22,5 @@ export { default as wxSdk }from './wxSdk'
 export { default as article }from './article'
 export { default as articleList }from './articleList'
 export { default as searchPublic }from './searchPublic'
+export { default as publicList }from './publicList'
+

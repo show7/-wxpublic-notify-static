@@ -28,6 +28,11 @@ let state = {
     content: [],
     isEnd: true,
     totalCount: 0
+  },
+  publicList:{
+    content: [],
+    isEnd: true,
+    totalCount: 0
   }
 }
 

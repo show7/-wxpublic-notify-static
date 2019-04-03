@@ -1,6 +1,6 @@
 <template lang="pug">
   div(class="search-result-component")
-    Public-address(:inputSearchArr='inputSearch.ownerList')
+    Public-address(:inputSearchArr='inputSearch.ownerList' :showMore='showMore')
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -16,6 +16,7 @@ import { State, Action } from 'vuex-class'
 export default class SearchResult extends Vue {
   @Action changeInputText: () => void
   @State inputSearch: Object
+  showMore: boolean = true
 }
 </script>
 

@@ -4,6 +4,8 @@ import Router, { RouteConfig, Route, NavigationGuard } from 'vue-router'
 // const home: AsyncComponent = (): any => import('@/pages/home/home.vue')
 const myorder: AsyncComponent = (): any => import('@/pages/myorder/Myorder.vue')
 const ArticleList: AsyncComponent = (): any => import('@/pages/articleList/ArticleList.vue')
+const PublicList: AsyncComponent = (): any => import('@/pages/publicList/PublicList.vue')
+
 // import main from '@/views/main.vue'
 
 Vue.use(Router)
@@ -33,6 +35,11 @@ const routes: RouteConfig[] = [
     path: '/update/articleList',
     name: 'articleList',
     component: ArticleList
+  },
+  {
+    path: '/update/publicList',
+    name: 'publicList',
+    component: PublicList
   },
   {
     path: '*',

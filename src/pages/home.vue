@@ -26,7 +26,7 @@ export default class Home extends Vue {
   // }
   async mounted() {}
   searchChange(val: any) {
-    this.changeInputText(val)
+    if (val !== '') this.changeInputText(val)
     if (val === '' && location.href.indexOf('/update/Default') === -1) {
       this.$router.replace({ path: '/update/Default' })
     } else if (location.href.indexOf('/update/SearchResult') === -1) {

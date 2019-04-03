@@ -1,5 +1,5 @@
 import { ActionTree } from 'vuex'
-import {home,wxSdk,article,articleList,searchPublic} from '../request'
+import {home,wxSdk,article,articleList,searchPublic,publicList} from '../request'
 import TYPES from './types'
 const actions: ActionTree<any, any> = {
   // async getData({ commit }, params?: any) {
@@ -17,7 +17,11 @@ const actions: ActionTree<any, any> = {
   async changeInputText({commit}, text: string) {
     const res: Ajax.AxiosResponse | any = await searchPublic.searchPublic(text)
     commit(TYPES.SET_INPUTTEXT, res.msg)
-  }
+  },
+  async PublicList({ commit }, params: any) {
+    const res: Ajax.AxiosResponse | any = await publicList.publicList(params)
+    commit(TYPES.SET_ARTICLELIST, res.msg)
+  },
 }
 
 export default actions
