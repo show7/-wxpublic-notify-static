@@ -11,8 +11,9 @@
       div(class="public-address-info")
         div(class="public-address-title" v-html='item.weChatName')
         // div(class="public-address-introduction") 我是最棒的我是最棒的我是最棒的我～
-      div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='item.isSubscribe ? unsubscribeFnc(item.weChatPublicId, index) : subscribeFnc(item.weChatPublicId, index)') {{item.isSubscribe ? '已订阅' : '订阅'}}
+      div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='item.isSubscribe ? unsubscribeFnc(item.weChatPublicId, i) : subscribeFnc(item.weChatPublicId, i)') {{item.isSubscribe ? '已订阅' : '订阅'}}
     div(v-show='showMore' class='showMore' @click='loadMore') 更多公众号
+      van-icon(name='arrow-down')
 
 </template>
 <script lang="ts">

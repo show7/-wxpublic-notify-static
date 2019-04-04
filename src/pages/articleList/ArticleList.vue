@@ -3,7 +3,7 @@
   :finished="finished"
   finished-text="没有更多了"
   @load="onLoad")
-    Article(:data='articleListArr')
+    Article(:data='articleListArr' :type='listParams.type')
 </template>
 
 <script lang="ts">

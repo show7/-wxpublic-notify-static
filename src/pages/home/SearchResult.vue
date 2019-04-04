@@ -2,9 +2,13 @@
   div(class="search-result-component")
     div()
       Public-address(:inputSearchArr='inputSearch.ownerList' :showMore='arrLength > 3 ? true : false')
-    div(style='height:30px')
+    div(class='notice' v-show='inputSearch.searchList.length > 0')
+      div 下面的是来自网络搜索的公众号
+      div 如果里面有你想要的，可以点击向小新推荐收录哦~
     Public-address(:inputSearchArr='inputSearch.searchList' :showMore='false')
-    van-button(type="info" class='included' @click='popup') 没有我想要的，我要让小新补充收录
+    div( :class='inputSearch.ownerList.length <= 0 && inputSearch.searchList.length <= 0 ? "included middle" : "included" ')
+      div(class='noList' v-show='inputSearch.ownerList.length <= 0 && inputSearch.searchList.length <= 0 ') 小新没有找到你心仪的公众号
+      van-button(type="info" @click='popup') 没有我想要的，我要让小新补充收录
     van-popup(v-model='initState.show' position="bottom" :overlay="true") 
       div(class='popContent')
         div(class='popText') 请输入你收录的公众号名称
@@ -18,6 +22,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import PublicAddress from '@/components/publicAddress/PublicAddress.vue'
 import { State, Action } from 'vuex-class'
+import { searchPublic } from '../../request'
 interface stateType {
   showMore: boolean
   show: boolean
@@ -47,16 +52,23 @@ export default class SearchResult extends Vue {
   popup() {
     if (this.initState.show) {
       this.initState.show = false
+      this.initState.inputText = ''
     } else {
       this.initState.show = true
     }
   }
-  confirm() {
+  async confirm() {
     if (this.initState.inputText === '') {
       this.$toast('您还没有填写哦~')
       return
     }
-    this.searchPublic(this.initState.inputText)
+    const res: Ajax.AxiosResponse | any = await searchPublic.recommandPublic({
+      weChatName: this.initState.inputText
+    })
+    if (res && res.code === 200) {
+      this.$toast('推荐成功！')
+      this.initState.show = false
+    }
   }
   get arrLength() {
     return this.inputSearch.ownerList.length
@@ -65,6 +77,15 @@ export default class SearchResult extends Vue {
 </script>
 
 <style lang="less">
+.notice {
+  font-size: 12px;
+  color: rgba(193, 192, 201, 1);
+  text-align: center;
+  padding: 10px 0;
+}
+.notice > div {
+  padding: 2px 0;
+}
 .home-component-wrap .search-component-wrap {
   position: fixed;
   left: 0;
@@ -79,7 +100,7 @@ export default class SearchResult extends Vue {
 .search-result-component {
   padding: 50px 20px;
 }
-.included {
+.included button {
   width: 100%;
   padding: 0 10px;
   height: 40px;
@@ -121,6 +142,20 @@ export default class SearchResult extends Vue {
   border: 0;
   height: 40px;
   font-size: 14px;
+}
+.middle {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  margin: 0 auto;
+  width: 342px;
+}
+.noList {
+  font-size: 12px;
+  color: rgba(193, 192, 201, 1);
+  text-align: center;
 }
 </style>
 

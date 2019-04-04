@@ -109,7 +109,7 @@ export default class Default extends Vue {
     top: 0;
     width: 100%;
     z-index: 10;
-    padding: 65px 20px;
+    padding: 70px 20px 50px 20px;
     box-sizing: border-box;
     background-color: #fff;
     display: flex;

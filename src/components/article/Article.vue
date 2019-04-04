@@ -1,35 +1,42 @@
 <template lang="pug">
   div
-    van-cell(v-for='(item, index) in computedMsg' :key='index' @click='pathToArticle(item.url)')
+    van-cell(v-for='(item, index) in computedMsg' :key='index' @click='pathToArticle(item,index)')
       div(class='articleTit') {{item.title}}
       div(class='articleContent')
         div(class='contentLeft')
           img(:src='item.avatar' class='articleUserImg')
           div(class='channelName') {{item.nickname}}
-        div(class='contentRight') 2019.01.07 12:30
+        div(class='contentRight') {{item.pushDate}}
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { State } from 'vuex-class'
 import Component from 'vue-class-component'
+import { articleList } from '../../request'
 @Component({
   props: {
-    data: Array
+    data: Array,
+    type: Number
   }
 })
 export default class Article extends Vue {
   name: 'Article'
   private data: object[] = this.data
   private updatePulic = 0
+  type: number = this.type
   mounted() {
     console.log(this.data)
   }
   get computedMsg() {
     return this.data
   }
-  pathToArticle(url: string) {
-    window.location.href = url
+  async pathToArticle(item: any, index: number) {
+    if (this.type === 2) {
+      let res: Ajax.AxiosResponse | any = await articleList.openArticle(item)
+      if (res && res.code === 200) this.computedMsg.splice(index, 1)
+    }
+    window.location.href = item.url
   }
 }
 </script>
