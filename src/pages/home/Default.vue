@@ -179,33 +179,5 @@ export default class Default extends Vue {
   margin: 0 auto;
   z-index: 11;
 }
-.boot-page-step {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  img {
-    width: 100vw;
-    height: 100vh;
-  }
-}
-.boot-step-1 {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 97px;
-}
-.boot-step-2 {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 224px;
-}
-.boot-step-3 {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 115px;
-}
 </style>
 

@@ -5,7 +5,7 @@
     div(class='notice' v-show='inputSearch.searchList.length > 0')
       div 下面的是来自网络搜索的公众号
       div 如果里面有你想要的，可以点击向小新推荐收录哦~
-    Public-address(:inputSearchArr='inputSearch.searchList' :showMore='false')
+    Public-address(:inputSearchArr='inputSearch.searchList' :showMore='false' :recommend="true")
     div( :class='inputSearch.ownerList.length <= 0 && inputSearch.searchList.length <= 0 ? "included middle" : "included" ')
       div(class='noList' v-show='inputSearch.ownerList.length <= 0 && inputSearch.searchList.length <= 0 ') 小新没有找到你心仪的公众号
       van-button(type="info" @click='popup') 没有我想要的，我要让小新补充收录
@@ -76,7 +76,7 @@ export default class SearchResult extends Vue {
     }
   }
   async confirm() {
-    if (this.initState.inputText === '') {
+    if (!this.initState.inputText) {
       this.$toast('您还没有填写哦~')
       return
     }
