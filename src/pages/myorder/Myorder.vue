@@ -83,7 +83,7 @@ export default class Myorder extends Vue {
         action: '点击查看全部文章'
       })
     }
-    this.$router.push(`/update/articles?type=${type}`)
+    this.$router.push(`/articles?type=${type}`)
   }
   pathToPublicList() {
     mark({
@@ -91,7 +91,7 @@ export default class Myorder extends Vue {
       function: '查看全部公众号',
       action: '点击查看全部公众号'
     })
-    this.$router.push(`/update/publicList`)
+    this.$router.push(`/publicList`)
   }
 }
 </script>
