@@ -1,6 +1,6 @@
 <template lang="pug">
     .search-component-wrap
-      input(class="search-input" type="search" /*@focus='focus'*/ v-model="text" /*@input='judge'*/ @input='search' @click='clickSearch')
+      input(class="search-input" type="search" /*@focus='focus'*/ v-model="text" /*@input='judge'*/ @search='search' @click='clickSearch')
       span(class="iconfont icon-search") 
       span(class="iconfont icon-close-copy" @click="clearText" v-show="searchStates")
 </template>
