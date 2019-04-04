@@ -59,9 +59,6 @@ export default class Default extends Vue {
   finished = false
   mounted() {
     this.getTypelist()
-    const step = localStorage.getItem('noviceGuideState') ? 0 : 1
-    this.setNoviceGuideState(step)
-    localStorage.setItem('noviceGuideState', 'true')
     this.onLoad()
     this.allList = []
     this.listParams = {
@@ -71,6 +68,9 @@ export default class Default extends Vue {
     this.isEnd = false
     this.loading = false
     this.finished = false
+    if (localStorage.getItem('noviceGuideState')) return
+    localStorage.setItem('noviceGuideState', 'true')
+    this.setNoviceGuideState(1)
   }
 
   selectNav(index: number) {
