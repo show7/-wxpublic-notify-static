@@ -61,7 +61,11 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: './',
+    assetsPublicPath: process.env.VERSION
+      ? `https://static.iqycamp.com/script/wxpublic-notify-static/${
+          process.env.VERSION
+        }/`
+      : '/script/wxpublic-notify-static/',
 
     /**
      * Source Maps
