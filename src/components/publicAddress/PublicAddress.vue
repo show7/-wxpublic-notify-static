@@ -7,7 +7,7 @@
           div(class="public-address-title" v-html='item.weChatName')
           div(class="public-address-introduction") {{item.description}}
       div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='setSubscribeStatus(item,index)') {{item.isSubscribe ? '已订阅' : '订阅'}}
-    .public-address-component(v-for='(item,i) in inputSearchArr' :key='"index"+i' v-show='!showMore' @click="recommend ? confirm((item.weChatName).replace('<strong>','').replace('</strong>','')) :''")
+    .public-address-component(v-for='(item,i) in inputSearchArr' :key='"index"+i' v-show='!showMore' @click="recommend ? confirm((item.weChatName).replace('<strong>','').replace('</strong>',''),item.searchId) :''")
       div
         img(class="public-address-head-img" :src="item.avatar")
         div(class="public-address-info")
@@ -117,9 +117,10 @@ export default class PublicAddress extends Vue {
   subscribe(isSubscribe: boolean) {
     return isSubscribe ? 'is-subscribe' : 'no-subscribe'
   }
-  async confirm(publicName: any) {
+  async confirm(publicName: any, searchId: any) {
     const res: Ajax.AxiosResponse | any = await searchPublic.recommandPublic({
-      weChatName: publicName
+      weChatName: publicName,
+      searchId
     })
     if (res && res.code === 200) {
       // this.$toast('推荐成功！')
