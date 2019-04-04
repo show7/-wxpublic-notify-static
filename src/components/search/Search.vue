@@ -61,5 +61,5 @@ export default class Search extends Vue {
 }
 </script>
 <style lang="less" scoped>
-@import './search.less';
+@import './Search.less';
 </style>
