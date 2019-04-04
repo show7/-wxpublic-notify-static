@@ -12,16 +12,16 @@
       div(class='homeContent')
         PublicAddress(:inputSearchArr='allList')
     // Toast(:title="")
-    Popup(v-show="step")
-      div(class="boot-page-step" v-show='step===1')
+    Popup(v-show="noviceGuideState")
+      div(class="boot-page-step" v-show='noviceGuideState===1')
           img(src="https://static.iqycamp.com/01-se9pnk59.png")
-          div(class="boot-step-btn boot-step-1" @click="step=2") 如何通知？
-      div(class="boot-page-step" v-show='step===2')
+          div(class="boot-step-btn boot-step-1" @click="setNoviceGuideState(2)") 如何通知？
+      div(class="boot-page-step" v-show='noviceGuideState===2')
         img(src="https://static.iqycamp.com/02-u7xf7vms.png")
-        div(class="boot-step-btn boot-step-2" @click='step=3') 如何查阅？
-      div(class="boot-page-step" v-show='step===3')
+        div(class="boot-step-btn boot-step-2" @click='setNoviceGuideState(3)') 如何查阅？
+      div(class="boot-page-step" v-show='noviceGuideState===3')
           img(src="https://static.iqycamp.com/03-8tl9x5f0.png")
-          div(class="boot-step-btn boot-step-3" @click='step=0') 开始订阅！
+          div(class="boot-step-btn boot-step-3" @click='setNoviceGuideState(0)') 开始订阅！
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -45,7 +45,9 @@ import Toast from '@/components/toast/Toast.vue'
 export default class Default extends Vue {
   @Action getTypelist: () => void
   @Action setAllList: (params?: object) => void
+  @Action setNoviceGuideState: (params?: any) => void
   @State typelist: any
+  @State noviceGuideState: number
   allList = []
   listParams = {
     category: 1,
@@ -54,11 +56,11 @@ export default class Default extends Vue {
   isEnd = false
   loading = false
   finished = false
-  step: number = 1
   mounted() {
     this.getTypelist()
-    this.step = localStorage.getItem('step') ? 0 : 1
-    localStorage.setItem('step', 'true')
+    const step = localStorage.getItem('noviceGuideState') ? 0 : 1
+    this.setNoviceGuideState(step)
+    localStorage.setItem('noviceGuideState', 'true')
     this.onLoad()
     this.allList = []
     this.listParams = {

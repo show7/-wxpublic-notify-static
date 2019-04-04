@@ -60,6 +60,9 @@ const actions: ActionTree<any, any> = {
   async searchPublic({commit},params:any){
     const res : Ajax.AxiosResponse | any = await searchPublic.recommandPublic(params)
     commit(TYPES.LOAD_MORE_ALL_LIST, res.msg)
+  },
+  setNoviceGuideState({commit},params:any){
+    commit(TYPES.SET_NOVICE_GUIDE_STATE,params)
   }
 }
 
