@@ -12,6 +12,7 @@ let state = {
     ownerList: [],
     searchList: []
   },
+  noviceGuideState:0,
   login: false,
   mySubscribe: {
     publicList: [],

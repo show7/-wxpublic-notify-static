@@ -46,5 +46,8 @@ const mutations: MutationTree<any> = {
   [TYPES.SET_SUBSCRIBE](state, params): void {
     state.gettoggleNight = params
   },
+  [TYPES.SET_NOVICE_GUIDE_STATE](state, params): void {
+    state.noviceGuideState = params
+  },
 }
 export default mutations
