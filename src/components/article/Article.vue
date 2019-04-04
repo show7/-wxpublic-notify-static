@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    van-cell(v-for='(item, index) in computedMsg' :key='index' @click='pathToArticle(item,index)')
+    van-cell(v-for='(item, index) in computedMsg' :key='index' @click='pathToArticle(item.recordId,index,item)')
       div(class='articleTit') {{item.title}}
       div(class='articleContent')
         div(class='contentLeft')
@@ -31,9 +31,9 @@ export default class Article extends Vue {
   get computedMsg() {
     return this.data
   }
-  async pathToArticle(item: any, index: number) {
-    if (this.type === 2) {
-      let res: Ajax.AxiosResponse | any = await articleList.openArticle(item)
+  async pathToArticle(recordId: number, index: number, item: any) {
+    if (!item.isRead) {
+      let res: Ajax.AxiosResponse | any = await articleList.openArticle({ recordId })
       if (res && res.code === 200) this.computedMsg.splice(index, 1)
     }
     window.location.href = item.url

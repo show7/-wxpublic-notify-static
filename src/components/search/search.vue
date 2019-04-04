@@ -1,6 +1,6 @@
 <template lang="pug">
     .search-component-wrap
-      input(class="search-input" type="text" @blur='blur' @focus='focus' v-model="text" @input='search')
+      input(class="search-input" type="text" @focus='focus' v-model="text" @input='search')
       span(class="iconfont icon-search") 
       span(class="iconfont icon-close-copy" @click="clearText" v-show="searchStates")
 </template>
@@ -28,6 +28,7 @@ export default class Search extends Vue {
   }
   clearText() {
     this.text = ''
+    this.searchStates = false
   }
   search() {
     this.$emit('input', this.text)

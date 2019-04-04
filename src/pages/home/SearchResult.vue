@@ -12,7 +12,7 @@
     van-popup(v-model='initState.show' position="bottom" :overlay="true") 
       div(class='popContent')
         div(class='popText') 请输入你收录的公众号名称
-        input(class='inputItem' placeholder='请输入你收录的公众号名称' v-model='initState.inputText')
+        input(class='inputItem' placeholder='请输入你推荐收录的公众号名称 ' maxlength='11' v-model='initState.inputText')
         div(class='confirm')
           van-button(type="default" @click='cancel') 取消
           van-button(type="default" style='background-color:rgba(251, 210, 6, 1)' @click='confirm') 提交

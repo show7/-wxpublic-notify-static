@@ -35,6 +35,7 @@ import Component from 'vue-class-component'
 import { State, Action } from 'vuex-class'
 import Article from '@/components/article/Article.vue'
 import Toast from '@/components/toast/Toast.vue'
+
 @Component({
   components: {
     Article,
@@ -77,7 +78,8 @@ export default class Myorder extends Vue {
   pathToPublic(url: string) {
     window.location.href = url
   }
-  pathToArticle(type: number) {
+  async pathToArticle(type: number) {
+
     this.$router.push(`/update/articleList?type=${type}`)
   }
   pathToPublicList() {
