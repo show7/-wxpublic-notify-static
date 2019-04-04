@@ -12,7 +12,7 @@ import Search from '@/components/search/Search.vue'
 import Popup from '@/components/popup/Popup.vue'
 
 import { State, Action } from 'vuex-class'
-import { constants } from 'fs';
+import { constants } from 'fs'
 
 @Component({
   name: 'Home',
@@ -29,10 +29,10 @@ export default class Home extends Vue {
   // }
   searchChange(val: any) {
     if (val !== '') this.changeInputText(val)
-    if (val === '' && location.href.indexOf('/update/Default') === -1) {
-      this.$router.replace({ path: '/update/Default' })
-    } else if (location.href.indexOf('/update/SearchResult') === -1) {
-      this.$router.replace({ path: '/update/SearchResult' })
+    if (val === '' && this.$route.path !== '/') {
+      this.$router.replace({ path: '/' })
+    } else if (this.$route.path !== '/searchResult') {
+      this.$router.replace({ path: '/searchResult' })
     }
   }
 }
