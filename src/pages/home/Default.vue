@@ -57,10 +57,8 @@ export default class Default extends Vue {
   step: number = 1
   mounted() {
     this.getTypelist()
-<<<<<<< HEAD
     this.step = localStorage.getItem('step') ? 0 : 1
     localStorage.setItem('step', 'true')
-=======
     this.onLoad()
     this.allList = []
     this.listParams = {
@@ -70,7 +68,6 @@ export default class Default extends Vue {
     this.isEnd = false
     this.loading = false
     this.finished = false
->>>>>>> 30b7d388ccca7b29b457045ce8cf549ccbbbcae2
   }
 
   selectNav(index: number) {
