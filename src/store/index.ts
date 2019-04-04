@@ -46,7 +46,7 @@ let state = {
   },
   canClick: true,
   toggleNight: true,
-  gettoggleNight: true
+  gettoggleNight: false
 }
 
 export default new Vuex.Store({
