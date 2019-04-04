@@ -84,7 +84,7 @@ export default class SearchResult extends Vue {
       weChatName: this.initState.inputText
     })
     if (res && res.code === 200) {
-      this.$toast('推荐成功！')
+      // this.$toast('推荐成功！')
       this.initState.show = false
     }
     this.recommendedPopup = true
