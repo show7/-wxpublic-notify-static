@@ -1,97 +1,47 @@
 <template lang="pug">
-  div
-    Button
-    //- span 123
-    div(v-for='item in activities')
-      .title {{item.title}}
+  .home-component-wrap
+    Search(@input = "searchChange")
+    transition(name="fade")
+      router-view
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import Search from '@/components/search/Search.vue'
+import Popup from '@/components/popup/Popup.vue'
+
 import { State, Action } from 'vuex-class'
-import Button from '@/components/Button.vue'
+import { constants } from 'fs'
+
 @Component({
+  name: 'Home',
   components: {
-    Button
+    Search,
+    Popup
   }
 })
 export default class Home extends Vue {
-  @Action getHome: (params: any) => void
-  Alert(params: number) {
-    alert(params == 1)
+  @Action changeInputText: (val: string) => void
+  // @Action getHome: (params: any) => void
+  // Alert(params: number) {
+  //   alert(params == 1)
+  // }
+  searchChange(val: any) {
+    console.log(this.$route.name)
+    if (val !== '') this.changeInputText(val)
+    if (val === '' && this.$route.name !== 'Home') {
+      this.$router.replace({ path: '/' })
+    } else if (this.$route.name !== 'searchResult') {
+      this.$router.replace({ path: '/searchResult' })
+    }
   }
-  private mounted() {
-    this.getHome('123')
-  }
-  @State activities: StoreState.activity[]
 }
 </script>
 
 <style lang="less" scoped>
-.board-wrap {
-  .board {
-    display: flex;
-    align-items: center;
+@import '../style/common.less';
 
-    .item {
-      display: flex;
-      flex: 1;
-      align-items: center;
-      padding: 10px;
-
-      .cnt {
-        flex: 1;
-
-        .title {
-          font-size: 16px;
-        }
-
-        .desc {
-          font-size: 12px;
-          color: #999;
-          margin-top: 5px;
-        }
-      }
-
-      img {
-        height: 60px;
-        width: 60px;
-      }
-    }
-  }
-
-  .wrap:nth-child(2) {
-    .item:first-child {
-      border-right: 1px solid #f1f1f1;
-    }
-  }
-
-  .wrap:nth-child(3) {
-    .item {
-      background-color: #ffa383;
-      color: white;
-      margin-right: 5px;
-
-      .desc {
-        width: 75px;
-        padding: 2px;
-        border-radius: 12px;
-        background-color: #f97e54;
-        transform: scale(0.9);
-        color: #e6e6e6;
-        text-align: center;
-      }
-    }
-
-    .item:last-child {
-      background-color: #44d0cd;
-      margin: 0;
-
-      .desc {
-        background-color: #22bab7;
-      }
-    }
-  }
+.home-component-wrap {
 }
 </style>

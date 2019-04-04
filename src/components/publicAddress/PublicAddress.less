@@ -1,0 +1,55 @@
+@import '../../style/common.less';
+.public-address-component {
+  position: relative;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid @color-border-bottom;
+  :first-child {
+    display: flex;
+    align-items: center;
+  }
+}
+.public-address-head-img {
+  width: 34px;
+  height: 34px;
+  margin-right: 9px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+.public-address-title {
+  color: @color-public-title;
+  font-weight: @font-weight4;
+  font-size: @font-public-title;
+}
+.public-address-introduction {
+  color: @color-content;
+  font-weight: @font-weight4;
+  font-size: @font-content;
+}
+.public-address-subscribe {
+  width: 76px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 22px;
+  font-size: 14px;
+}
+.no-subscribe {
+  background: @color-subscribe-btn;
+  box-shadow: 0px 4px 10px 0px rgba(251, 210, 6, 0.32);
+}
+.is-subscribe {
+  color: @color-content;
+  border: 1px solid rgba(219, 219, 219, 1);
+}
+.public-address-title strong {
+  color: rgba(251, 210, 6, 1);
+}
+.showMore {
+  font-size: 12px;
+  padding: 10px 0;
+  text-align: center;
+  color: @color-content;
+}

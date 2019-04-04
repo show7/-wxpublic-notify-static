@@ -4,12 +4,12 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { State } from "vuex-class";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { State } from 'vuex-class'
 
 @Component
-export default class Button extends Vue {}
+export default class Button extends Vue { }
 </script>
 
 <style lang="less" scoped>
