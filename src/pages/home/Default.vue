@@ -54,10 +54,12 @@ export default class Default extends Vue {
     category: 1,
     page: 0
   }
+  isInit = true
   isEnd = false
   loading = false
   finished = false
   mounted() {
+    this.isInit = true
     this.getTypelist()
     this.onLoad()
     this.allList = []
@@ -92,7 +94,10 @@ export default class Default extends Vue {
     let res: Ajax.AxiosResponse | any = await home.getAllList(this.listParams)
     if (res && res.code === 200) {
       this.allList = this.allList.concat(res.msg.content)
-      console.log(this.allList)
+      if (this.isInit) {
+        this.allList = []
+        this.isInit = false
+      }
       this.loading = false
       this.isEnd = res.msg.isEnd
       if (this.isEnd) {
