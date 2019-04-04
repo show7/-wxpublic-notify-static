@@ -44,10 +44,6 @@ const actions: ActionTree<any, any> = {
     const res: Ajax.AxiosResponse | any = await toggleNight.toggleNight(params)
     commit(TYPES.SET_TOGGLENIGHT)
   },
-  async GetToggleNight({ commit }) {
-    const res: Ajax.AxiosResponse | any = await getToggleNight.getToggleNight()
-    commit(TYPES.SET_GETTOGGLENIGHT, res.msg)
-  },
   CanClick({ commit }) {
     commit(TYPES.SET_CANCLICK, false)
   },

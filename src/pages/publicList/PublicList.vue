@@ -17,7 +17,10 @@ import Vue from 'vue'
 import { State, Action } from 'vuex-class'
 import Component from 'vue-class-component'
 import Public from '@/components/publicAddress/PublicAddress.vue'
-import { publicList } from '../../request'
+import { publicList, getToggleNight } from '../../request'
+import { connect } from 'net';
+import { constants } from 'http2';
+import { setTimeout } from 'timers';
 interface list {
   isEnd: boolean
 }
@@ -28,14 +31,12 @@ interface list {
 })
 export default class ArticleList extends Vue {
   @Action ToggleNight: (params: object) => void
-  @Action GetToggleNight: (params: object) => void
-  @State gettoggleNight: boolean
   listParams = {
     page: 0
   }
   loading = false
   finished = false
-  checked = true
+  checked = false
   isEnd = false
   publicListArr = []
   async onLoad() {
@@ -55,10 +56,12 @@ export default class ArticleList extends Vue {
     }
   }
   toggleSwitch() {
+    console.log(this.checked)
     this.ToggleNight({ quietMode: this.checked })
   }
-  mounted() {
-    this.GetToggleNight({})
+  async mounted() {
+    const res: Ajax.AxiosResponse | any = await getToggleNight.getToggleNight()
+    this.checked = res.msg
   }
 }
 </script>
