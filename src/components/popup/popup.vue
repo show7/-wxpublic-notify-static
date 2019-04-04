@@ -22,7 +22,7 @@ export default class Popup extends Vue {
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgb(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 99;
 }
 </style>
