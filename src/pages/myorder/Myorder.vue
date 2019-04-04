@@ -30,13 +30,12 @@
 </template>
 
 <script lang='ts'>
-import mark from '../../utils/mark.js'
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { State, Action } from 'vuex-class'
 import Article from '@/components/article/Article.vue'
 import Toast from '@/components/toast/Toast.vue'
-
+import mark from '../../utils/mark'
 @Component({
   components: {
     Article,
