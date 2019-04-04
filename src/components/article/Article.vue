@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { State } from 'vuex-class'
+import { State, Action } from 'vuex-class'
 import Component from 'vue-class-component'
 import { articleList } from '../../request'
 import mark from '../../utils/mark'
@@ -22,6 +22,7 @@ import mark from '../../utils/mark'
   }
 })
 export default class Article extends Vue {
+  @Action getArticle: () => void
   name: 'Article'
   private data: object[] = this.data
   private updatePulic = 0
@@ -44,6 +45,7 @@ export default class Article extends Vue {
       })
       if (res && res.code === 200) this.computedMsg.splice(index, 1)
     }
+    this.getArticle()
     window.location.href = item.url
   }
 }

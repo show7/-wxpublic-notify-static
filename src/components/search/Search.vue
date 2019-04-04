@@ -29,7 +29,7 @@ export default class Search extends Vue {
   clearText() {
     this.text = ''
     this.searchStates = false
-    this.$router.replace({ path: '/' })
+    window.location.replace('/wx_public/')
   }
   judge() {
     if (this.text === '') {

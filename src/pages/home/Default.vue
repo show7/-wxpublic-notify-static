@@ -59,7 +59,7 @@ export default class Default extends Vue {
   finished = false
   mounted() {
     this.getTypelist()
-    this.onLoad()
+    // this.onLoad()
     this.allList = []
     this.listParams = {
       category: 1,
