@@ -7,7 +7,7 @@
           div(class="public-address-title" v-html='item.weChatName')
           div(class="public-address-introduction") {{item.description}}
       div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='setSubscribeStatus(item,index)') {{item.isSubscribe ? '已订阅' : '订阅'}}
-    .public-address-component(v-for='(item,i) in inputSearchArr' :key='"index"+i' v-show='!showMore' @click="recommend ? confirm(item.weChatName) :''")
+    .public-address-component(v-for='(item,i) in inputSearchArr' :key='"index"+i' v-show='!showMore' @click="recommend ? confirm((item.weChatName).replace('<strong>','').replace('</strong>','')) :''")
       div
         img(class="public-address-head-img" :src="item.avatar")
         div(class="public-address-info")
