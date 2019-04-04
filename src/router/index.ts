@@ -17,12 +17,12 @@ const routes: RouteConfig[] = [
     component:()=>import('@/pages/Home.vue'),
     children:[{
       name: 'default',
-      path: '',
+      path: '/',
       component: () => import('@/pages/home/Default.vue')
     },
     {
       name: 'searchResult',
-      path: 'searchResult',
+      path: '/searchResult',
       component: () => import('@/pages/home/SearchResult.vue')
     }]
   },
