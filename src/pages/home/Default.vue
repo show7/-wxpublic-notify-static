@@ -8,7 +8,7 @@
     van-list(v-model="loading"
     :finished="finished"
     finished-text="没有更多了"
-    @load="onLoad" class='content' offset='200')
+    @load="onLoad" class='content' :offset='200')
       div(class='homeContent')
         PublicAddress(:inputSearchArr='allList')
 </template>
@@ -41,6 +41,15 @@ export default class Default extends Vue {
   finished = false
   mounted() {
     this.getTypelist()
+    this.onLoad()
+    this.allList = []
+    this.listParams = {
+      category: 1,
+      page: 0
+    }
+    this.isEnd = false
+    this.loading = false
+    this.finished = false
   }
   selectNav(index: number) {
     this.listParams = {
@@ -81,7 +90,7 @@ export default class Default extends Vue {
     top: 0;
     width: 100%;
     z-index: 10;
-    padding: 60px 20px;
+    padding: 65px 20px;
     box-sizing: border-box;
     background-color: #fff;
     display: flex;

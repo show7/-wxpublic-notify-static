@@ -1,12 +1,19 @@
 <template lang="pug">
   div(style='padding-top:5px')
-    .public-address-component(v-for='(item,index) in SearchArr' :key='index')
+    .public-address-component(v-for='(item,index) in SearchArr' :key='item.avatar' v-show='showMore')
       img(class="public-address-head-img" :src="item.avatar")
       div(class="public-address-info")
         div(class="public-address-title" v-html='item.weChatName')
         // div(class="public-address-introduction") 我是最棒的我是最棒的我是最棒的我～
       div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='item.isSubscribe ? unsubscribeFnc(item.weChatPublicId, index) : subscribeFnc(item.weChatPublicId, index)') {{item.isSubscribe ? '已订阅' : '订阅'}}
-    div(v-if='showMore') 更多公众号
+    .public-address-component(v-for='(item,index) in inputSearchArr' :key='index' v-show='!showMore')
+      img(class="public-address-head-img" :src="item.avatar")
+      div(class="public-address-info")
+        div(class="public-address-title" v-html='item.weChatName')
+        // div(class="public-address-introduction") 我是最棒的我是最棒的我是最棒的我～
+      div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='item.isSubscribe ? unsubscribeFnc(item.weChatPublicId, index) : subscribeFnc(item.weChatPublicId, index)') {{item.isSubscribe ? '已订阅' : '订阅'}}
+    div(v-show='showMore' class='showMore' @click='loadMore') 更多公众号
+
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -28,13 +35,16 @@ export default class PublicAddress extends Vue {
   showMore: boolean = this.showMore
   inputSearchArr: any = this.inputSearchArr
   get SearchArr(): any {
-    let _inputSearchArr = []
-    if (this.showMore) {
-      _inputSearchArr = this.inputSearchArr.splice(0, 3)
+    let _inputSearchArr = this.inputSearchArr.map((item: object) => item)
+    if (this.inputSearchArr.length > 3 && this.showMore) {
+      _inputSearchArr = _inputSearchArr.splice(0, 3)
     } else {
       _inputSearchArr = this.inputSearchArr
     }
     return _inputSearchArr
+  }
+  loadMore() {
+    this.showMore = false
   }
   subscribe(isSubscribe: boolean) {
     return isSubscribe ? 'is-subscribe' : 'no-subscribe'

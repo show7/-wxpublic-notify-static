@@ -1,9 +1,9 @@
 <template lang="pug">
   div(class="search-result-component")
     div()
-      Public-address(:inputSearchArr='inputSearch.ownerList' :showMore='initState.showMore')
+      Public-address(:inputSearchArr='inputSearch.ownerList' :showMore='arrLength > 3 ? true : false')
     div(style='height:30px')
-    Public-address(:inputSearchArr='inputSearch.searchList')
+    Public-address(:inputSearchArr='inputSearch.searchList' :showMore='false')
     van-button(type="info" class='included' @click='popup') 没有我想要的，我要让小新补充收录
     van-popup(v-model='initState.show' position="bottom" :overlay="true") 
       div(class='popContent')
@@ -23,6 +23,9 @@ interface stateType {
   show: boolean
   inputText: string
 }
+interface arr {
+  ownerList: any[]
+}
 @Component({
   name: 'SearchResult',
   components: {
@@ -32,7 +35,7 @@ interface stateType {
 export default class SearchResult extends Vue {
   @Action changeInputText: () => void
   @Action searchPublic: (params: any) => void
-  @State inputSearch: Object
+  @State inputSearch: arr
   private initState: stateType = {
     showMore: true,
     show: false,
@@ -55,6 +58,9 @@ export default class SearchResult extends Vue {
     }
     this.searchPublic(this.initState.inputText)
   }
+  get arrLength() {
+    return this.inputSearch.ownerList.length
+  }
 }
 </script>
 
@@ -63,10 +69,12 @@ export default class SearchResult extends Vue {
   position: fixed;
   left: 0;
   right: 0;
-  top: 10px;
+  top: 0;
   width: 342px;
   margin: 0 auto;
   z-index: 11;
+  padding: 10px 0;
+  background-color: #fff;
 }
 .search-result-component {
   padding: 50px 20px;
