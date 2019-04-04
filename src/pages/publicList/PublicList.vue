@@ -9,7 +9,7 @@
         van-switch(v-model="checked" @change='toggleSwitch' size='20px')
       div(class='nightText') 开启深夜勿扰模式，我们会将晚上十点之后更新的文章延迟到次日上午8点之后推送通知，帮您睡个好觉。
     div(class='separate')
-    Public(:inputSearchArr='publicList.content')
+    Public(:inputSearchArr='publicListArr')
 </template>
 
 <script lang="ts">
@@ -17,6 +17,7 @@ import Vue from 'vue'
 import { State, Action } from 'vuex-class'
 import Component from 'vue-class-component'
 import Public from '@/components/publicAddress/PublicAddress.vue'
+import { publicList } from '../../request'
 interface list {
   isEnd: boolean
 }
@@ -26,27 +27,31 @@ interface list {
   }
 })
 export default class ArticleList extends Vue {
-  @Action PublicList: (params: object) => void
   @Action ToggleNight: (params: object) => void
   @Action GetToggleNight: (params: object) => void
-  @State publicList: list
   @State gettoggleNight: boolean
   listParams = {
-    type: 1,
     page: 0
   }
   loading = false
   finished = false
   checked = true
-  get isEnd() {
-    return this.publicList.isEnd
-  }
-  onLoad() {
+  isEnd = false
+  publicListArr = []
+  async onLoad() {
     this.listParams.page++
-    this.PublicList(this.listParams)
-    this.loading = false
-    if (this.isEnd) {
-      this.finished = true
+    let res: Ajax.AxiosResponse | any = await publicList.publicList(
+      this.listParams
+    )
+    if (res && res.code === 200) {
+      this.publicListArr = this.publicListArr.concat(res.msg.content)
+      this.loading = false
+      this.isEnd = res.msg.isEnd
+      if (this.isEnd) {
+        this.finished = true
+      } else {
+        this.finished = false
+      }
     }
   }
   toggleSwitch() {
