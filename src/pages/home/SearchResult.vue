@@ -11,28 +11,46 @@
         input(class='inputItem' placeholder='请输入你收录的公众号名称' v-model='initState.inputText')
         div(class='confirm')
           van-button(type="default" @click='cancel') 取消
-          van-button(type="default" style='background-color:rgba(251, 210, 6, 1)' @click='confirm') 确认
+          van-button(type="default" style='background-color:rgba(251, 210, 6, 1)' @click='confirm') 提交
+    Toast(title='小新提示' :btnGroup="recommendedBtn" v-show="recommendedPopup")
+      div(slot="content") 推荐成功！我会在24小时内审核，收录后会告诉你哒！
 </template>
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import PublicAddress from '@/components/publicAddress/PublicAddress.vue'
 import { State, Action } from 'vuex-class'
+import Toast from '@/components/toast/Toast.vue'
 interface stateType {
   showMore: boolean
   show: boolean
   inputText: string
 }
+
 interface arr {
   ownerList: any[]
 }
 @Component({
   name: 'SearchResult',
   components: {
-    PublicAddress
+    PublicAddress,
+    Toast
   }
 })
 export default class SearchResult extends Vue {
+  recommendedPopup = false
+  private recommendedBtn: object[] = [
+    {
+      name: '好的',
+      color: '#FBD206',
+      click: () => {
+        this.ok()
+      }
+    }
+  ]
+  ok() {
+    this.recommendedPopup = false
+  }
   @Action changeInputText: () => void
   @Action searchPublic: (params: any) => void
   @State inputSearch: arr
@@ -57,6 +75,8 @@ export default class SearchResult extends Vue {
       return
     }
     this.searchPublic(this.initState.inputText)
+    this.recommendedPopup = true
+    this.cancel()
   }
   get arrLength() {
     return this.inputSearch.ownerList.length

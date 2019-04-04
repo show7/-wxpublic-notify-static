@@ -5,14 +5,18 @@
       div(class="public-address-info")
         div(class="public-address-title" v-html='item.weChatName')
         // div(class="public-address-introduction") 我是最棒的我是最棒的我是最棒的我～
-      div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='item.isSubscribe ? unsubscribeFnc(item.weChatPublicId, index) : subscribeFnc(item.weChatPublicId, index)') {{item.isSubscribe ? '已订阅' : '订阅'}}
+      div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='setSubscribeStatus(item,index)') {{item.isSubscribe ? '已订阅' : '订阅'}}
     .public-address-component(v-for='(item,i) in inputSearchArr' :key='"index"+i' v-show='!showMore')
       img(class="public-address-head-img" :src="item.avatar")
       div(class="public-address-info")
         div(class="public-address-title" v-html='item.weChatName')
         // div(class="public-address-introduction") 我是最棒的我是最棒的我是最棒的我～
-      div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='item.isSubscribe ? unsubscribeFnc(item.weChatPublicId, index) : subscribeFnc(item.weChatPublicId, index)') {{item.isSubscribe ? '已订阅' : '订阅'}}
+      div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='setSubscribeStatus(item,index)') {{item.isSubscribe ? '已订阅' : '订阅'}}
     div(v-show='showMore' class='showMore' @click='loadMore') 更多公众号
+    Toast(title='小新提示' :btnGroup="unSubbtnGroup" v-show="cancelSubPopup")
+      div(slot="content") 取消订阅之后，就不能收到最新更新的提醒了哦！
+    Toast(title='小新提示' :btnGroup="subBtnGroup" v-show="subscribePopup")
+      div(slot="content") 你已经订阅了{{subscribeNum}}个心仪的公众号啦~ 继续订阅的话，每天可能会收到多条来自小新的提醒哦！
 
 </template>
 <script lang="ts">
@@ -37,28 +41,42 @@ export default class PublicAddress extends Vue {
   @Action CanClick: (params: any) => void
   @Action Subscribe: (params: any) => void
   @State canClick: any
-  cancelSubscribe: boolean = true
-  btnGroup = [
+  private cancelSubPopup: boolean = false
+  private subscribePopup: boolean = false
+  private subscribeNum: number = 0
+
+  weChatPublicId = 0
+  index = 0
+  subBtnGroup = [
+    {
+      name: '好的',
+      color: '#FBD206',
+      click: () => {
+        this.ok()
+      }
+    }
+  ]
+  unSubbtnGroup = [
     {
       name: '再想想',
       color: '#FBD206',
       click: () => {
-        console.log(this)
-        this.cancelSubscribe = false
-        console.log(this.cancelSubscribe)
+        this.cancel()
       }
     },
     {
       name: '确认取消',
       color: '#999999',
       click: () => {
-        this.cancelSubscribe = false
-        console.log('确认取消ma')
+        this.unsubscribeFnc(this.weChatPublicId, this.index)
       }
     }
   ]
+  ok() {
+    this.subscribePopup = false
+  }
   cancel() {
-    console.log('取消')
+    this.cancelSubPopup = false
   }
   showMore: boolean = this.showMore
   inputSearchArr: any = this.inputSearchArr
@@ -83,15 +101,30 @@ export default class PublicAddress extends Vue {
       isSearchResult: false,
       weChatPublicId: weChatPublicId
     })
+    this.subscribeNum = res.msg
+    this.subscribePopup = true
     this.SearchArr[index].isSubscribe = true
   } //取消订阅
   async unsubscribeFnc(weChatPublicId: number, index: number) {
+    this.cancelSubPopup = true
     this.CanClick('')
     const res: Ajax.AxiosResponse | any = await unsubscribe.unsubscribe({
       isSearchResult: false,
       weChatPublicId: weChatPublicId
     })
+    this.cancelSubPopup = false
     this.SearchArr[index].isSubscribe = false
+  }
+  setSubscribeStatus(item: any, index: number) {
+    console.log(item)
+    const { isSubscribe, weChatPublicId } = item
+    if (isSubscribe) {
+      this.cancelSubPopup = true
+      this.weChatPublicId = weChatPublicId
+      this.index = index
+    } else {
+      this.subscribeFnc(weChatPublicId, index)
+    }
   }
 }
 </script>
