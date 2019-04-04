@@ -1,6 +1,6 @@
 <template lang="pug">
   div(class="search-result-component")
-    div(style='min-height:40vh')
+    div()
       Public-address(:inputSearchArr='inputSearch.ownerList' :showMore='initState.showMore')
     div(style='height:30px')
     Public-address(:inputSearchArr='inputSearch.searchList')
@@ -59,8 +59,17 @@ export default class SearchResult extends Vue {
 </script>
 
 <style lang="less">
+.home-component-wrap .search-component-wrap {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 10px;
+  width: 342px;
+  margin: 0 auto;
+  z-index: 11;
+}
 .search-result-component {
-  padding: 0 20px;
+  padding: 50px 20px;
 }
 .included {
   width: 100%;

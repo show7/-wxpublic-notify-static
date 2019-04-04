@@ -22,7 +22,7 @@ let state = {
   typelist:[],
   allList:{
     content: [],
-    isEnd: true,
+    isEnd: false,
     totalCount: 0
   },
   listParams:[{
@@ -30,8 +30,8 @@ let state = {
     page:1
   }],
   activeIndex: 0,
-  loading: [],
-  finished: [],
+  loading: true,
+  finished: false,
   articleList:{
     content: [],
     isEnd: true,
