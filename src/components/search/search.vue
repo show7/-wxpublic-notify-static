@@ -1,6 +1,6 @@
 <template lang="pug">
     .search-component-wrap
-      input(class="search-input" type="text" @blur='blur' @focus='focus' v-model="text" /*@input='search'*/ @search='search' @click='clickSearch')
+      input(class="search-input" type="text" @focus='focus' v-model="text" /*@input='search'*/ @search='search' @click='clickSearch')
       span(class="iconfont icon-search") 
       span(class="iconfont icon-close-copy" @click="clearText" v-show="searchStates")
 </template>
@@ -13,7 +13,7 @@ import mark from '../../utils/mark'
   props: {
     input: {
       type: Function,
-      default: (): void => {}
+      default: (): void => { }
     }
   }
 })

@@ -1,7 +1,7 @@
 <template lang='pug'>
   div
     van-cell-group
-      van-cell(title='又更新公众号' class='cellTit' is-link)
+      van-cell(title='已订阅公众号' class='cellTit' is-link)
         span(class='findMore' @click='pathToPublicList') 查看全部({{mySubscribe.publicList.length}})
     van-row(class='descriptionContent')
       van-col(span='6' v-for='(item, index) in publicList' :key='index' @click='pathToPublic(item.url)')
@@ -30,7 +30,6 @@
 </template>
 
 <script lang='ts'>
-import mark from '../../utils/mark.js'
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { State, Action } from 'vuex-class'
@@ -64,8 +63,11 @@ export default class Myorder extends Vue {
       }
     }
   ]
-  cancle() {}
+  cancle() {
+
+  }
   get publicList() {
+
     if (this.mySubscribe.publicList.length > 4) {
       let _public = this.mySubscribe.publicList.slice(0, 4)
       return _public
@@ -77,14 +79,10 @@ export default class Myorder extends Vue {
     window.location.href = url
   }
   async pathToArticle(type: number) {
+
     this.$router.push(`/update/articleList?type=${type}`)
   }
   pathToPublicList() {
-    mark({
-      module: '打点',
-      function: '售卖组件',
-      action: '点击用户协议'
-    })
     this.$router.push(`/update/publicList`)
   }
 }

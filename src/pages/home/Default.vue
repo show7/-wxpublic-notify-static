@@ -121,8 +121,15 @@ export default class Default extends Vue {
     font-size: @font-title;
     font-weight: @font-wight6;
     .classify-strategy {
-      color: @color-content;
+      width: 76px;
+      height: 24px;
+      box-shadow: 0px 4px 10px 0px rgba(251, 210, 6, 0.32);
+      border-radius: 12px;
+      background: @color-subscribe-btn;
+      color: #1d1300;
       font-size: @font-content;
+      line-height: 24px;
+      text-align: center;
     }
   }
   .classify-nav-wrap {

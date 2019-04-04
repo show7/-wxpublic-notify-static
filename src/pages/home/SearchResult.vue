@@ -8,7 +8,7 @@
     Public-address(:inputSearchArr='inputSearch.searchList' :showMore='false' :recommend="true")
     div( :class='inputSearch.ownerList.length <= 0 && inputSearch.searchList.length <= 0 ? "included middle" : "included" ')
       div(class='noList' v-show='inputSearch.ownerList.length <= 0 && inputSearch.searchList.length <= 0 ') 小新没有找到你心仪的公众号
-      van-button(type="info" @click='popup') 没有我想要的，我要让小新补充收录
+      van-button(type="info" @click='popup') 让小新补充收录
     van-popup(v-model='initState.show' position="bottom" :overlay="true") 
       div(class='popContent')
         div(class='popText') 请输入你收录的公众号名称
