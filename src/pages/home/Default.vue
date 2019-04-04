@@ -2,7 +2,7 @@
   div(class="classify-warp")
     div(class="classify-title")
       div 公众号分类
-      div(class="classify-strategy" @click="setNoviceGuideState(1)") 使用攻略 &gt;
+      div(class="classify-strategy" @click="setNoviceGuideState(1)") 使用攻略
     van-tabs( @click="selectNav" class='tabContent')
       van-tab(v-for="(navItem,i) in typelist" :key="i" :title="navItem.name" style="")
     van-list(v-model="loading"
