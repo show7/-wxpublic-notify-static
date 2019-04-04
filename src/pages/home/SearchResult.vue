@@ -1,6 +1,6 @@
 <template lang="pug">
   div(class="search-result-component")
-    div(style='min-height:40vh')
+    div()
       Public-address(:inputSearchArr='inputSearch.ownerList' :showMore='initState.showMore')
     div(style='height:30px')
     Public-address(:inputSearchArr='inputSearch.searchList')
@@ -8,10 +8,10 @@
     van-popup(v-model='initState.show' position="bottom" :overlay="true") 
       div(class='popContent')
         div(class='popText') 请输入你收录的公众号名称
-        input(class='inputItem' placeholder='请输入你收录的公众号名称')
+        input(class='inputItem' placeholder='请输入你收录的公众号名称' v-model='initState.inputText')
         div(class='confirm')
           van-button(type="default" @click='cancel') 取消
-          van-button(type="default" style='background-color:rgba(251, 210, 6, 1)' ) 确认
+          van-button(type="default" style='background-color:rgba(251, 210, 6, 1)' @click='confirm') 确认
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -21,6 +21,7 @@ import { State, Action } from 'vuex-class'
 interface stateType {
   showMore: boolean
   show: boolean
+  inputText: string
 }
 @Component({
   name: 'SearchResult',
@@ -30,10 +31,12 @@ interface stateType {
 })
 export default class SearchResult extends Vue {
   @Action changeInputText: () => void
+  @Action searchPublic: (params: any) => void
   @State inputSearch: Object
   private initState: stateType = {
     showMore: true,
-    show: false
+    show: false,
+    inputText: ''
   }
   cancel() {
     this.initState.show = false
@@ -45,12 +48,28 @@ export default class SearchResult extends Vue {
       this.initState.show = true
     }
   }
+  confirm() {
+    if (this.initState.inputText === '') {
+      this.$toast('您还没有填写哦~')
+      return
+    }
+    this.searchPublic(this.initState.inputText)
+  }
 }
 </script>
 
 <style lang="less">
+.home-component-wrap .search-component-wrap {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 10px;
+  width: 342px;
+  margin: 0 auto;
+  z-index: 11;
+}
 .search-result-component {
-  padding: 0 20px;
+  padding: 50px 20px;
 }
 .included {
   width: 100%;
@@ -60,6 +79,7 @@ export default class SearchResult extends Vue {
   border-radius: 40px;
   background-color: rgba(251, 210, 6, 1);
   border: 0;
+  margin: 10px 0;
 }
 .popContent {
   height: 203px;

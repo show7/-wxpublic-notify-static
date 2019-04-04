@@ -51,13 +51,16 @@ const actions: ActionTree<any, any> = {
   },
   async setAllList({commit},params:any){
     const res : Ajax.AxiosResponse | any = await home.getAllList(params)
-    commit(TYPES.SET_ALL_LIST, Object.assign(res.msg, params))
+    commit(TYPES.SET_ALL_LIST, res.msg)
   },
   async loadMore({commit},params:any){
     const res : Ajax.AxiosResponse | any = await home.getAllList(params)
     commit(TYPES.LOAD_MORE_ALL_LIST, Object.assign(res.msg, params))
+  },
+  async searchPublic({commit},params:any){
+    const res : Ajax.AxiosResponse | any = await searchPublic.recommandPublic(params)
+    commit(TYPES.LOAD_MORE_ALL_LIST, res.msg)
   }
-
 }
 
 export default actions

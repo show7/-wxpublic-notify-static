@@ -23,11 +23,11 @@ const mutations: MutationTree<any> = {
   [TYPES.SET_TYPELIST](state,typelist):void{
     state.typelist = typelist
   },
-  [TYPES.SET_ALL_LIST](state,parmas):void{
-    console.log(parmas)
-    const {category,page=0}= parmas
-      state.allList[category] = {...parmas,page}
-      console.log(state.allList)
+  [TYPES.SET_ALL_LIST](state,allList):void{
+    state.allList = {
+      content: state.publicList.content.concat(allList.content),
+      ...allList
+    }
   },
   [TYPES.LOAD_MORE_ALL_LIST](state,parmas){
     console.log(parmas)

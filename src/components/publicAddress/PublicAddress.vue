@@ -5,8 +5,8 @@
       div(class="public-address-info")
         div(class="public-address-title" v-html='item.weChatName')
         // div(class="public-address-introduction") 我是最棒的我是最棒的我是最棒的我～
-      div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='canClick && item.isSubscribe ? unsubscribeFnc(item.weChatPublicId) : subscribeFnc(item.weChatPublicId, index)') {{item.isSubscribe ? '已订阅' : '订阅'}}
-
+      div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='item.isSubscribe ? unsubscribeFnc(item.weChatPublicId, index) : subscribeFnc(item.weChatPublicId, index)') {{item.isSubscribe ? '已订阅' : '订阅'}}
+    div(v-if='showMore') 更多公众号
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -45,7 +45,7 @@ export default class PublicAddress extends Vue {
       isSearchResult: false,
       weChatPublicId: weChatPublicId
     })
-    if (res.code && res.code === 200) this.SearchArr[index].isSubscribe = true
+    this.SearchArr[index].isSubscribe = true
   }
   async unsubscribeFnc(weChatPublicId: number, index: number) {
     this.CanClick('')
@@ -53,7 +53,7 @@ export default class PublicAddress extends Vue {
       isSearchResult: false,
       weChatPublicId: weChatPublicId
     })
-    if (res.code && res.code === 200) this.SearchArr[index].isSubscribe = true
+    this.SearchArr[index].isSubscribe = false
   }
 }
 </script>

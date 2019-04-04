@@ -1,79 +1,69 @@
 <template lang="pug">
-    div(class="classify-warp")
-      div(class="classify-title")
-        div 公众号分类
-        div(class="classify-strategy") 使用攻略 &gt;
-      van-tabs(v-model="active" @click="selectNav")
-          van-tab(v-for="(navItem,i) in typelist" :key="i" :title="navItem.name")
-            van-list(class="public-address-wrap" v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad")
-               van-cell 
-                    Public-address(v-for="(publist,i) in currentList" :inputSearchArr="publist.content" :showMore="false")
-      // div(class="classify-nav-wrap")
-      //   div(class="nav-active" v-for="(navItem,i) in typelist" :key="i" @click="checkNavItem(navItem.id)") {{navItem.name}}
-      // van-list(class="public-address-wrap" v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad")
-      //   van-cell
-      //     Public-address(v-for="(publist,i) in allList" :inputSearchArr="publist.content" :showMore="false")
+  div(class="classify-warp")
+    div(class="classify-title")
+      div 公众号分类
+      div(class="classify-strategy") 使用攻略 &gt;
+    van-tabs( @click="selectNav" class='tabContent')
+      van-tab(v-for="(navItem,i) in typelist" :key="i" :title="navItem.name" style="")
+    van-list(v-model="loading"
+    :finished="finished"
+    finished-text="没有更多了"
+    @load="onLoad" class='content' offset='200')
+      div(class='homeContent')
+        PublicAddress(:inputSearchArr='allList')
 </template>
-<script lang="ts">  
+<script lang="ts">
 import Vue from 'vue'
-import Component from 'vue-class-component';
-import PublicAddress from '@/components/publicAddress/PublicAddress.vue'
-import { State, Action, Getter } from 'vuex-class';
-import { constants } from 'fs';
-import { fail } from 'assert';
-import { setInterval } from 'timers';
+import Component from 'vue-class-component'
+import { State, Action, Getter } from 'vuex-class'
+import { constants } from 'fs'
+import { fail } from 'assert'
+import { setInterval } from 'timers'
+import home from '../../request/home'
+import PublicAddress from '@/components/publicAddress/publicAddress.vue'
 @Component({
   name: 'Default',
   components: {
     PublicAddress
-  }}
-)
+  }
+})
 export default class Default extends Vue {
   @Action getTypelist: () => void
   @Action setAllList: (params?: object) => void
-  @Action loadMore: (params?: object) => void
-  @State typelist: StoreState.typelist[]
-  @State allList: StoreState.typelist[]
-  loading: boolean = false
-  finished: boolean = false
-  active: number = 0
+  @State typelist: any
+  allList = []
   listParams = {
     category: 1,
     page: 0
   }
-  currentPublicInfo = {}
-  private mounted() {
+  isEnd = false
+  loading = false
+  finished = false
+  mounted() {
     this.getTypelist()
   }
-  selectNav() {
-    const params = {
-      category: this.category,
+  selectNav(index: number) {
+    this.listParams = {
+      category: index + 1,
+      page: 0
     }
-    console.log(params)
-    console.log(this.typelist[this.active])
-    this.setAllList(params)
+    this.allList = []
+    this.onLoad()
   }
-  get category() {
-    return this.typelist[this.active].id
-  }
-  get currentList() {
-    return this.allList[this.category]
-  }
-  onLoad() {
-
-    // if (this.allList[this.category].isEnd) {
-    //   alert('加载完成')
-    //   this.loading = false;
-    //   this.finished = true;
-    // }
-    const params = {
-      category: this.category,
+  async onLoad() {
+    this.listParams.page++
+    let res: Ajax.AxiosResponse | any = await home.getAllList(this.listParams)
+    if (res && res.code === 200) {
+      this.allList = this.allList.concat(res.msg.content)
+      console.log(this.allList)
+      this.loading = false
+      this.isEnd = res.msg.isEnd
+      if (this.isEnd) {
+        this.finished = true
+      } else {
+        this.finished = false
+      }
     }
-    this.setAllList(params)
-
-    console.log(params)
-
-
   }
 }
 </script>
@@ -81,13 +71,20 @@ export default class Default extends Vue {
 <style lang="less">
 @import '../../style/common.less';
 .classify-warp {
-  padding-top: 18px;
+  padding-top: 120px;
   .van-tabs__line {
     background: @color-subscribe-btn;
   }
   .classify-title {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    padding: 60px 20px;
+    box-sizing: border-box;
+    background-color: #fff;
     display: flex;
-    padding: 0 20px;
     justify-content: space-between;
     align-content: center;
     color: @color-title;
@@ -132,6 +129,25 @@ export default class Default extends Vue {
 .public-address-wrap {
   border-top: 9px solid @color-gap;
   padding: 0 20px;
+}
+.homeContent {
+  padding: 20px;
+}
+.tabContent {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 100px;
+  z-index: 10;
+}
+.home-component-wrap .search-component-wrap {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 10px;
+  width: 342px;
+  margin: 0 auto;
+  z-index: 11;
 }
 </style>
 

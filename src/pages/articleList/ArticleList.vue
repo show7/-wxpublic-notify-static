@@ -39,6 +39,9 @@ export default class ArticleList extends Vue {
       this.finished = true
     }
   }
+  mounted() {
+    this.listParams.type = Number(this.$route.query.type)
+  }
 }
 </script>
 <style lang="less" scoped>
