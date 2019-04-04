@@ -13,11 +13,11 @@ Vue.use(Router)
 const routes: RouteConfig[] = [
   {
     name:'Home',
-    path:'/update',
+    path:'/',
     component:()=>import('@/pages/Home.vue'),
     children:[{
       name: 'default',
-      path: 'default',
+      path: '',
       component: () => import('@/pages/home/Default.vue')
     },
     {
@@ -27,25 +27,25 @@ const routes: RouteConfig[] = [
     }]
   },
   {
-    path: '/update/myorder',
+    path: '/myorder',
     name: 'myorder',
     component: myorder
   },
   {
-    path: '/update/articleList',
-    name: 'articleList',
+    path: '/articles',
+    name: 'articles',
     component: ArticleList
   },
   {
-    path: '/update/publicList',
+    path: '/publicList',
     name: 'publicList',
     component: PublicList
   },
-  {
-    path: '*',
-    redirect: '/home/default',
-    component: ()=>import('@/pages/home/Default.vue')
-  }
+  // {
+  //   path: '*',
+  //   redirect: '/',
+  //   component: ()=>import('@/pages/home/Default.vue')
+  // }
 ]
 
 const router: Router = new Router({

@@ -31,6 +31,7 @@ import { unsubscribe, subscribe } from '../../request'
 import Toast from '@/components/toast/Toast.vue'
 import { searchPublic } from '../../request'
 import { constants, truncate } from 'fs'
+import mark from '../../utils/mark'
 @Component({
   name: 'PublicAddress',
   components: {
@@ -146,7 +147,11 @@ export default class PublicAddress extends Vue {
     this.SearchArr[index].isSubscribe = false
   }
   setSubscribeStatus(item: any, index: number) {
-    console.log(item)
+    mark({
+      module: '打点',
+      function: '订阅按钮',
+      action: '订阅按钮点击'
+    })
     const { isSubscribe, weChatPublicId } = item
     if (isSubscribe) {
       this.cancelSubPopup = true

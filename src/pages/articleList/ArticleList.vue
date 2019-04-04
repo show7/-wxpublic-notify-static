@@ -12,6 +12,7 @@ import { State, Action } from 'vuex-class'
 import Component from 'vue-class-component'
 import Article from '@/components/article/Article.vue'
 import { articleList } from '../../request'
+import mark from '../../utils/mark'
 interface list {
   isEnd: boolean
 }
@@ -47,7 +48,19 @@ export default class ArticleList extends Vue {
   }
   mounted() {
     this.listParams.type = Number(this.$route.query.type) || 1
-    alert(this.listParams.type)
+    if (this.listParams.type === 1) {
+      mark({
+        module: '打点',
+        function: '查看已读文章',
+        action: '点击已读文章'
+      })
+    } else if (this.listParams.type === 2) {
+      mark({
+        module: '打点',
+        function: '查看未读文章',
+        action: '点击未读文章'
+      })
+    }
   }
 }
 </script>

@@ -14,6 +14,7 @@ import Vue from 'vue'
 import { State } from 'vuex-class'
 import Component from 'vue-class-component'
 import { articleList } from '../../request'
+import mark from '../../utils/mark'
 @Component({
   props: {
     data: Array,
@@ -32,8 +33,15 @@ export default class Article extends Vue {
     return this.data
   }
   async pathToArticle(recordId: number, index: number, item: any) {
+    mark({
+      module: '打点',
+      function: '点击文章',
+      action: '点击阅读文章'
+    })
     if (!item.isRead) {
-      let res: Ajax.AxiosResponse | any = await articleList.openArticle({ recordId })
+      let res: Ajax.AxiosResponse | any = await articleList.openArticle({
+        recordId
+      })
       if (res && res.code === 200) this.computedMsg.splice(index, 1)
     }
     window.location.href = item.url
