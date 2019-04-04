@@ -7,7 +7,7 @@
                alt="")
           span {{title}}
         div
-          solt
+          slot(name="content")
         div(class="toast-btn-group")
           div(v-for="(btn,i) in btnGroup"
                :style="{color:btn.color}"
@@ -28,6 +28,10 @@ import { constants } from 'fs';
     title: {
       type: String,
       default: () => '小新提示'
+    },
+    cancel: {
+      type: Function,
+      default: () => { }
     },
     btnGroup: {
       type: Array,
@@ -60,9 +64,10 @@ export default class ToastPoup extends Vue {
 .toast-component-wrap {
   .toast-content {
     position: absolute;
-    top: 163px;
+    top: 50%;
     left: 0;
     right: 0;
+    transform: translateY(-50%);
     width: 263px;
     margin: auto;
     background: rgba(255, 255, 255, 1);
@@ -81,6 +86,7 @@ export default class ToastPoup extends Vue {
       img {
         width: 40px;
         height: 39px;
+        margin-right: 10px;
       }
     }
     .toast-btn-group {

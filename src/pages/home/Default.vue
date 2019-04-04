@@ -2,15 +2,26 @@
   div(class="classify-warp")
     div(class="classify-title")
       div 公众号分类
-      div(class="classify-strategy") 使用攻略 &gt;
+      div(class="classify-strategy" @click="step=1") 使用攻略 &gt;
     van-tabs( @click="selectNav" class='tabContent')
       van-tab(v-for="(navItem,i) in typelist" :key="i" :title="navItem.name" style="")
     van-list(v-model="loading"
     :finished="finished"
     finished-text="没有更多了"
-    @load="onLoad" class='content' offset='200')
+    @load="onLoad" class='content' :offset='200')
       div(class='homeContent')
         PublicAddress(:inputSearchArr='allList')
+    // Toast(:title="")
+    Popup(v-show="step")
+      div(class="boot-page-step" v-show='step===1')
+          img(src="https://static.iqycamp.com/01-se9pnk59.png")
+          div(class="boot-step-btn boot-step-1" @click="step=2") 如何通知？
+      div(class="boot-page-step" v-show='step===2')
+        img(src="https://static.iqycamp.com/02-u7xf7vms.png")
+        div(class="boot-step-btn boot-step-2" @click='step=3') 如何查阅？
+      div(class="boot-page-step" v-show='step===3')
+          img(src="https://static.iqycamp.com/03-8tl9x5f0.png")
+          div(class="boot-step-btn boot-step-3" @click='step=0') 开始订阅！
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -21,10 +32,14 @@ import { fail } from 'assert'
 import { setInterval } from 'timers'
 import home from '../../request/home'
 import PublicAddress from '@/components/publicAddress/publicAddress.vue'
+import Popup from '@/components/popup/Popup.vue'
+import Toast from '@/components/toast/Toast.vue'
 @Component({
   name: 'Default',
   components: {
-    PublicAddress
+    PublicAddress,
+    Popup,
+    Toast
   }
 })
 export default class Default extends Vue {
@@ -39,9 +54,13 @@ export default class Default extends Vue {
   isEnd = false
   loading = false
   finished = false
+  step: number = 1
   mounted() {
     this.getTypelist()
+    this.step = localStorage.getItem('step') ? 0 : 1
+    localStorage.setItem('step', 'true')
   }
+
   selectNav(index: number) {
     this.listParams = {
       category: index + 1,
@@ -148,6 +167,34 @@ export default class Default extends Vue {
   width: 342px;
   margin: 0 auto;
   z-index: 11;
+}
+.boot-page-step {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  img {
+    width: 100vw;
+    height: 100vh;
+  }
+}
+.boot-step-1 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 97px;
+}
+.boot-step-2 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 224px;
+}
+.boot-step-3 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 115px;
 }
 </style>
 

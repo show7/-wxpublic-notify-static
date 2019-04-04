@@ -13,8 +13,13 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { State, Action } from 'vuex-class'
 import { unsubscribe, subscribe } from '../../request'
+import Toast from '@/components/toast/Toast.vue'
+import { constants, truncate } from 'fs';
 @Component({
   name: 'PublicAddress',
+  components: {
+    Toast
+  },
   props: {
     inputSearchArr: Array,
     showMore: Boolean,
@@ -25,6 +30,26 @@ export default class PublicAddress extends Vue {
   @Action CanClick: (params: any) => void
   @Action Subscribe: (params: any) => void
   @State canClick: any
+  cancelSubscribe: boolean = true
+  btnGroup = [{
+    name: '再想想',
+    color: '#FBD206',
+    click: () => {
+      console.log(this)
+      this.cancelSubscribe = false
+      console.log(this.cancelSubscribe)
+    }
+  }, {
+    name: '确认取消',
+    color: '#999999',
+    click: () => {
+      this.cancelSubscribe = false
+      console.log('确认取消ma')
+    }
+  }]
+  cancel() {
+    console.log('取消')
+  }
   showMore: boolean = this.showMore
   inputSearchArr: any = this.inputSearchArr
   get SearchArr(): any {
@@ -46,7 +71,7 @@ export default class PublicAddress extends Vue {
       weChatPublicId: weChatPublicId
     })
     this.SearchArr[index].isSubscribe = true
-  }
+  }//取消订阅
   async unsubscribeFnc(weChatPublicId: number, index: number) {
     this.CanClick('')
     const res: Ajax.AxiosResponse | any = await unsubscribe.unsubscribe({

@@ -1,11 +1,16 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import Vue from 'vue'
 import TYPES from '../store/types'
 import VueAxios from 'vue-axios';
 Vue.use(VueAxios,axios)
+
 let platform = 'we_mobile'
 Vue.axios.defaults.headers.platform = platform
 Vue.axios.defaults.headers.post['Content-Type'] = 'application/json'
+Vue.axios.interceptors.request.use((request)=>{ 
+    return request
+})
+
 Vue.axios.interceptors.response.use(
   (response: any) => {
     console.log('9999999')

@@ -3,16 +3,6 @@
     Search(@input = "searchChange")
     transition(name="fade")
       router-view
-    Popup(v-show="step")
-      div(class="boot-page-step1" v-show='step===1')
-          img(src="https://static.iqycamp.com/Group 4@2x-habvzzd1.png")
-          div(class="boot-step-btn" @click="step=2") 如何通知？
-      div(class="boot-page-step2" v-show='step===2')
-        img(src="https://static.iqycamp.com/Group 7@2x-1eft11f2.png")
-        div(class="boot-step-btn" @click='step=3') 如何查阅？
-      div(class="boot-page-step3" v-show='step===3')
-          img(src="https://static.iqycamp.com/Group 4@2x-habvzzd1.png")
-          div(class="boot-step-btn" @click='step=0') 开始订阅！
 </template>
 
 <script lang="ts">
@@ -22,6 +12,7 @@ import Search from '@/components/search/Search.vue'
 import Popup from '@/components/popup/Popup.vue'
 
 import { State, Action } from 'vuex-class'
+import { constants } from 'fs';
 
 @Component({
   name: 'Home',
@@ -36,8 +27,6 @@ export default class Home extends Vue {
   // Alert(params: number) {
   //   alert(params == 1)
   // }
-  step: number = 1
-  async mounted() { }
   searchChange(val: any) {
     if (val !== '') this.changeInputText(val)
     if (val === '' && location.href.indexOf('/update/Default') === -1) {
@@ -53,39 +42,5 @@ export default class Home extends Vue {
 @import '../style/common.less';
 
 .home-component-wrap {
-  .boot-page-step1 {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 130px;
-    width: 337px;
-    margin: auto;
-    img {
-      margin-bottom: 40px;
-    }
-  }
-  .boot-page-step3 {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 130px;
-    width: 337px;
-    margin: auto;
-    img {
-      margin-bottom: 40px;
-    }
-  }
-  padding: 14px 0 0 0;
-  .boot-page-step2 {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 130px;
-    width: 364px;
-    margin: auto;
-    img {
-      margin-bottom: 85px;
-    }
-  }
 }
 </style>
