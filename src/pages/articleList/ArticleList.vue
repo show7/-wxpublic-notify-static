@@ -51,14 +51,14 @@ export default class ArticleList extends Vue {
     if (this.listParams.type === 1) {
       mark({
         module: '打点',
-        function: '查看已读文章',
-        action: '点击已读文章'
+        function: '着陆已读文章',
+        action: '点击着陆已读文章'
       })
     } else if (this.listParams.type === 2) {
       mark({
         module: '打点',
-        function: '查看未读文章',
-        action: '点击未读文章'
+        function: '着陆未读文章',
+        action: '点击着陆未读文章'
       })
     }
   }

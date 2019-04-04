@@ -34,6 +34,7 @@ import home from '../../request/home'
 import PublicAddress from '@/components/publicAddress/publicAddress.vue'
 import Popup from '@/components/popup/Popup.vue'
 import Toast from '@/components/toast/Toast.vue'
+import mark from '../../utils/mark'
 @Component({
   name: 'Default',
   components: {
@@ -73,6 +74,12 @@ export default class Default extends Vue {
   }
 
   selectNav(index: number) {
+    mark({
+      module: '打点',
+      function: '分类',
+      action: '点击分类',
+      memo: index
+    })
     this.listParams = {
       category: index + 1,
       page: 0

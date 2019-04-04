@@ -53,8 +53,8 @@ export default class Myorder extends Vue {
   private mounted() {
     mark({
       module: '打点',
-      function: '搜索',
-      action: '点击搜索'
+      function: '我的订阅',
+      action: '着陆我的订阅'
     })
     this.getArticle()
   }
@@ -68,7 +68,7 @@ export default class Myorder extends Vue {
       }
     }
   ]
-  cancle() { }
+  cancle() {}
   get publicList() {
     if (this.mySubscribe.publicList.length > 4) {
       let _public = this.mySubscribe.publicList.slice(0, 4)

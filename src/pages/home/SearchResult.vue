@@ -8,11 +8,11 @@
     Public-address(:inputSearchArr='inputSearch.searchList' :showMore='false' :recommend="true")
     div( :class='inputSearch.ownerList.length <= 0 && inputSearch.searchList.length <= 0 ? "included middle" : "included" ')
       div(class='noList' v-show='inputSearch.ownerList.length <= 0 && inputSearch.searchList.length <= 0 ') 小新没有找到你心仪的公众号
-      van-button(type="info" @click='popup') 让小新补充收录
+      van-button(type="info" @click='popup') {{inputSearch.ownerList.length <= 0 && inputSearch.searchList.length <= 0 ? '让小新补充收录！' : '没有我想要的，我要让小新补充收录！' }}
     van-popup(v-model='initState.show' position="bottom" :overlay="true") 
       div(class='popContent')
         div(class='popText') 请输入你收录的公众号名称
-        input(class='inputItem' placeholder='请输入你推荐收录的公众号名称 ' maxlength='11' v-model='initState.inputText')
+        input(class='inputItem' placeholder='请输入你推荐收录的公众号名称 ' maxlength='20' v-model='initState.inputText')
         div(class='confirm')
           van-button(type="default" @click='cancel') 取消
           van-button(type="default" style='background-color:rgba(251, 210, 6, 1)' @click='confirm') 提交
@@ -68,9 +68,9 @@ export default class SearchResult extends Vue {
     this.initState.show = false
   }
   popup() {
+    this.initState.inputText = ''
     if (this.initState.show) {
       this.initState.show = false
-      this.initState.inputText = ''
     } else {
       this.initState.show = true
     }
