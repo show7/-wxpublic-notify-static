@@ -30,6 +30,7 @@
 </template>
 
 <script lang='ts'>
+import mark from '../../utils/mark.js'
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { State, Action } from 'vuex-class'
@@ -64,7 +65,7 @@ export default class Myorder extends Vue {
     this.subscribePopup = false
   }
   get publicList() {
-    if (!this.mySubscribe.publicList.length) return this.subscribePopup = true
+    if (!this.mySubscribe.publicList.length) return (this.subscribePopup = true)
     if (this.mySubscribe.publicList.length > 4) {
       let _public = this.mySubscribe.publicList.slice(0, 4)
       return _public
@@ -79,6 +80,11 @@ export default class Myorder extends Vue {
     this.$router.push(`/update/articleList?type=${type}`)
   }
   pathToPublicList() {
+    mark({
+      module: '打点',
+      function: '售卖组件',
+      action: '点击用户协议'
+    })
     this.$router.push(`/update/publicList`)
   }
 }

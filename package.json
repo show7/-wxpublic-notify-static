@@ -12,6 +12,8 @@
     "ftp": "npm run build&&gulp ftp"
   },
   "dependencies": {
+    "lodash": "^4.17.11",
+    "sa-sdk-javascript": "^1.13.1",
     "vant": "^1.6.12",
     "vue": "^2.5.9",
     "vue-awesome-swiper": "^3.0.6",

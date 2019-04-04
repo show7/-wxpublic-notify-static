@@ -6657,6 +6657,11 @@ rx-lite@^3.1.2:
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-3.1.2.tgz#19ce502ca572665f3b647b10939f97fd1615f102"
   integrity sha1-Gc5QLKVyZl87ZHsQk5+X/RYV8QI=
 
+sa-sdk-javascript@^1.13.1:
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/sa-sdk-javascript/-/sa-sdk-javascript-1.13.1.tgz#2b26c21d002b23f5daa5e8a300714b9d5aa37d80"
+  integrity sha512-NmIRALbdcNfHFqN5SzFvbtu+6JcF02EWLqrgPh3C/73UClTu/ZP/Ewmr8UM30cHLtNXx/DuGw+lL/T6koZ1wEg==
+
 safe-buffer@5.1.2, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"

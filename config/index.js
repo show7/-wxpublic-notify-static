@@ -12,6 +12,9 @@ module.exports = {
     proxyTable: {
       '/api/*': {
         target: 'http://beta.confucius.mobi'
+      },
+      '/rise/*': {
+        target: 'http://beta.confucius.mobi'
       }
     },
 
