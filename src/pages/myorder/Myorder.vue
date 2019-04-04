@@ -51,6 +51,11 @@ export default class Myorder extends Vue {
   @State noviceState: number
   private updatePulic = 0
   private mounted() {
+    mark({
+      module: '打点',
+      function: '搜索',
+      action: '点击搜索'
+    })
     this.getArticle()
   }
   noviceGuideBtn: object[] = [
