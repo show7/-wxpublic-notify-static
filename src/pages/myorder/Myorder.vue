@@ -1,18 +1,18 @@
 <template lang='pug'>
   div
     van-cell-group
-      van-cell(title='又更新公众号' class='cellTit' is-link)
+        van-cell(title='未读文章' class='cellTit' is-link)
+          span(v-if='mySubscribe.totalUnReadCount > 3' class='findMore' @click='pathToArticle(2)') 查看全部({{mySubscribe.totalUnReadCount}})
+    Article(:data='mySubscribe.unReadArticles')
+    div(class='separate')
+    van-cell-group
+      van-cell(title='已订阅公众号' class='cellTit' is-link)
         span(class='findMore' @click='pathToPublicList') 查看全部({{mySubscribe.totalSubscribeCount}})
     van-row(class='descriptionContent')
       van-col(span='6' v-for='(item, index) in publicList' :key='index' @click='pathToPublic(item.url)')
         div(class='mySubscribe-item')
           img(class='mySubscribe' :src='item.avatar')
         div(class='descriptionTxt') {{item.weChatName}}
-    div(class='separate')
-    van-cell-group
-        van-cell(title='又更新文章' class='cellTit' is-link)
-          span(v-if='mySubscribe.totalUnReadCount > 3' class='findMore' @click='pathToArticle(2)') 查看全部({{mySubscribe.totalUnReadCount}})
-    Article(:data='mySubscribe.unReadArticles')
     div(class='separate')
     van-cell(title="已阅文章" is-link class='cellTit' @click='pathToArticle(1)')
     Toast(title='小新提示' :btnGroup="noviceGuideBtn" v-show="noviceState")
@@ -63,7 +63,7 @@ export default class Myorder extends Vue {
       }
     }
   ]
-  cancle() {}
+  cancle() { }
   get publicList() {
     if (this.mySubscribe.publicList.length > 4) {
       let _public = this.mySubscribe.publicList.slice(0, 4)

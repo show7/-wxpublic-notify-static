@@ -17,7 +17,7 @@ const routes: RouteConfig[] = [
     component:()=>import('@/pages/Home.vue'),
     children:[{
       name: 'default',
-      path: '',
+      path: 'default',
       component: () => import('@/pages/home/Default.vue')
     },
     {
