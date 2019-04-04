@@ -31,7 +31,7 @@ export default class Home extends Vue {
     console.log(this.$route.name)
     if (val !== '') this.changeInputText(val)
     if (val === '' && this.$route.name !== 'Home') {
-      this.$router.replace({ path: '/' })
+      window.location.replace('/wx_public/')
     } else if (this.$route.name !== 'searchResult') {
       this.$router.replace({ path: '/searchResult' })
     }
