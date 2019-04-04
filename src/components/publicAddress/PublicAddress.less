@@ -3,8 +3,13 @@
   position: relative;
   height: 60px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid @color-border-bottom;
+  :first-child {
+    display: flex;
+    align-items: center;
+  }
 }
 .public-address-head-img {
   width: 34px;
@@ -24,8 +29,6 @@
   font-size: @font-content;
 }
 .public-address-subscribe {
-  position: absolute;
-  right: 0;
   width: 76px;
   height: 30px;
   line-height: 30px;

@@ -20,6 +20,11 @@ const actions: ActionTree<any, any> = {
   // },
   async getArticle({ commit }, params?: any) {
     const res: Ajax.AxiosResponse | any = await article.article()
+    const publicList= res.msg.publicList
+    if(!!publicList && !publicList.length){
+      commit(TYPES.SET_NOVICE_STATE, true)
+    }
+    console.log(res.msg)
     commit(TYPES.SET_PUBLICE, res.msg)
   },
   async ArticleList({ commit }, params: any) {
@@ -63,6 +68,9 @@ const actions: ActionTree<any, any> = {
   // },
   setNoviceGuideState({commit},params:any){
     commit(TYPES.SET_NOVICE_GUIDE_STATE,params)
+  },
+  setNoviceState({commit},params:any){
+    commit(TYPES.SET_NOVICE_STATE, params)
   }
 }
 

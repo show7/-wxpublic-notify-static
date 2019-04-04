@@ -49,5 +49,8 @@ const mutations: MutationTree<any> = {
   [TYPES.SET_NOVICE_GUIDE_STATE](state, params): void {
     state.noviceGuideState = params
   },
+  [TYPES.SET_NOVICE_STATE](state,params):void{
+    state.noviceState = params
+  }
 }
 export default mutations

@@ -28,6 +28,7 @@ export default class Search extends Vue {
   }
   clearText() {
     this.text = ''
+    this.searchStates = false
   }
   search() {
     mark({

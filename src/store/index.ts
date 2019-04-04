@@ -13,6 +13,7 @@ let state = {
     searchList: []
   },
   noviceGuideState:0,
+  noviceState:false,
   login: false,
   mySubscribe: {
     publicList: [],

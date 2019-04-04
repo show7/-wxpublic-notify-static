@@ -2,7 +2,7 @@
   div(class="classify-warp")
     div(class="classify-title")
       div 公众号分类
-      div(class="classify-strategy" @click="step=1") 使用攻略 &gt;
+      div(class="classify-strategy" @click="setNoviceGuideState(1)") 使用攻略 &gt;
     van-tabs( @click="selectNav" class='tabContent')
       van-tab(v-for="(navItem,i) in typelist" :key="i" :title="navItem.name" style="")
     van-list(v-model="loading"
@@ -178,34 +178,6 @@ export default class Default extends Vue {
   width: 342px;
   margin: 0 auto;
   z-index: 11;
-}
-.boot-page-step {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  img {
-    width: 100vw;
-    height: 100vh;
-  }
-}
-.boot-step-1 {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 97px;
-}
-.boot-step-2 {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 224px;
-}
-.boot-step-3 {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 115px;
 }
 </style>
 

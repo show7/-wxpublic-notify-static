@@ -47,6 +47,7 @@ export default class ArticleList extends Vue {
   }
   mounted() {
     this.listParams.type = Number(this.$route.query.type) || 1
+    alert(this.listParams.type)
   }
 }
 </script>
