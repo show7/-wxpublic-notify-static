@@ -57,10 +57,10 @@ const actions: ActionTree<any, any> = {
     const res : Ajax.AxiosResponse | any = await home.getAllList(params)
     commit(TYPES.LOAD_MORE_ALL_LIST, Object.assign(res.msg, params))
   },
-  async searchPublic({commit},params:any){
-    const res : Ajax.AxiosResponse | any = await searchPublic.recommandPublic(params)
-    commit(TYPES.LOAD_MORE_ALL_LIST, res.msg)
-  },
+  // async searchPublic({commit},params:any){
+  //   const res : Ajax.AxiosResponse | any = await searchPublic.recommandPublic(params)
+  //   commit(TYPES.LOAD_MORE_ALL_LIST, res.msg)
+  // },
   setNoviceGuideState({commit},params:any){
     commit(TYPES.SET_NOVICE_GUIDE_STATE,params)
   }
