@@ -20,6 +20,7 @@ import mark from '../../utils/mark'
 export default class Search extends Vue {
   text: any = ''
   searchStates: boolean = false
+  canChangeInput = true
   focus() {
     this.searchStates = true
   }
@@ -29,12 +30,15 @@ export default class Search extends Vue {
   clearText() {
     this.text = ''
     this.searchStates = false
-    window.location.replace('/wx_public/')
+    // window.location.replace('/wx_public/')
+    this.$emit('input', this.text)
   }
   judge() {
+    if (!this.canChangeInput) return
     if (this.text === '') {
       this.searchStates = false
-      window.location.replace('/wx_public/')
+      // window.location.replace('/wx_public/')
+      this.$emit('input', this.text)
     }
   }
   search() {
@@ -55,6 +59,14 @@ export default class Search extends Vue {
       module: '打点',
       function: '搜索',
       action: '点击搜索'
+    })
+  }
+  mounted() {
+    document.addEventListener('compositionstart', () => {
+      this.canChangeInput = false
+    })
+    document.addEventListener('compositionend', () => {
+      this.canChangeInput = true
     })
   }
 }

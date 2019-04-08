@@ -28,11 +28,10 @@ export default class Home extends Vue {
   //   alert(params == 1)
   // }
   searchChange(val: any) {
-    console.log(this.$route.name)
     if (val !== '') this.changeInputText(val)
-    if (val === '' && this.$route.name !== 'Home') {
+    if (val === '' && this.$route.name !== 'default') {
       window.location.replace('/wx_public/')
-    } else if (this.$route.name !== 'searchResult') {
+    } else if (val !== '' && this.$route.name === 'default') {
       this.$router.replace({ path: '/searchResult' })
     }
   }
