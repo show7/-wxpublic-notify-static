@@ -43,7 +43,7 @@ export default class Article extends Vue {
       let res: Ajax.AxiosResponse | any = await articleList.openArticle({
         recordId
       })
-      if (res && res.code === 200) this.computedMsg.splice(index, 1)
+      // if (res && res.code === 200) this.computedMsg.splice(index, 1)
     }
     this.getArticle()
     window.location.href = item.url
