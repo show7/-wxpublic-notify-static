@@ -68,8 +68,8 @@ const actions: ActionTree<any, any> = {
     if(params>1){
       mark({
         module: '打点',
-        function: '使用攻略',
-        action: '点击使用攻略',
+        function: '引导页',
+        action: '点击引导页',
         memo: params
       })
     }

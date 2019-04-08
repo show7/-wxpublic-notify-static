@@ -49,16 +49,16 @@ export default class Search extends Vue {
     }
     mark({
       module: '打点',
-      function: '点击搜索框',
-      action: '点击搜索框'
+      function: '搜索',
+      action: '点击搜索'
     })
     this.$emit('input', this.text)
   }
   clickSearch() {
     mark({
       module: '打点',
-      function: '搜索',
-      action: '点击搜索'
+      function: '点击搜索框',
+      action: '点击搜索框'
     })
   }
   mounted() {

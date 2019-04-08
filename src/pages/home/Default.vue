@@ -2,7 +2,7 @@
   div(class="classify-warp")
     div(class="classify-title")
       div 公众号分类
-      div(class="classify-strategy" @click="setNoviceGuideState(1)") 使用攻略
+      div(class="classify-strategy" @click="clickStrategy") 使用攻略
     van-tabs( @click="selectNav" class='tabContent')
       van-tab(v-for="(navItem,i) in typelist" :key="i" :title="navItem.name" style="")
     van-list(v-model="loading"
@@ -46,7 +46,7 @@ import mark from '../../utils/mark'
 export default class Default extends Vue {
   @Action getTypelist: () => void
   @Action setAllList: (params?: object) => void
-  @Action setNoviceGuideState: (params?: any) => void
+  @Action setNoviceGuideState: (params: any) => void
   @State typelist: any
   @State noviceGuideState: number
   allList = []
@@ -77,7 +77,14 @@ export default class Default extends Vue {
     })
     this.setNoviceGuideState(1)
   }
-
+  clickStrategy() {
+    mark({
+      module: '打点',
+      function: '使用攻略',
+      action: '点击使用攻略'
+    })
+    this.setNoviceGuideState(1)
+  }
   selectNav(index: number) {
     mark({
       module: '打点',
