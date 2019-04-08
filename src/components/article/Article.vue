@@ -11,7 +11,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Watch } from 'vue-property-decorator'
 import { State, Action } from 'vuex-class'
 import Component from 'vue-class-component'
 import { articleList } from '../../request'
