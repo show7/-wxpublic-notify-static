@@ -68,7 +68,14 @@ export default class Default extends Vue {
     this.isEnd = false
     this.loading = false
     this.finished = false
-    if (localStorage.getItem('noviceGuideState')) return
+    if (localStorage.getItem('noviceGuideState')) {
+      mark({
+        module: '打点',
+        function: '首页',
+        action: '着陆首页'
+      })
+      return
+    }
     localStorage.setItem('noviceGuideState', 'true')
     mark({
       module: '打点',
