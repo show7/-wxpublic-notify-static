@@ -16,7 +16,6 @@
     "sa-sdk-javascript": "^1.13.1",
     "vant": "^1.6.12",
     "vue": "^2.5.9",
-    "vue-awesome-swiper": "^3.0.6",
     "vue-axios": "^2.1.4",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
