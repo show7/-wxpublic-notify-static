@@ -23,7 +23,7 @@ import mark from '../../utils/mark'
   }
 })
 export default class Article extends Vue {
-  @Action getArticle: (url: string) => void
+  @Action getArticle: (url?: string) => void
   name: 'Article'
   private data: object[] = this.data
   private updatePulic = 0
@@ -48,8 +48,6 @@ export default class Article extends Vue {
     }
     this.getArticle(item.url)
   }
-  @Watch('data')
-  dataChange(newVal: any, oldVal: any) {}
 }
 </script>
 <style lang="less" scoped>
