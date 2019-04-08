@@ -1,6 +1,6 @@
 <template lang="pug">
     .search-component-wrap
-      input(class="search-input" type="search" /*@focus='focus'*/ v-model="text" /*@input='judge'*/ @search='search' @click='clickSearch')
+      input(class="search-input" type="search" /*@focus='focus'*/ v-model="text" @input='judge' @search='search' @click='clickSearch')
       span(class="iconfont icon-search") 
       span(class="iconfont icon-close-copy" @click="clearText" v-show="searchStates")
 </template>
@@ -33,9 +33,8 @@ export default class Search extends Vue {
   }
   judge() {
     if (this.text === '') {
-      this.clearText()
-    } else {
-      this.focus()
+      this.searchStates = false
+      window.location.replace('/wx_public/')
     }
   }
   search() {
