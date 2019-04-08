@@ -11,6 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { Watch } from 'vue-property-decorator'
 import { State, Action } from 'vuex-class'
 import Component from 'vue-class-component'
 import { articleList } from '../../request'
@@ -22,7 +23,7 @@ import mark from '../../utils/mark'
   }
 })
 export default class Article extends Vue {
-  @Action getArticle: () => void
+  @Action getArticle: (url: string) => void
   name: 'Article'
   private data: object[] = this.data
   private updatePulic = 0
@@ -45,9 +46,10 @@ export default class Article extends Vue {
       })
       // if (res && res.code === 200) this.computedMsg.splice(index, 1)
     }
-    this.getArticle()
-    window.location.href = item.url
+    this.getArticle(item.url)
   }
+  @Watch('data')
+  dataChange(newVal: any, oldVal: any) {}
 }
 </script>
 <style lang="less" scoped>
