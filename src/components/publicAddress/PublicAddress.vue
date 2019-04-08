@@ -95,6 +95,11 @@ export default class PublicAddress extends Vue {
     this.subscribePopup = false
   }
   cancelSubscribe() {
+    mark({
+      module: '打点',
+      function: '确认取消订阅',
+      action: '点击确认取消'
+    })
     this.unsubscribeFnc(this.weChatPublicId, this.index)
   }
   cancel() {

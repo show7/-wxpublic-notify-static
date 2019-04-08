@@ -12,7 +12,7 @@
       div(class='homeContent')
         PublicAddress(:inputSearchArr='allList')
     // Toast(:title="")
-    Popup(v-show="noviceGuideState")
+    Popup(v-show="noviceGuideState<4 && noviceGuideState>0")
       div(class="boot-page-step" v-show='noviceGuideState===1')
           img(src="https://static.iqycamp.com/01-se9pnk59.png")
           div(class="boot-step-btn boot-step-1" @click="setNoviceGuideState(2)") 如何通知？
@@ -21,7 +21,7 @@
         div(class="boot-step-btn boot-step-2" @click='setNoviceGuideState(3)') 如何查阅？
       div(class="boot-page-step" v-show='noviceGuideState===3')
           img(src="https://static.iqycamp.com/03-8tl9x5f0.png")
-          div(class="boot-step-btn boot-step-3" @click='setNoviceGuideState(0)') 开始订阅！
+          div(class="boot-step-btn boot-step-3" @click='setNoviceGuideState(4)') 开始订阅！
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -70,6 +70,11 @@ export default class Default extends Vue {
     this.finished = false
     if (localStorage.getItem('noviceGuideState')) return
     localStorage.setItem('noviceGuideState', 'true')
+    mark({
+      module: '打点',
+      function: '新手引导',
+      action: '着陆新手引导'
+    })
     this.setNoviceGuideState(1)
   }
 

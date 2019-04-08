@@ -18,9 +18,10 @@ import { State, Action } from 'vuex-class'
 import Component from 'vue-class-component'
 import Public from '@/components/publicAddress/PublicAddress.vue'
 import { publicList, getToggleNight } from '../../request'
-import { connect } from 'net';
-import { constants } from 'http2';
-import { setTimeout } from 'timers';
+import { connect } from 'net'
+import { constants } from 'http2'
+import { setTimeout } from 'timers'
+import mark from '../../utils/mark'
 interface list {
   isEnd: boolean
 }
@@ -56,7 +57,19 @@ export default class ArticleList extends Vue {
     }
   }
   toggleSwitch() {
-    console.log(this.checked)
+    if (this.checked) {
+      mark({
+        module: '打点',
+        function: '开启深夜勿扰模式',
+        action: '点击开启深夜勿扰模式'
+      })
+    } else {
+      mark({
+        module: '打点',
+        function: '取消深夜勿扰模式',
+        action: '点击取消深夜勿扰模式'
+      })
+    }
     this.ToggleNight({ quietMode: this.checked })
   }
   async mounted() {

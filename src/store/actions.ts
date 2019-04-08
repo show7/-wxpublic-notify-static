@@ -65,12 +65,14 @@ const actions: ActionTree<any, any> = {
   //   commit(TYPES.LOAD_MORE_ALL_LIST, res.msg)
   // },
   setNoviceGuideState({commit},params:any){
-    mark({
-      module: '打点',
-      function: '使用攻略',
-      action: '点击使用攻略',
-      memo: params
-    })
+    if(params>1){
+      mark({
+        module: '打点',
+        function: '使用攻略',
+        action: '点击使用攻略',
+        memo: params
+      })
+    }
     commit(TYPES.SET_NOVICE_GUIDE_STATE,params)
   },
   setNoviceState({commit},params:any){
