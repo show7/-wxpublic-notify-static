@@ -2,7 +2,7 @@
   div(class="classify-warp")
     div(class="classify-title")
       div 公众号分类
-      div(class="classify-strategy" @click="setNoviceGuideState(1)") 使用攻略
+      div(class="classify-strategy" @click="clickStrategy") 使用攻略
     van-tabs( @click="selectNav" class='tabContent')
       van-tab(v-for="(navItem,i) in typelist" :key="i" :title="navItem.name" style="")
     van-list(v-model="loading"
@@ -12,7 +12,7 @@
       div(class='homeContent')
         PublicAddress(:inputSearchArr='allList')
     // Toast(:title="")
-    Popup(v-show="noviceGuideState")
+    Popup(v-show="noviceGuideState<4 && noviceGuideState>0")
       div(class="boot-page-step" v-show='noviceGuideState===1')
           img(src="https://static.iqycamp.com/01-se9pnk59.png")
           div(class="boot-step-btn boot-step-1" @click="setNoviceGuideState(2)") 如何通知？
@@ -21,7 +21,7 @@
         div(class="boot-step-btn boot-step-2" @click='setNoviceGuideState(3)') 如何查阅？
       div(class="boot-page-step" v-show='noviceGuideState===3')
           img(src="https://static.iqycamp.com/03-8tl9x5f0.png")
-          div(class="boot-step-btn boot-step-3" @click='setNoviceGuideState(0)') 开始订阅！
+          div(class="boot-step-btn boot-step-3" @click='setNoviceGuideState(4)') 开始订阅！
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -46,7 +46,7 @@ import mark from '../../utils/mark'
 export default class Default extends Vue {
   @Action getTypelist: () => void
   @Action setAllList: (params?: object) => void
-  @Action setNoviceGuideState: (params?: any) => void
+  @Action setNoviceGuideState: (params: any) => void
   @State typelist: any
   @State noviceGuideState: number
   allList = []
@@ -68,11 +68,30 @@ export default class Default extends Vue {
     this.isEnd = false
     this.loading = false
     this.finished = false
-    if (localStorage.getItem('noviceGuideState')) return
+    if (localStorage.getItem('noviceGuideState')) {
+      mark({
+        module: '打点',
+        function: '首页',
+        action: '着陆首页'
+      })
+      return
+    }
     localStorage.setItem('noviceGuideState', 'true')
+    mark({
+      module: '打点',
+      function: '新手引导',
+      action: '着陆新手引导'
+    })
     this.setNoviceGuideState(1)
   }
-
+  clickStrategy() {
+    mark({
+      module: '打点',
+      function: '使用攻略',
+      action: '点击使用攻略'
+    })
+    this.setNoviceGuideState(1)
+  }
   selectNav(index: number) {
     mark({
       module: '打点',

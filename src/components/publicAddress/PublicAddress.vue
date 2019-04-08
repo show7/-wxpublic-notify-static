@@ -95,6 +95,11 @@ export default class PublicAddress extends Vue {
     this.subscribePopup = false
   }
   cancelSubscribe() {
+    mark({
+      module: '打点',
+      function: '确认取消订阅',
+      action: '点击确认取消'
+    })
     this.unsubscribeFnc(this.weChatPublicId, this.index)
   }
   cancel() {
@@ -148,17 +153,22 @@ export default class PublicAddress extends Vue {
     this.SearchArr[index].isSubscribe = false
   }
   setSubscribeStatus(item: any, index: number) {
-    mark({
-      module: '打点',
-      function: '订阅按钮',
-      action: '订阅按钮点击'
-    })
     const { isSubscribe, weChatPublicId } = item
     if (isSubscribe) {
+      mark({
+        module: '打点',
+        function: '已订阅按钮',
+        action: '点击已订阅按钮点击'
+      })
       this.cancelSubPopup = true
       this.weChatPublicId = weChatPublicId
       this.index = index
     } else {
+      mark({
+        module: '打点',
+        function: '订阅按钮',
+        action: '订阅按钮点击'
+      })
       this.subscribeFnc(weChatPublicId, index)
     }
   }

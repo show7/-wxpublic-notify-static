@@ -19,7 +19,7 @@ const actions: ActionTree<any, any> = {
   //   const res: Ajax.AxiosResponse | any = await home.getData()
   //   if (res.code && res.code === 200) commit(TYPES.SET_ACTIVITIES, res.msg)
   // },
-  async getArticle({ commit }, params?: any) {
+  async getArticle({ commit }, url?: string) {
     const res: Ajax.AxiosResponse | any = await article.article()
     const publicList= res.msg.publicList
     if(!!publicList && !publicList.length){
@@ -27,6 +27,7 @@ const actions: ActionTree<any, any> = {
     }
     console.log(res.msg)
     commit(TYPES.SET_PUBLICE, res.msg)
+    if(!!url) window.location.href = url
   },
   async ArticleList({ commit }, params: any) {
     const res: Ajax.AxiosResponse | any = await articleList.articleList(params)
@@ -64,12 +65,14 @@ const actions: ActionTree<any, any> = {
   //   commit(TYPES.LOAD_MORE_ALL_LIST, res.msg)
   // },
   setNoviceGuideState({commit},params:any){
-    mark({
-      module: '打点',
-      function: '使用攻略',
-      action: '点击使用攻略',
-      memo: params
-    })
+    if(params>1){
+      mark({
+        module: '打点',
+        function: '引导页',
+        action: '点击引导页',
+        memo: params
+      })
+    }
     commit(TYPES.SET_NOVICE_GUIDE_STATE,params)
   },
   setNoviceState({commit},params:any){

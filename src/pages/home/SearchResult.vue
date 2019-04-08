@@ -177,5 +177,8 @@ export default class SearchResult extends Vue {
   color: rgba(193, 192, 201, 1);
   text-align: center;
 }
+.van-popup {
+  position: absolute;
+}
 </style>
 
