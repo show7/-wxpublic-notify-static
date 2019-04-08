@@ -71,7 +71,6 @@
     "vue-class-component": "^6.1.0",
     "vue-lazyload": "^1.1.4",
     "vue-loader": "^13.3.0",
-    "vue-property-decorator": "^8.1.0",
     "vue-style-loader": "^3.0.3",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
