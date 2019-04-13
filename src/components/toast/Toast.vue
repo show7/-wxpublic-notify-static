@@ -97,6 +97,9 @@ export default class ToastPoup extends Vue {
       font-size: @font-wight6;
       font-weight: @font-wight6;
       color: @color-content;
+      div {
+        cursor: pointer;
+      }
     }
   }
 }
