@@ -12,7 +12,7 @@
     van-popup(v-model='initState.show' position="bottom" :overlay="true") 
       div(class='popContent')
         div(class='popText') 请输入你收录的公众号名称
-        input(class='inputItem' placeholder='请输入你推荐收录的公众号名称 ' maxlength='20' v-model='initState.inputText')
+        input(class='inputItem' placeholder='请输入你推荐收录的公众号名称 ' maxlength='20' v-model='initState.inputText' @blur='iosBlur')
         div(class='confirm')
           van-button(type="default" @click='cancel') 取消
           van-button(type="default" style='background-color:rgba(251, 210, 6, 1)' @click='confirm') 提交
@@ -63,6 +63,9 @@ export default class SearchResult extends Vue {
     showMore: true,
     show: false,
     inputText: ''
+  }
+  iosBlur() {
+    window.scrollTo(0, 0)
   }
   cancel() {
     this.initState.show = false
@@ -177,8 +180,8 @@ export default class SearchResult extends Vue {
   color: rgba(193, 192, 201, 1);
   text-align: center;
 }
-.van-popup {
-  position: absolute;
-}
+// .van-popup {
+//   top: unset;
+// }
 </style>
 

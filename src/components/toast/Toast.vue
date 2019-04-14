@@ -16,11 +16,10 @@
   </div>
 </template>
 <script lang="ts">
-
 import Vue from 'vue'
-import Component from 'vue-class-component';
+import Component from 'vue-class-component'
 import Popup from '@/components/popup/Popup.vue'
-import { constants } from 'fs';
+import { constants } from 'fs'
 
 @Component({
   name: 'ToastPoup',
@@ -31,33 +30,33 @@ import { constants } from 'fs';
     },
     cancel: {
       type: Function,
-      default: () => { }
+      default: () => {}
     },
     btnGroup: {
       type: Array,
-      default: () => [{
-        name: '再想想',
-        color: '#FBD206',
-        click: () => {
-          console.log('再想想')
+      default: () => [
+        {
+          name: '再想想',
+          color: '#FBD206',
+          click: () => {
+            console.log('再想想')
+          }
+        },
+        {
+          name: '确认取消',
+          color: '#999999',
+          click: () => {
+            console.log('确认取消')
+          }
         }
-      }, {
-        name: '确认取消',
-        color: '#999999',
-        click: () => {
-          console.log('确认取消')
-        }
-      }]
+      ]
     }
-
   },
   components: {
     Popup
   }
 })
-export default class ToastPoup extends Vue {
-
-}
+export default class ToastPoup extends Vue {}
 </script>
 <style lang="less">
 @import '../../style/common.less';
@@ -97,9 +96,9 @@ export default class ToastPoup extends Vue {
       font-size: @font-wight6;
       font-weight: @font-wight6;
       color: @color-content;
-      div {
-        cursor: pointer;
-      }
+      // div {
+      //   cursor: pointer;
+      // }
     }
   }
 }
