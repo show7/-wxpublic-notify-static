@@ -83,7 +83,6 @@ export default class SearchResult extends Vue {
     }
   }
   async confirm(e?: any) {
-    e.stopPropagation()
     if (!this.initState.inputText) {
       this.$toast('您还没有填写哦~')
       return
