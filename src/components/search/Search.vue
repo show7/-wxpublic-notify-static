@@ -24,9 +24,9 @@ export default class Search extends Vue {
   focus() {
     this.searchStates = true
   }
-  blur() {
-    this.searchStates = false
-  }
+  // blur() {
+  //   this.searchStates = false
+  // }
   clearText() {
     this.text = ''
     this.searchStates = false
@@ -42,7 +42,10 @@ export default class Search extends Vue {
     }
   }
   iosBlur() {
-    window.scrollTo(0, 0)
+    let _timer = setTimeout(() => {
+      clearTimeout(_timer)
+      window.scrollTo(0, 0)
+    }, 100)
   }
   search() {
     if (this.text === '') {
