@@ -1,8 +1,9 @@
 <template lang="pug">
     .search-component-wrap
-      input(class="search-input" type="search" /*@focus='focus'*/ v-model="text" @input='judge' @search='search' @blur='iosBlur' @click='clickSearch')
-      span(class="iconfont icon-search") 
-      span(class="iconfont icon-close-copy" @click="clearText" v-show="searchStates")
+      form(action="javascript:return true")
+        input(class="search-input" type="search" /*@focus='focus'*/ v-model="text" @input='judge' @search='search' @blur='iosBlur' @click='clickSearch')
+        span(class="iconfont icon-search")
+        span(class="iconfont icon-close-copy" @click="clearText" v-show="searchStates")
 </template>
 <script lang="ts">
 import Vue from 'vue'
