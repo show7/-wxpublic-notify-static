@@ -8,14 +8,14 @@
     Public-address(:inputSearchArr='inputSearch.searchList' :showMore='false' :recommend="true")
     div( :class='inputSearch.ownerList.length <= 0 && inputSearch.searchList.length <= 0 ? "included middle" : "included" ')
       div(class='noList' v-show='inputSearch.ownerList.length <= 0 && inputSearch.searchList.length <= 0 ') 小新没有找到你心仪的公众号
-      van-button(type="info" @click='popup' id='supplement') {{inputSearch.ownerList.length <= 0 && inputSearch.searchList.length <= 0 ? '让小新补充收录！' : '没有我想要的，我要让小新补充收录！' }}
+      van-button(type="info" @click='popup') {{inputSearch.ownerList.length <= 0 && inputSearch.searchList.length <= 0 ? '让小新补充收录！' : '没有我想要的，我要让小新补充收录！' }}
     van-popup(v-model='initState.show' position="bottom" :overlay="true") 
       div(class='popContent')
         div(class='popText') 请输入你收录的公众号名称
         input(class='inputItem' placeholder='请输入你推荐收录的公众号名称 ' maxlength='20' v-model='initState.inputText' @blur='iosBlur')
         div(class='confirm')
-          van-button(type="default" @click='cancel' id='cancel') 取消
-          van-button(type="default" style='background-color:rgba(251, 210, 6, 1)' @click='confirm' id='confirm') 提交
+          van-button(type="default" @click='cancel') 取消
+          van-button(type="default" style='background-color:rgba(251, 210, 6, 1)' @click='confirm') 提交
     Toast(title='小新提示' :btnGroup="recommendedBtn" v-show="recommendedPopup")
       div(slot="content") 推荐成功！我会在24小时内审核，收录后会告诉你哒！
 </template>
