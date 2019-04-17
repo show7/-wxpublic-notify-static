@@ -74,14 +74,13 @@ export default class Default extends Vue {
         function: '首页',
         action: '着陆首页'
       })
-      return
+    } else {
+      mark({
+        module: '打点',
+        function: '新手引导',
+        action: '着陆新手引导'
+      })
     }
-    localStorage.setItem('noviceGuideState', 'true')
-    mark({
-      module: '打点',
-      function: '新手引导',
-      action: '着陆新手引导'
-    })
     this.setNoviceGuideState(1)
   }
   clickStrategy() {
