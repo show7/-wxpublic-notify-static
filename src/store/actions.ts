@@ -64,16 +64,26 @@ const actions: ActionTree<any, any> = {
   //   const res : Ajax.AxiosResponse | any = await searchPublic.recommandPublic(params)
   //   commit(TYPES.LOAD_MORE_ALL_LIST, res.msg)
   // },
-  setNoviceGuideState({commit},params:any){
-    if(params>1){
+  async setNoviceGuideState({commit},params:any){
+    const {status,isStrategy} = params
+    if(status>1){
       mark({
         module: '打点',
         function: '引导页',
         action: '点击引导页',
-        memo: params
+        memo: status
       })
     }
-    commit(TYPES.SET_NOVICE_GUIDE_STATE,params)
+    console.log(isStrategy,params)
+    if(isStrategy&&status===4){
+      const res: Ajax.AxiosResponse | any = await subscribe.subscribe({
+        isSearchResult: false,
+        weChatPublicId: 17
+      })
+    }
+    
+    commit(TYPES.SET_NOVICE_GUIDE_STATE,status)
+    
   },
   setNoviceState({commit},params:any){
     commit(TYPES.SET_NOVICE_STATE, params)

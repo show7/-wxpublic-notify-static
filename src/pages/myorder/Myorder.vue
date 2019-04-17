@@ -20,13 +20,13 @@
     Popup(v-show="noviceGuideState")
       div(class="boot-page-step" v-show='noviceGuideState===1')
           img(src="https://static.iqycamp.com/01-se9pnk59.png")
-          div(class="boot-step-btn boot-step-1" @click="setNoviceGuideState(2)") 如何通知？
+          div(class="boot-step-btn boot-step-1" @click="setNoviceGuideState({status:2})") 如何通知？
       div(class="boot-page-step" v-show='noviceGuideState===2')
         img(src="https://static.iqycamp.com/02-u7xf7vms.png")
-        div(class="boot-step-btn boot-step-2" @click='setNoviceGuideState(3)') 如何查阅？
+        div(class="boot-step-btn boot-step-2" @click='setNoviceGuideState({status:3})') 如何查阅？
       div(class="boot-page-step" v-show='noviceGuideState===3')
           img(src="https://static.iqycamp.com/03-8tl9x5f0.png")
-          div(class="boot-step-btn boot-step-3" @click='setNoviceGuideState(0)') 开始订阅！
+          div(class="boot-step-btn boot-step-3" @click='setNoviceGuideState({status:0,isStrategy:true})') 开始订阅！
 </template>
 
 <script lang='ts'>
@@ -63,12 +63,12 @@ export default class Myorder extends Vue {
       name: '新手引导',
       color: '#FBD206',
       click: () => {
-        this.setNoviceGuideState(1)
+        this.setNoviceGuideState({ status: 1 })
         this.setNoviceState(false)
       }
     }
   ]
-  cancle() {}
+  cancle() { }
   get publicList() {
     if (this.mySubscribe.publicList.length > 4) {
       let _public = this.mySubscribe.publicList.slice(0, 4)
