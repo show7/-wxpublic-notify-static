@@ -21,7 +21,7 @@
         div(class="boot-step-btn boot-step-2" @click='setNoviceGuideState({status:3})') 如何查阅？
       div(class="boot-page-step" v-show='noviceGuideState===3')
           img(src="https://static.iqycamp.com/03-8tl9x5f0.png")
-          div(class="boot-step-btn boot-step-3" @click='setNoviceGuideState({status:4,isStrategy})') 开始订阅！
+          div(class="boot-step-btn boot-step-3" @click='setNoviceGuideState({status:4,isStrategy:true})') 开始订阅！
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -57,7 +57,6 @@ export default class Default extends Vue {
   isEnd = false
   loading = false
   finished = false
-  isStrategy = false
   mounted() {
     this.getTypelist()
     // this.onLoad()
@@ -82,7 +81,7 @@ export default class Default extends Vue {
         action: '着陆新手引导'
       })
     }
-    this.setNoviceGuideState(1)
+    this.setNoviceGuideState({ status: 1 })
   }
   clickStrategy() {
     mark({
@@ -90,8 +89,7 @@ export default class Default extends Vue {
       function: '使用攻略',
       action: '点击使用攻略'
     })
-    this.isStrategy = true
-    this.setNoviceGuideState(1)
+    this.setNoviceGuideState({ status: 1 })
   }
   selectNav(index: number) {
     mark({
