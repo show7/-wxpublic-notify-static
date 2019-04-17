@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import Vue from 'vue'
-import TYPES from '../store/types'
+import mark from '../utils/mark'
 import VueAxios from 'vue-axios';
 Vue.use(VueAxios,axios)
 
@@ -13,10 +13,13 @@ Vue.axios.interceptors.request.use((request)=>{
 
 Vue.axios.interceptors.response.use(
   (response: any) => {
-    console.log('9999999')
     if (response.status === 700) {
       window.location.href = decodeURI(`${window.location.protocol}//${window.location.host}/wx/oauth/auth/10?callbackUrl=`) + encodeURIComponent(window.location.href)
     } else {
+      if (localStorage.getItem('noviceGuideState')) {
+        return response.data
+      }
+      localStorage.setItem('noviceGuideState', 'true')
       return response.data
     }
   },
