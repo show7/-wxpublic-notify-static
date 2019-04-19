@@ -21,7 +21,7 @@
         div(class="boot-step-btn boot-step-2" @click='setNoviceGuideState({status:3})') 如何查阅？
       div(class="boot-page-step" v-show='noviceGuideState===3')
           img(src="https://static.iqycamp.com/03-8tl9x5f0.png")
-          div(class="boot-step-btn boot-step-3" @click='setNoviceGuideState({status:4,isStrategy:true})') 开始订阅！
+          div(class="boot-step-btn boot-step-3" @click='lastStep') 开始订阅！
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -35,6 +35,7 @@ import PublicAddress from '@/components/publicAddress/PublicAddress.vue'
 import Popup from '@/components/popup/Popup.vue'
 import Toast from '@/components/toast/Toast.vue'
 import mark from '../../utils/mark'
+import { Watch } from 'vue-property-decorator'
 @Component({
   name: 'Default',
   components: {
@@ -57,6 +58,9 @@ export default class Default extends Vue {
   isEnd = false
   loading = false
   finished = false
+  lastStep() {
+    this.setNoviceGuideState({ status: 4, isStrategy: true })
+  }
   mounted() {
     this.getTypelist()
     // this.onLoad()
@@ -74,14 +78,24 @@ export default class Default extends Vue {
         function: '首页',
         action: '着陆首页'
       })
+      return
     } else {
       mark({
         module: '打点',
         function: '新手引导',
         action: '着陆新手引导'
       })
+      this.setNoviceGuideState({ status: 1 })
     }
-    this.setNoviceGuideState({ status: 1 })
+  }
+  @Watch('noviceGuideState')
+  onNoviceGuideState(val: number, oldVal: number) {
+    if (val >= 4 && !localStorage.getItem('isNewUser')) {
+      this.listParams.page = 0
+      this.allList = []
+      localStorage.setItem('isNewUser', 'true')
+      this.onLoad()
+    }
   }
   clickStrategy() {
     mark({

@@ -14,12 +14,9 @@ Vue.axios.interceptors.request.use((request)=>{
 Vue.axios.interceptors.response.use(
   (response: any) => {
     if (response.status === 700) {
+      localStorage.clear()
       window.location.href = decodeURI(`${window.location.protocol}//${window.location.host}/wx/oauth/auth/10?callbackUrl=`) + encodeURIComponent(window.location.href)
     } else {
-      if (localStorage.getItem('noviceGuideState')) {
-        return response.data
-      }
-      localStorage.setItem('noviceGuideState', 'true')
       return response.data
     }
   },
