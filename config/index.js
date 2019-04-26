@@ -11,10 +11,12 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api/*': {
-        target: 'http://beta.confucius.mobi'
+        target: 'https://www.confucius.mobi',
+        secure: false
       },
       '/rise/*': {
-        target: 'http://beta.confucius.mobi'
+        target: 'https://www.confucius.mobi',
+        secure: false
       }
     },
 

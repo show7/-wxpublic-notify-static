@@ -1,7 +1,5 @@
-import  Vue from 'vue'
-
-const validateStatus = (status:number)=>status >= 200 && status < 300 || status == 700
+import {apiGet} from './api'
 
 export default{
-  publicList: (params: object) => Vue.axios.get('/api/webwechat/subscribe/list', {params,validateStatus})
+  publicList: (params: object) => apiGet('/api/webwechat/subscribe/list', params)
 }

@@ -1,7 +1,5 @@
-import Vue from 'vue'
+import {apiGet} from './api'
 
-
-const validateStatus = (status:number)=>status >= 200 && status < 300 || status == 700
 export default{
-  getToggleNight: (params?: any) => Vue.axios.get('/api/webwechat/quiet/mode',{...params,validateStatus})
+  getToggleNight: (params?: any) => apiGet('/api/webwechat/quiet/mode',params)
 }

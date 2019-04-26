@@ -2,11 +2,13 @@ import axios, { AxiosRequestConfig } from 'axios';
 import Vue from 'vue'
 import mark from '../utils/mark'
 import VueAxios from 'vue-axios';
+import {MockId} from '../config/localconfig'
 Vue.use(VueAxios,axios)
 
 let platform = 'we_mobile'
 Vue.axios.defaults.headers.platform = platform
 Vue.axios.defaults.headers.post['Content-Type'] = 'application/json'
+Vue.axios.defaults.headers.mockId = MockId
 Vue.axios.interceptors.request.use((request)=>{ 
     return request
 })

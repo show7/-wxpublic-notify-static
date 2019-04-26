@@ -79,31 +79,5 @@ export default class ArticleList extends Vue {
 }
 </script>
 <style lang="less" scoped>
-.nightItem {
-  padding: 12px 0;
-}
-.content {
-  padding: 0 20px;
-}
-.nightContent {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 15px;
-  font-weight: bold;
-  padding-bottom: 8px;
-}
-.nightText {
-  font-size: 12px;
-  color: rgba(153, 153, 153, 1);
-  line-height: 1.5;
-}
-.separate {
-  height: 9px;
-  background-color: rgba(245, 245, 245, 1);
-  margin: 0 -20px;
-}
-.van-switch--on {
-  background-color: #fbd206;
-}
+@import './PublicList.less';
 </style>
