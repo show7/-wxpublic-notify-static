@@ -2,6 +2,7 @@
   .scroll-view(:style="{height:height}")
     .scroll-container
       slot
+    slot(name="fixButton")
 </template>
 <script lang="ts">
 import Vue from 'vue'
