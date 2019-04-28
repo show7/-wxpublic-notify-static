@@ -20,7 +20,8 @@
         //-   div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='setSubscribeStatus(item,i)') {{item.isSubscribe ? '已订阅' : '订阅'}}
         //- div(v-show='showMore' class='showMore' @click='loadMore') 更多公众号
           van-icon(name='arrow-down')
-    .public-address-subscribe(class="no-subscribe moreItem") 订阅更多  
+    .moreContent
+      .public-address-subscribe(class="no-subscribe moreItem") 订阅更多  
     Toast(title='小新提示' :btnGroup="unSubbtnGroup" v-show="cancelSubPopup")
       div(slot="content") 取消订阅之后，就不能收到最新更新的提醒了哦！
     Toast(title='小新提示' :btnGroup="subBtnGroup" v-show="subscribePopup")
