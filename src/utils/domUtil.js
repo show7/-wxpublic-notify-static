@@ -6,7 +6,7 @@ export function importExternalCss(url) {
   let cssLink = document.createElement('link')
   cssLink.href = url
   cssLink.rel = 'stylesheet'
-  document.body.appendChild(cssLink)
+  document.head.appendChild(cssLink)
 }
 
 /**
@@ -17,4 +17,8 @@ export function importExternalJs(url) {
   let jsLink = document.createElement('script')
   jsLink.src = url
   document.body.appendChild(jsLink)
+}
+
+export const getHeight = () => {
+  return window.innerHeight
 }

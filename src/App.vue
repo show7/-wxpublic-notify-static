@@ -15,12 +15,12 @@ export default class App extends Vue {}
 </script>
 
 <style>
-body {
+body,
+html {
   margin: 0;
+  padding: 0;
 }
-
-.divider {
-  height: 10px;
-  background-color: #f0f0f0;
+#app {
+  position: relative;
 }
 </style>

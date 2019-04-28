@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  ScrollView
     .topic 感谢关注，小新为您推荐～
     .contentFlex
       .public-address-component(v-for='(item,index) in allList' :key='index')
@@ -8,7 +8,9 @@
           div(class="public-address-info")
             div(class="public-address-title" v-html='item.weChatName')
             div(class="public-address-introduction") {{item.description}}
-        div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='setSubscribeStatus(item,index)') {{item.isSubscribe ? '已订阅' : '订阅'}}
+          div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='setSubscribeStatus(item,index)') 
+            i(v-if='item.isSubscribe' class="iconfont iconduihao")
+            div {{item.isSubscribe ? '已订阅' : '订阅'}}
         //- .public-address-component(v-for='(item,i) in allList' :key='"index"+i' v-show='!showMore' @click="recommend ? confirm((item.weChatName).replace('<strong>','').replace('</strong>',''),item.searchId) :''")
         //-   div
         //-     img(class="public-address-head-img" :src="item.avatar")
@@ -18,12 +20,13 @@
         //-   div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='setSubscribeStatus(item,i)') {{item.isSubscribe ? '已订阅' : '订阅'}}
         //- div(v-show='showMore' class='showMore' @click='loadMore') 更多公众号
           van-icon(name='arrow-down')
-      Toast(title='小新提示' :btnGroup="unSubbtnGroup" v-show="cancelSubPopup")
-        div(slot="content") 取消订阅之后，就不能收到最新更新的提醒了哦！
-      Toast(title='小新提示' :btnGroup="subBtnGroup" v-show="subscribePopup")
-        div(slot="content") 你已经订阅了{{subscribeNum}}个心仪的公众号啦~ 继续订阅的话，每天可能会收到多条来自小新的提醒哦！
-      Toast(title='小新提示' :btnGroup="recommendedBtn" v-show="recommendedPopup")
-        div(slot="content") 推荐成功！我会在24小时内审核，收录后会告诉你哒！
+    .public-address-subscribe(class="no-subscribe moreItem") 订阅更多  
+    Toast(title='小新提示' :btnGroup="unSubbtnGroup" v-show="cancelSubPopup")
+      div(slot="content") 取消订阅之后，就不能收到最新更新的提醒了哦！
+    Toast(title='小新提示' :btnGroup="subBtnGroup" v-show="subscribePopup")
+      div(slot="content") 你已经订阅了{{subscribeNum}}个心仪的公众号啦~ 继续订阅的话，每天可能会收到多条来自小新的提醒哦！
+    Toast(title='小新提示' :btnGroup="recommendedBtn" v-show="recommendedPopup")
+      div(slot="content") 推荐成功！我会在24小时内审核，收录后会告诉你哒！
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -35,10 +38,12 @@ import { searchPublic } from '../../request'
 import { constants, truncate } from 'fs'
 import mark from '../../utils/mark'
 import home from '../../request/home'
+import ScrollView from '@/components/scrollView/ScrollView.vue'
 @Component({
   name: 'PublicAddress',
   components: {
-    Toast
+    Toast,
+    ScrollView
   }
 })
 export default class ClassifyList extends Vue {
