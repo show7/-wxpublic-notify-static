@@ -142,7 +142,7 @@ export default class Default extends Vue {
 .classify-warp {
   padding-top: 120px;
   .van-tabs__line {
-    background: @color-subscribe-btn;
+    background: @color-btn;
   }
   .classify-title {
     position: fixed;
@@ -164,7 +164,7 @@ export default class Default extends Vue {
       height: 24px;
       box-shadow: 0px 4px 10px 0px rgba(251, 210, 6, 0.32);
       border-radius: 12px;
-      background: @color-subscribe-btn;
+      background: @color-btn;
       color: #1d1300;
       font-size: @font-content;
       line-height: 24px;
@@ -197,7 +197,7 @@ export default class Default extends Vue {
         width: 13px;
         height: 2px;
         transform: translateX(-50%);
-        background: @color-subscribe-btn;
+        background: @color-btn;
       }
     }
   }

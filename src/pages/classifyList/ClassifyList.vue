@@ -1,27 +1,29 @@
 <template lang="pug">
-  div(style='padding-top:5px')
-    .public-address-component(v-for='(item,index) in SearchArr' :key='index' v-show='showMore')
-      div
-        img(class="public-address-head-img" :src="item.avatar")
-        div(class="public-address-info")
-          div(class="public-address-title" v-html='item.weChatName')
-          div(class="public-address-introduction") {{item.description}}
-      div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='setSubscribeStatus(item,index)') {{item.isSubscribe ? '已订阅' : '订阅'}}
-    .public-address-component(v-for='(item,i) in inputSearchArr' :key='"index"+i' v-show='!showMore' @click="recommend ? confirm((item.weChatName).replace('<strong>','').replace('</strong>',''),item.searchId) :''")
-      div
-        img(class="public-address-head-img" :src="item.avatar")
-        div(class="public-address-info")
-          div(class="public-address-title" v-html='item.weChatName')
-          div(class="public-address-introduction") {{item.description}}
-      div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='setSubscribeStatus(item,i)') {{item.isSubscribe ? '已订阅' : '订阅'}}
-    div(v-show='showMore' class='showMore' @click='loadMore') 更多公众号
-      van-icon(name='arrow-down')
-    Toast(title='小新提示' :btnGroup="unSubbtnGroup" v-show="cancelSubPopup")
-      div(slot="content") 取消订阅之后，就不能收到最新更新的提醒了哦！
-    Toast(title='小新提示' :btnGroup="subBtnGroup" v-show="subscribePopup")
-      div(slot="content") 你已经订阅了{{subscribeNum}}个心仪的公众号啦~ 继续订阅的话，每天可能会收到多条来自小新的提醒哦！
-    Toast(title='小新提示' :btnGroup="recommendedBtn" v-show="recommendedPopup")
-      div(slot="content") 推荐成功！我会在24小时内审核，收录后会告诉你哒！
+  div
+    .topic 感谢关注，小新为您推荐～
+    .contentFlex
+      .public-address-component(v-for='(item,index) in allList' :key='index')
+        div
+          img(class="public-address-head-img" :src="item.avatar")
+          div(class="public-address-info")
+            div(class="public-address-title" v-html='item.weChatName')
+            div(class="public-address-introduction") {{item.description}}
+        div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='setSubscribeStatus(item,index)') {{item.isSubscribe ? '已订阅' : '订阅'}}
+        //- .public-address-component(v-for='(item,i) in allList' :key='"index"+i' v-show='!showMore' @click="recommend ? confirm((item.weChatName).replace('<strong>','').replace('</strong>',''),item.searchId) :''")
+        //-   div
+        //-     img(class="public-address-head-img" :src="item.avatar")
+        //-     div(class="public-address-info")
+        //-       div(class="public-address-title" v-html='item.weChatName')
+        //-       div(class="public-address-introduction") {{item.description}}
+        //-   div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='setSubscribeStatus(item,i)') {{item.isSubscribe ? '已订阅' : '订阅'}}
+        //- div(v-show='showMore' class='showMore' @click='loadMore') 更多公众号
+          van-icon(name='arrow-down')
+      Toast(title='小新提示' :btnGroup="unSubbtnGroup" v-show="cancelSubPopup")
+        div(slot="content") 取消订阅之后，就不能收到最新更新的提醒了哦！
+      Toast(title='小新提示' :btnGroup="subBtnGroup" v-show="subscribePopup")
+        div(slot="content") 你已经订阅了{{subscribeNum}}个心仪的公众号啦~ 继续订阅的话，每天可能会收到多条来自小新的提醒哦！
+      Toast(title='小新提示' :btnGroup="recommendedBtn" v-show="recommendedPopup")
+        div(slot="content") 推荐成功！我会在24小时内审核，收录后会告诉你哒！
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -32,22 +34,20 @@ import Toast from '@/components/toast/Toast.vue'
 import { searchPublic } from '../../request'
 import { constants, truncate } from 'fs'
 import mark from '../../utils/mark'
+import home from '../../request/home'
 @Component({
   name: 'PublicAddress',
   components: {
     Toast
-  },
-  props: {
-    inputSearchArr: Array,
-    showMore: Boolean,
-    justRecommend: Boolean,
-    recommend: Boolean
   }
 })
-export default class PublicAddress extends Vue {
+export default class ClassifyList extends Vue {
   @Action CanClick: (params: any) => void
   @Action Subscribe: (params: any) => void
   @State canClick: any
+  isEnd = false
+  loading = false
+  finished = false
   private cancelSubPopup: boolean = false
   private subscribePopup: boolean = false
   private subscribeNum: number = 0
@@ -105,20 +105,7 @@ export default class PublicAddress extends Vue {
   cancel() {
     this.cancelSubPopup = false
   }
-  showMore: boolean = this.showMore
-  inputSearchArr: any = this.inputSearchArr
-  get SearchArr(): any {
-    let _inputSearchArr = this.inputSearchArr.map((item: object) => item)
-    if (this.inputSearchArr.length > 3 && this.showMore) {
-      _inputSearchArr = _inputSearchArr.splice(0, 3)
-    } else {
-      _inputSearchArr = this.inputSearchArr
-    }
-    return _inputSearchArr
-  }
-  loadMore() {
-    this.showMore = false
-  }
+  allList: any = []
   subscribe(isSubscribe: boolean) {
     return isSubscribe ? 'is-subscribe' : 'no-subscribe'
   }
@@ -140,7 +127,7 @@ export default class PublicAddress extends Vue {
     })
     this.subscribeNum = res.msg
     // this.subscribePopup = true
-    this.SearchArr[index].isSubscribe = true
+    this.allList[index].isSubscribe = true
   } //取消订阅
   async unsubscribeFnc(weChatPublicId: number, index: number) {
     this.cancelSubPopup = true
@@ -150,7 +137,7 @@ export default class PublicAddress extends Vue {
       weChatPublicId: weChatPublicId
     })
     this.cancelSubPopup = false
-    this.SearchArr[index].isSubscribe = false
+    this.allList[index].isSubscribe = false
   }
   setSubscribeStatus(item: any, index: number) {
     const { isSubscribe, weChatPublicId } = item
@@ -172,8 +159,14 @@ export default class PublicAddress extends Vue {
       this.subscribeFnc(weChatPublicId, index)
     }
   }
+  async mounted() {
+    let res: Ajax.AxiosResponse | any = await home.getAllList()
+    if (res && res.code === 200) {
+      this.allList = res.msg.content
+    }
+  }
 }
 </script>
 <style lang="less">
-@import './PublicAddress.less';
+@import './ClassifyList.less';
 </style>
