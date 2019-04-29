@@ -219,6 +219,9 @@ export default class ClassifyList extends Vue {
   async mounted() {
     let res: Ajax.AxiosResponse | any = await classifylist.classifylist()
     if (res && res.code === 200) {
+      if (!res.msg.isFirstSubscribe) {
+        this.$router.replace('/')
+      }
       this.isKOL = res.msg.isKOL
       this.allList = res.msg.categoryWechatPublics
       this.kolname = res.msg.kolname
