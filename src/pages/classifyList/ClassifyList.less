@@ -11,13 +11,18 @@ body {
   left: 0;
   top: 0;
   width: 100%;
-  height: 20px;
+  height: 36px;
   line-height: 20px;
   z-index: 10;
+  box-sizing: border-box;
+}
+.topic2 {
+  height: 58px;
 }
 .public-address-component-list {
+  box-shadow: 0px 1px 10px 4px rgba(223, 223, 223, 0.35);
   border-radius: 5px;
-  min-height: 155px;
+  min-height: 150px;
   margin-top: 10px;
   margin-right: 10px;
   background-color: #fff;
@@ -108,12 +113,12 @@ body {
 .contentFlex {
   display: flex;
   flex-wrap: wrap;
-  padding-top: 36px;
+  padding-top: 58px;
 }
 .scroll-view {
   padding-bottom: 48px;
   box-sizing: border-box;
-  background-color: #f2f2f2;
+  // background-color: #f7f7f7;
 }
 .moreContent {
   position: absolute;
@@ -129,10 +134,11 @@ body {
   }
 }
 .kindContent {
-  padding-top: 60px;
-
+  padding-top: 36px;
   .kindsTit {
     padding-left: 20px;
+    font-size: 14px;
+    margin-top: 20px;
   }
   .contentFlex {
     padding: 0;
