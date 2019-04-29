@@ -12,16 +12,6 @@
       div(class='homeContent')
         PublicAddress(:inputSearchArr='allList')
     // Toast(:title="")
-    Popup(v-show="noviceGuideState<4 && noviceGuideState>0")
-      div(class="boot-page-step" v-show='noviceGuideState===1')
-          img(src="https://static.iqycamp.com/01-se9pnk59.png")
-          div(class="boot-step-btn boot-step-1" @click="setNoviceGuideState({status:2})") 如何通知？
-      div(class="boot-page-step" v-show='noviceGuideState===2')
-        img(src="https://static.iqycamp.com/02-u7xf7vms.png")
-        div(class="boot-step-btn boot-step-2" @click='setNoviceGuideState({status:3})') 如何查阅？
-      div(class="boot-page-step" v-show='noviceGuideState===3')
-          img(src="https://static.iqycamp.com/03-8tl9x5f0.png")
-          div(class="boot-step-btn boot-step-3" @click='lastStep') 开始订阅！
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -40,7 +30,6 @@ import { Watch } from 'vue-property-decorator'
   name: 'Default',
   components: {
     PublicAddress,
-    Popup,
     Toast
   }
 })
@@ -103,7 +92,7 @@ export default class Default extends Vue {
       function: '使用攻略',
       action: '点击使用攻略'
     })
-    this.setNoviceGuideState({ status: 1 })
+    this.$router.push('/guide')
   }
   selectNav(index: number) {
     mark({

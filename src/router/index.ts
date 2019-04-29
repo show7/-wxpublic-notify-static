@@ -6,6 +6,7 @@ const myorder: AsyncComponent = (): any => import('@/pages/myorder/Myorder.vue')
 const ArticleList: AsyncComponent = (): any => import('@/pages/articleList/ArticleList.vue')
 const PublicList: AsyncComponent = (): any => import('@/pages/publicList/PublicList.vue')
 const ClassifyList: AsyncComponent = (): any => import('@/pages/classifyList/ClassifyList.vue')
+const Guide: AsyncComponent = (): any => import('@/pages/guide/Guide.vue')
 // import main from '@/views/main.vue'
 
 Vue.use(Router)
@@ -45,6 +46,11 @@ const routes: RouteConfig[] = [
     path: '/publicList',
     name: 'publicList',
     component: PublicList
+  },
+  {
+    path: '/guide',
+    name: 'guide',
+    component: Guide
   },
   // {
   //   path: '*',

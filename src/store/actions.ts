@@ -74,14 +74,11 @@ const actions: ActionTree<any, any> = {
         memo: status
       })
     }
-    if(isStrategy&&status===4){
-      if(!localStorage.getItem('noviceGuideState')){
-        localStorage.setItem('noviceGuideState', 'true')
-        const res: Ajax.AxiosResponse | any = await subscribe.subscribe({
-          isSearchResult: false,
-          weChatPublicId: 17
-        })
-      }
+    if(isStrategy&&status===3){
+      const res: Ajax.AxiosResponse | any = await subscribe.subscribe({
+        isSearchResult: false,
+        weChatPublicId: 17
+      })
     }
     
     commit(TYPES.SET_NOVICE_GUIDE_STATE,status)
