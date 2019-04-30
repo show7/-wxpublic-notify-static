@@ -15,8 +15,8 @@
         div(class='descriptionTxt') {{item.weChatName}}
     div(class='separate')
     van-cell(title="已阅文章" is-link class='cellTit' @click='pathToArticle(1)')
-    Toast(title='小新提示' :btnGroup="noviceGuideBtn" v-show="noviceState")
-      div(slot="content") 你还没有订阅任何公众号哦！ 点击按钮完成新手教学吧～
+    //- Toast(title='小新提示' :btnGroup="noviceGuideBtn" v-show="noviceState")
+    //-   div(slot="content") 你还没有订阅任何公众号哦！ 点击按钮完成新手教学吧～
     //- Popup(v-show="noviceGuideState")
     //-   div(class="boot-page-step" v-show='noviceGuideState===1')
     //-       img(src="https://static.iqycamp.com/01-se9pnk59.png")
@@ -66,16 +66,16 @@ export default class Myorder extends Vue {
     })
     this.getArticle()
   }
-  noviceGuideBtn: object[] = [
-    {
-      name: '新手引导',
-      color: '#FBD206',
-      click: () => {
-        this.setNoviceGuideState({ status: 1 })
-        this.setNoviceState(false)
-      }
-    }
-  ]
+  // noviceGuideBtn: object[] = [
+  //   {
+  //     name: '新手引导',
+  //     color: '#FBD206',
+  //     click: () => {
+  //       this.setNoviceGuideState({ status: 1 })
+  //       this.setNoviceState(false)
+  //     }
+  //   }
+  // ]
   cancle() {}
   get publicList() {
     if (this.mySubscribe.publicList.length > 4) {
