@@ -12,16 +12,6 @@
       div(class='homeContent')
         PublicAddress(:inputSearchArr='allList')
     // Toast(:title="")
-    Popup(v-show="noviceGuideState<4 && noviceGuideState>0")
-      div(class="boot-page-step" v-show='noviceGuideState===1')
-          img(src="https://static.iqycamp.com/01-se9pnk59.png")
-          div(class="boot-step-btn boot-step-1" @click="setNoviceGuideState({status:2})") 如何通知？
-      div(class="boot-page-step" v-show='noviceGuideState===2')
-        img(src="https://static.iqycamp.com/02-u7xf7vms.png")
-        div(class="boot-step-btn boot-step-2" @click='setNoviceGuideState({status:3})') 如何查阅？
-      div(class="boot-page-step" v-show='noviceGuideState===3')
-          img(src="https://static.iqycamp.com/03-8tl9x5f0.png")
-          div(class="boot-step-btn boot-step-3" @click='lastStep') 开始订阅！
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -36,17 +26,17 @@ import Popup from '@/components/popup/Popup.vue'
 import Toast from '@/components/toast/Toast.vue'
 import mark from '../../utils/mark'
 import { Watch } from 'vue-property-decorator'
+import classifylist from '../../request/classifylist'
 @Component({
   name: 'Default',
   components: {
     PublicAddress,
-    Popup,
     Toast
   }
 })
 export default class Default extends Vue {
   @Action getTypelist: () => void
-  @Action setAllList: (params?: object) => void
+  // @Action setAllList: (params?: object) => void
   @Action setNoviceGuideState: (params: any) => void
   @State typelist: any
   @State noviceGuideState: number
@@ -58,12 +48,20 @@ export default class Default extends Vue {
   isEnd = false
   loading = false
   finished = false
-  lastStep() {
-    this.setNoviceGuideState({ status: 4, isStrategy: true })
-  }
-  mounted() {
+  async mounted() {
+    let res: Ajax.AxiosResponse | any = await classifylist.firstSubscribe()
+    if (res && res.code === 200) {
+      if (res.msg === true) {
+        this.$router.replace('/classifyList')
+        return
+      }
+    }
+    mark({
+      module: '打点',
+      function: '首页',
+      action: '着陆首页'
+    })
     this.getTypelist()
-    // this.onLoad()
     this.allList = []
     this.listParams = {
       category: 1,
@@ -72,30 +70,7 @@ export default class Default extends Vue {
     this.isEnd = false
     this.loading = false
     this.finished = false
-    if (localStorage.getItem('noviceGuideState')) {
-      mark({
-        module: '打点',
-        function: '首页',
-        action: '着陆首页'
-      })
-      return
-    } else {
-      mark({
-        module: '打点',
-        function: '新手引导',
-        action: '着陆新手引导'
-      })
-      this.setNoviceGuideState({ status: 1 })
-    }
-  }
-  @Watch('noviceGuideState')
-  onNoviceGuideState(val: number, oldVal: number) {
-    if (val >= 4 && !localStorage.getItem('isNewUser')) {
-      this.listParams.page = 0
-      this.allList = []
-      localStorage.setItem('isNewUser', 'true')
-      this.onLoad()
-    }
+    // this.onLoad()
   }
   clickStrategy() {
     mark({
@@ -103,7 +78,7 @@ export default class Default extends Vue {
       function: '使用攻略',
       action: '点击使用攻略'
     })
-    this.setNoviceGuideState({ status: 1 })
+    this.$router.push('/guide')
   }
   selectNav(index: number) {
     mark({
@@ -123,6 +98,7 @@ export default class Default extends Vue {
     this.listParams.page++
     let res: Ajax.AxiosResponse | any = await home.getAllList(this.listParams)
     if (res && res.code === 200) {
+      if (this.allList.length > 0 && this.listParams.page === 1) return
       this.allList = this.allList.concat(res.msg.content)
       console.log(this.allList)
       this.loading = false
@@ -142,7 +118,7 @@ export default class Default extends Vue {
 .classify-warp {
   padding-top: 120px;
   .van-tabs__line {
-    background: @color-subscribe-btn;
+    background: @color-btn;
   }
   .classify-title {
     position: fixed;
@@ -164,7 +140,7 @@ export default class Default extends Vue {
       height: 24px;
       box-shadow: 0px 4px 10px 0px rgba(251, 210, 6, 0.32);
       border-radius: 12px;
-      background: @color-subscribe-btn;
+      background: @color-btn;
       color: #1d1300;
       font-size: @font-content;
       line-height: 24px;
@@ -197,7 +173,7 @@ export default class Default extends Vue {
         width: 13px;
         height: 2px;
         transform: translateX(-50%);
-        background: @color-subscribe-btn;
+        background: @color-btn;
       }
     }
   }

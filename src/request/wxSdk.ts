@@ -1,7 +1,5 @@
-import axios from 'axios'
-
-import Vue from 'vue'
+import {apiGet} from './api'
 
 export default{
-  wxSdk: (url: string) => Vue.axios.get(url)
+  wxSdk: (url: string) => apiGet(url)
 }

@@ -5,12 +5,18 @@ import Router, { RouteConfig, Route, NavigationGuard } from 'vue-router'
 const myorder: AsyncComponent = (): any => import('@/pages/myorder/Myorder.vue')
 const ArticleList: AsyncComponent = (): any => import('@/pages/articleList/ArticleList.vue')
 const PublicList: AsyncComponent = (): any => import('@/pages/publicList/PublicList.vue')
-
+const ClassifyList: AsyncComponent = (): any => import('@/pages/classifyList/ClassifyList.vue')
+const Guide: AsyncComponent = (): any => import('@/pages/guide/Guide.vue')
 // import main from '@/views/main.vue'
 
 Vue.use(Router)
 
 const routes: RouteConfig[] = [
+  {
+    path: '/classifyList',
+    name: 'ClassifyList',
+    component: ClassifyList
+  },
   {
     name:'Home',
     path:'/',
@@ -41,6 +47,11 @@ const routes: RouteConfig[] = [
     name: 'publicList',
     component: PublicList
   },
+  {
+    path: '/guide',
+    name: 'guide',
+    component: Guide
+  },
   // {
   //   path: '*',
   //   redirect: '/',
@@ -48,10 +59,20 @@ const routes: RouteConfig[] = [
   // }
 ]
 
+
+
 const router: Router = new Router({
   mode: 'history',
   base: '/wx_public',
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if(!localStorage.getItem("noviceGuideState")){
+    localStorage.setItem("noviceGuideState", "true")
+    router.replace('/classifyList')
+  }
+  next()
 })
 
 export default router

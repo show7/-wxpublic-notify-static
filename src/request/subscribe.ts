@@ -1,6 +1,5 @@
-import Vue from 'vue'
+import {apiGet,apiPost} from './api'
 
-const validateStatus = (status:number)=>status >= 200 && status < 300 || status == 700
 export default{
-  subscribe: (params: any) => Vue.axios.post('/api/webwechat/subscribe', {...params,validateStatus})
+  subscribe: (params: any) => apiPost('/api/webwechat/subscribe', params)
 }

@@ -1,8 +1,6 @@
-import Vue from 'vue'
+import {apiGet,apiPost} from './api'
 
-
-const validateStatus = (status:number)=>status >= 200 && status < 300 || status == 700
 export default{
-  searchPublic: (text: any) => Vue.axios.get('/api/webwechat/search', {params: {weChatName: text},validateStatus}),
-  recommandPublic: (params:object) => Vue.axios.post('/api/webwechat/recommend', params)
+  searchPublic: (text: any) => apiGet('/api/webwechat/search', {weChatName: text}),
+  recommandPublic: (params:object) => apiPost('/api/webwechat/recommend', params)
 }

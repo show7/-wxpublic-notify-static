@@ -177,5 +177,3 @@ export default class PublicAddress extends Vue {
 <style lang="less">
 @import './PublicAddress.less';
 </style>
-
-
