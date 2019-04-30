@@ -227,15 +227,16 @@ export default class ClassifyList extends Vue {
     }
   }
   async mounted() {
-    mark({
-      module: '打点',
-      function: '着陆页面',
-      action: '着陆引导List页'
-    })
     let _type =
       Object.keys(this.$route.query).length > 0
         ? this.$route.query.type
         : void 0
+    mark({
+      module: '打点',
+      function: '着陆页面',
+      action: '着陆引导List页',
+      memo: _type
+    })
     if (_type) {
       let res: Ajax.AxiosResponse | any = await classifylist.classifylist({
         type: _type
