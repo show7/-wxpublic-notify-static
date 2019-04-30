@@ -1,11 +1,11 @@
 <template lang="pug">
   Popup(v-show="noviceGuideState<3 && noviceGuideState>0")
     div(class="boot-page-step" v-show='noviceGuideState===1')
-        img(src="https://static.iqycamp.com/guide-buke1ruy.png")
+        img(class="bgImg1" src="https://static.iqycamp.com/guide-buke1ruy.png")
         img(class="stepImg1" src="https://static.iqycamp.com/stepone-d0odv55v.png")
         div(class="boot-step-btn boot-step-1" @click="setNoviceGuideState({status:2})") 如何通知？
     div(class="boot-page-step" v-show='noviceGuideState===2')
-        img(src="https://static.iqycamp.com/guideImg-1ej3lf7f.png")
+        img(class="bgImg2" src="https://static.iqycamp.com/guideImg-1ej3lf7f.png")
         img(class="stepImg2" src="https://static.iqycamp.com/steptwo-bg31wwdf.png")
         div
           div(class="boot-step-btn boot-step-2" style="left:20px;right:unset" @click="pathTo('/')") 开始订阅！
