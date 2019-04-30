@@ -36,7 +36,7 @@ import classifylist from '../../request/classifylist'
 })
 export default class Default extends Vue {
   @Action getTypelist: () => void
-  @Action setAllList: (params?: object) => void
+  // @Action setAllList: (params?: object) => void
   @Action setNoviceGuideState: (params: any) => void
   @State typelist: any
   @State noviceGuideState: number
@@ -48,9 +48,6 @@ export default class Default extends Vue {
   isEnd = false
   loading = false
   finished = false
-  lastStep() {
-    this.setNoviceGuideState({ status: 4, isStrategy: true })
-  }
   async mounted() {
     let res: Ajax.AxiosResponse | any = await classifylist.firstSubscribe()
     if (res && res.code === 200) {
@@ -58,8 +55,12 @@ export default class Default extends Vue {
         this.$router.replace('/classifyList')
         return
       }
+      mark({
+        module: '打点',
+        function: '首页',
+        action: '着陆首页'
+      })
       this.getTypelist()
-      // this.onLoad()
       this.allList = []
       this.listParams = {
         category: 1,
@@ -68,30 +69,7 @@ export default class Default extends Vue {
       this.isEnd = false
       this.loading = false
       this.finished = false
-      if (localStorage.getItem('noviceGuideState')) {
-        mark({
-          module: '打点',
-          function: '首页',
-          action: '着陆首页'
-        })
-        return
-      } else {
-        mark({
-          module: '打点',
-          function: '新手引导',
-          action: '着陆新手引导'
-        })
-        this.setNoviceGuideState({ status: 1 })
-      }
-    }
-  }
-  @Watch('noviceGuideState')
-  onNoviceGuideState(val: number, oldVal: number) {
-    if (val >= 4 && !localStorage.getItem('isNewUser')) {
-      this.listParams.page = 0
-      this.allList = []
-      localStorage.setItem('isNewUser', 'true')
-      this.onLoad()
+      // this.onLoad()
     }
   }
   clickStrategy() {
@@ -120,6 +98,7 @@ export default class Default extends Vue {
     this.listParams.page++
     let res: Ajax.AxiosResponse | any = await home.getAllList(this.listParams)
     if (res && res.code === 200) {
+      if (this.allList.length > 0 && this.listParams.page === 1) return
       this.allList = this.allList.concat(res.msg.content)
       console.log(this.allList)
       this.loading = false

@@ -1,7 +1,7 @@
 <template lang="pug">
   Popup(v-show="noviceGuideState<3 && noviceGuideState>0")
     div(class="boot-page-step" v-show='noviceGuideState===1')
-        img(src="https://static.iqycamp.com/guide1-5lt8ghmv.png")
+        img(src="https://static.iqycamp.com/guide-buke1ruy.png")
         div(class="boot-step-btn boot-step-1" @click="setNoviceGuideState({status:2})") 如何通知？
     div(class="boot-page-step" v-show='noviceGuideState===2')
         img(src="https://static.iqycamp.com/guide2-thecb1bw.png")
@@ -14,6 +14,7 @@ import Vue from 'vue'
 import { State, Action } from 'vuex-class'
 import Component from 'vue-class-component'
 import Popup from '@/components/popup/Popup.vue'
+import mark from '../../utils/mark'
 @Component({
   name: 'Guide',
   components: {
@@ -27,6 +28,11 @@ export default class Guide extends Vue {
     this.$router.replace(url)
   }
   mounted() {
+    mark({
+      module: '打点',
+      function: '首页',
+      action: '着陆首页'
+    })
     this.setNoviceGuideState({ status: 1 })
   }
 }

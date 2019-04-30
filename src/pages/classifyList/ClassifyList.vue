@@ -1,22 +1,27 @@
 <template lang="pug">
   ScrollView
-    .topic2(class="topic" v-if="isKOL") 下面是{{kolname}}订阅的公众号，小新已经为您关注啦！ 每天为您推送当日的公众号更新，优化您的阅读体验～
+    .topic2(class="topic" v-if="isKOL") 
+      span 下面是
+      strong(style="margin:0 4px") {{kolname}}
+      span 订阅的公众号，小新已经为您关注啦！ 每天为您推送当日的公众号更新，优化您的阅读体验～
     .topic(v-else) 感谢关注，小新为您推荐～
     div(v-if="isKOL")
-      .contentFlex
-        .public-address-component-list(v-for='(item,index) in allList' :key='index')
-          div
-            img(class="public-address-head-img" :src="item.avatar")
-            div(class="public-address-info")
-              div(class="public-address-title" v-html='item.weChatName')
-              div(class="public-address-introduction") {{item.description}}
-            div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='setSubscribeStatus(item,index)') 
-              i(v-if='item.isSubscribe' class="iconfont iconduihao")
-              div {{item.isSubscribe ? '已订阅' : '订阅'}}
+      .kindContent(class='kol')
+        .kindsList(v-for='(res,i) in allList' :key='i')
+          .contentFlex
+            .public-address-component-list(v-for='(item,index) in res.weChatPublicVOs' :key='index')
+              div
+                img(class="public-address-head-img" :src="item.avatar")
+                div(class="public-address-info")
+                  div(class="public-address-title" v-html='item.weChatName')
+                  div(class="public-address-introduction") {{item.description}}
+                div(v-if='item.isSubscribe !== undefined' :class="['public-address-subscribe',subscribe(item.isSubscribe)]" @click='setnormalSubscribeStatus(item, index, i)') 
+                  i(v-if='item.isSubscribe' class="iconfont iconduihao")
+                  div {{item.isSubscribe ? '已订阅' : '订阅'}}
     div(v-else)
       .kindContent
         .kindsList(v-for='(res,i) in allList' :key='i')
-          .kindsTit {{res.categoryName}}
+          .kindsTit(:style="{display:res.weChatPublicVOs.length>0 ? 'block':'none'}") {{res.categoryName}}
           .contentFlex
             .public-address-component-list(v-for='(item,index) in res.weChatPublicVOs' :key='index')
               div
@@ -222,14 +227,37 @@ export default class ClassifyList extends Vue {
     }
   }
   async mounted() {
-    let res: Ajax.AxiosResponse | any = await classifylist.classifylist()
-    if (res && res.code === 200) {
-      if (!res.msg.isFirstSubscribe) {
-        this.$router.replace('/')
+    mark({
+      module: '打点',
+      function: '着陆页面',
+      action: '着陆引导List页'
+    })
+    let _type =
+      Object.keys(this.$route.query).length > 0
+        ? this.$route.query.type
+        : void 0
+    if (_type) {
+      let res: Ajax.AxiosResponse | any = await classifylist.classifylist({
+        type: _type
+      })
+      if (res && res.code === 200) {
+        if (!res.msg.isFirstSubscribe) {
+          this.$router.replace('/')
+        }
+        this.isKOL = res.msg.isKOL
+        this.allList = res.msg.categoryWechatPublics
+        this.kolname = res.msg.kolname
       }
-      this.isKOL = res.msg.isKOL
-      this.allList = res.msg.categoryWechatPublics
-      this.kolname = res.msg.kolname
+    } else {
+      let res: Ajax.AxiosResponse | any = await classifylist.classifylist()
+      if (res && res.code === 200) {
+        if (!res.msg.isFirstSubscribe) {
+          this.$router.replace('/')
+        }
+        this.isKOL = res.msg.isKOL
+        this.allList = res.msg.categoryWechatPublics
+        this.kolname = res.msg.kolname
+      }
     }
   }
 }
