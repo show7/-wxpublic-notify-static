@@ -5,7 +5,9 @@
         div(class="boot-step-btn boot-step-1" @click="setNoviceGuideState({status:2})") 如何通知？
     div(class="boot-page-step" v-show='noviceGuideState===2')
         img(src="https://static.iqycamp.com/guide2-thecb1bw.png")
-        div(class="boot-step-btn boot-step-2" @click='lastStep') 开始订阅！
+        div
+          div(class="boot-step-btn boot-step-2" style="left:20px;right:unset" @click="pathTo('/')") 开始订阅！
+          div(class="boot-step-btn boot-step-2" style="right:20px;left:unset" @click="pathTo('/myorder')") 阅读文章！
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -21,9 +23,8 @@ import Popup from '@/components/popup/Popup.vue'
 export default class Guide extends Vue {
   @Action setNoviceGuideState: (params: any) => void
   @State noviceGuideState: number
-  lastStep() {
-    this.setNoviceGuideState({ status: 3, isStrategy: true })
-    this.$router.replace('/')
+  pathTo(url: string) {
+    this.$router.replace(url)
   }
   mounted() {
     this.setNoviceGuideState({ status: 1 })

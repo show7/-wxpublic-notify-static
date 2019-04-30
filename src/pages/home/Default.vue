@@ -26,6 +26,7 @@ import Popup from '@/components/popup/Popup.vue'
 import Toast from '@/components/toast/Toast.vue'
 import mark from '../../utils/mark'
 import { Watch } from 'vue-property-decorator'
+import classifylist from '../../request/classifylist'
 @Component({
   name: 'Default',
   components: {
@@ -50,31 +51,38 @@ export default class Default extends Vue {
   lastStep() {
     this.setNoviceGuideState({ status: 4, isStrategy: true })
   }
-  mounted() {
-    this.getTypelist()
-    // this.onLoad()
-    this.allList = []
-    this.listParams = {
-      category: 1,
-      page: 0
-    }
-    this.isEnd = false
-    this.loading = false
-    this.finished = false
-    if (localStorage.getItem('noviceGuideState')) {
-      mark({
-        module: '打点',
-        function: '首页',
-        action: '着陆首页'
-      })
-      return
-    } else {
-      mark({
-        module: '打点',
-        function: '新手引导',
-        action: '着陆新手引导'
-      })
-      this.setNoviceGuideState({ status: 1 })
+  async mounted() {
+    let res: Ajax.AxiosResponse | any = await classifylist.firstSubscribe()
+    if (res && res.code === 200) {
+      if (res.msg === true) {
+        this.$router.replace('/classifyList')
+        return
+      }
+      this.getTypelist()
+      // this.onLoad()
+      this.allList = []
+      this.listParams = {
+        category: 1,
+        page: 0
+      }
+      this.isEnd = false
+      this.loading = false
+      this.finished = false
+      if (localStorage.getItem('noviceGuideState')) {
+        mark({
+          module: '打点',
+          function: '首页',
+          action: '着陆首页'
+        })
+        return
+      } else {
+        mark({
+          module: '打点',
+          function: '新手引导',
+          action: '着陆新手引导'
+        })
+        this.setNoviceGuideState({ status: 1 })
+      }
     }
   }
   @Watch('noviceGuideState')

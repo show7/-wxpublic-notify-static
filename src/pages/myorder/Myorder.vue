@@ -17,16 +17,16 @@
     van-cell(title="已阅文章" is-link class='cellTit' @click='pathToArticle(1)')
     Toast(title='小新提示' :btnGroup="noviceGuideBtn" v-show="noviceState")
       div(slot="content") 你还没有订阅任何公众号哦！ 点击按钮完成新手教学吧～
-    Popup(v-show="noviceGuideState")
-      div(class="boot-page-step" v-show='noviceGuideState===1')
-          img(src="https://static.iqycamp.com/01-se9pnk59.png")
-          div(class="boot-step-btn boot-step-1" @click="setNoviceGuideState({status:2})") 如何通知？
-      div(class="boot-page-step" v-show='noviceGuideState===2')
-        img(src="https://static.iqycamp.com/02-u7xf7vms.png")
-        div(class="boot-step-btn boot-step-2" @click='setNoviceGuideState({status:3})') 如何查阅？
-      div(class="boot-page-step" v-show='noviceGuideState===3')
-          img(src="https://static.iqycamp.com/03-8tl9x5f0.png")
-          div(class="boot-step-btn boot-step-3" @click='setNoviceGuideState({status:0,isStrategy:true})') 开始订阅！
+    //- Popup(v-show="noviceGuideState")
+    //-   div(class="boot-page-step" v-show='noviceGuideState===1')
+    //-       img(src="https://static.iqycamp.com/01-se9pnk59.png")
+    //-       div(class="boot-step-btn boot-step-1" @click="setNoviceGuideState({status:2})") 如何通知？
+    //-   div(class="boot-page-step" v-show='noviceGuideState===2')
+    //-     img(src="https://static.iqycamp.com/02-u7xf7vms.png")
+    //-     div(class="boot-step-btn boot-step-2" @click='setNoviceGuideState({status:3})') 如何查阅？
+    //-   div(class="boot-page-step" v-show='noviceGuideState===3')
+    //-       img(src="https://static.iqycamp.com/03-8tl9x5f0.png")
+    //-       div(class="boot-step-btn boot-step-3" @click='setNoviceGuideState({status:0,isStrategy:true})') 开始订阅！
 </template>
 
 <script lang='ts'>
@@ -47,7 +47,7 @@ export default class Myorder extends Vue {
   @Action getArticle: () => void
   @Action setNoviceGuideState: (params?: any) => void
   @Action setNoviceState: (params?: any) => void
-  @State noviceGuideState: number
+  // @State noviceGuideState: number
   @State noviceState: number
   private updatePulic = 0
   private mounted() {
@@ -68,7 +68,7 @@ export default class Myorder extends Vue {
       }
     }
   ]
-  cancle() { }
+  cancle() {}
   get publicList() {
     if (this.mySubscribe.publicList.length > 4) {
       let _public = this.mySubscribe.publicList.slice(0, 4)

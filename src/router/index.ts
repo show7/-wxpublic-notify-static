@@ -70,7 +70,7 @@ const router: Router = new Router({
 router.beforeEach((to, from, next) => {
   if(!localStorage.getItem("noviceGuideState")){
     localStorage.setItem("noviceGuideState", "true")
-    router.replace('/ClassifyList')
+    router.replace('/classifyList')
   }
   next()
 })
