@@ -36,6 +36,7 @@ import { State, Action } from 'vuex-class'
 import Article from '@/components/article/Article.vue'
 import Toast from '@/components/toast/Toast.vue'
 import mark from '../../utils/mark'
+import classifylist from '../../request/classifylist'
 @Component({
   components: {
     Article,
@@ -50,7 +51,14 @@ export default class Myorder extends Vue {
   // @State noviceGuideState: number
   @State noviceState: number
   private updatePulic = 0
-  private mounted() {
+  async mounted() {
+    let res: Ajax.AxiosResponse | any = await classifylist.firstSubscribe()
+    if (res && res.code === 200) {
+      if (res.msg === true) {
+        this.$router.replace('/classifyList')
+        return
+      }
+    }
     mark({
       module: '打点',
       function: '我的订阅',

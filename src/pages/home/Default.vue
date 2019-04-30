@@ -55,22 +55,22 @@ export default class Default extends Vue {
         this.$router.replace('/classifyList')
         return
       }
-      mark({
-        module: '打点',
-        function: '首页',
-        action: '着陆首页'
-      })
-      this.getTypelist()
-      this.allList = []
-      this.listParams = {
-        category: 1,
-        page: 0
-      }
-      this.isEnd = false
-      this.loading = false
-      this.finished = false
-      // this.onLoad()
     }
+    mark({
+      module: '打点',
+      function: '首页',
+      action: '着陆首页'
+    })
+    this.getTypelist()
+    this.allList = []
+    this.listParams = {
+      category: 1,
+      page: 0
+    }
+    this.isEnd = false
+    this.loading = false
+    this.finished = false
+    // this.onLoad()
   }
   clickStrategy() {
     mark({
