@@ -42,8 +42,7 @@
         //- div(v-show='showMore' class='showMore' @click='loadMore') 更多公众号
           van-icon(name='arrow-down')
     template(slot="fixButton")
-      .moreContent
-        .public-address-subscribe(class="no-subscribe moreItem" @click="pathToGuide") 订阅更多  
+      .moreContent(@click="pathToGuide") 下一步  
     Toast(title='小新提示' :btnGroup="unSubbtnGroup" v-show="cancelSubPopup")
       div(slot="content") 取消订阅之后，就不能收到最新更新的提醒了哦！
     Toast(title='小新提示' :btnGroup="subBtnGroup" v-show="subscribePopup")
@@ -123,6 +122,11 @@ export default class ClassifyList extends Vue {
     }
   ]
   pathToGuide() {
+    mark({
+      module: '打点',
+      function: '下一步',
+      action: '点击下一步'
+    })
     this.$router.replace('/guide')
   }
   ok() {
