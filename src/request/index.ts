@@ -16,7 +16,6 @@ Vue.axios.interceptors.request.use((request)=>{
 Vue.axios.interceptors.response.use(
   (response: any) => {
     if (response.status === 700) {
-      alert(decodeURI(`${window.location.protocol}//${window.location.host}/wx/oauth/auth/10?callbackUrl=`) + encodeURIComponent(window.location.href))
       window.location.href = decodeURI(`${window.location.protocol}//${window.location.host}/wx/oauth/auth/10?callbackUrl=`) + encodeURIComponent(window.location.href)
     } else {
       return response.data
