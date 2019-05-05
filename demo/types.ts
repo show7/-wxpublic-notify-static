@@ -79,7 +79,7 @@ any = true
  * 没有类型，多用于函数
  */
 function warnUser(): void {
-  alert("This is my warning message")
+  // alert("This is my warning message")
 }
 
 function getName(name: string): string {
