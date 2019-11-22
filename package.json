@@ -14,7 +14,7 @@
   "dependencies": {
     "lodash": "^4.17.11",
     "sa-sdk-javascript": "^1.13.1",
-    "vant": "^1.6.12",
+    "vant": "^2.1.8",
     "vue": "^2.5.9",
     "vue-axios": "^2.1.4",
     "vue-property-decorator": "^8.1.0",
